@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armaan — Mechanical Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F2438;
+    --blue-deep:#16324A;
+    --blue-panel:#1E3E5C;
+    --blue-panel-2:#254A6E;
+    --paper:#EDF1F4;
+    --paper-dim:#C9D4DD;
+    --line:#3E5B78;
+    --line-light:#4C6E8E;
+    --amber:#E8A33D;
+    --amber-dim:#B8823A;
+    --font-head:'Archivo',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--blue-deep);
+    color:var(--paper);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  /* ===== Drawing-sheet frame ===== */
+  .sheet{
+    max-width:1180px;
+    margin:0 auto;
+    border-left:1px solid var(--line);
+    border-right:1px solid var(--line);
+    position:relative;
+  }
+  .sheet::before, .sheet::after{
+    content:"";
+    position:fixed;
+    top:0; bottom:0;
+    width:1px;
+    background:var(--line);
+    z-index:0;
+    display:none;
+  }
+
+  header.title-block{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:28px 32px;
+    border-bottom:1px solid var(--line);
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--paper-dim);
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  header.title-block .tb-left{display:flex; gap:28px; flex-wrap:wrap;}
+  header.title-block .tb-field span{display:block; color:var(--line-light); font-size:11px; letter-spacing:.03em;}
+  header.title-block .tb-field strong{color:var(--paper); font-weight:500;}
+  nav{display:flex; gap:22px;}
+  nav a{font-family:var(--font-mono); font-size:13px; color:var(--paper-dim); border-bottom:1px solid transparent; padding-bottom:2px; transition:border-color .15s, color .15s;}
+  nav a:hover{color:var(--amber); border-color:var(--amber);}
+
+  /* ===== Hero ===== */
+  .hero{
+    padding:96px 32px 88px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:48px 48px;
+    opacity:.14;
+    pointer-events:none;
+  }
+  .hero-content{position:relative; max-width:760px;}
+  .hero-eyebrow{
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--amber);
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:var(--font-head);
+    font-weight:800;
+    font-size:clamp(2.6rem, 5.5vw, 4.4rem);
+    line-height:1.05;
+    letter-spacing:-.01em;
+    color:var(--paper);
+  }
+  .hero h1 em{font-style:normal; color:var(--amber);}
+  .hero p.lede{
+    margin-top:26px;
+    font-size:1.15rem;
+    color:var(--paper-dim);
+    max-width:600px;
+  }
+  .hero .roles{
+    margin-top:34px;
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    font-family:var(--font-mono);
+    font-size:13px;
+  }
+  .hero .roles div{border-left:2px solid var(--amber); padding-left:12px;}
+  .hero .roles div .role-title{color:var(--paper); font-size:14px; margin-bottom:2px;}
+  .hero .roles div .role-org{color:var(--paper-dim);}
+
+  /* ===== Section shell ===== */
+  section{padding:76px 32px; border-bottom:1px solid var(--line);}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom:48px; flex-wrap:wrap; gap:10px;
+  }
+  .section-num{
+    font-family:var(--font-mono); font-size:13px; color:var(--amber);
+  }
+  .section-head h2{
+    font-family:var(--font-head); font-weight:700; font-size:1.9rem;
+    color:var(--paper);
+  }
+
+  /* ===== Projects ===== */
+  .project{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:36px;
+    padding:32px 0;
+    border-top:1px solid var(--line);
+  }
+  .project:last-child{padding-bottom:0;}
+  .project-meta{font-family:var(--font-mono); font-size:12px; color:var(--paper-dim);}
+  .project-meta .p-label{color:var(--line-light); margin-bottom:4px;}
+  .project-meta .p-value{color:var(--paper); margin-bottom:14px;}
+  .project-body h3{
+    font-family:var(--font-head); font-size:1.4rem; font-weight:700; color:var(--paper); margin-bottom:10px;
+  }
+  .project-body p{color:var(--paper-dim); max-width:640px; margin-bottom:14px;}
+  .spec-row{
+    display:flex; gap:24px; flex-wrap:wrap; margin-top:16px;
+    font-family:var(--font-mono); font-size:12.5px;
+  }
+  .spec{
+    background:var(--blue-panel);
+    border:1px solid var(--line);
+    padding:8px 12px;
+    color:var(--paper-dim);
+  }
+  .spec strong{color:var(--amber); font-weight:500;}
+
+  @media (max-width:720px){
+    .project{grid-template-columns:1fr;}
+  }
+
+  /* ===== Skills / competencies ===== */
+  .comp-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .comp-cell{
+    background:var(--blue-deep);
+    padding:22px;
+  }
+  .comp-cell .comp-num{font-family:var(--font-mono); font-size:11px; color:var(--amber-dim); margin-bottom:10px;}
+  .comp-cell h4{font-family:var(--font-head); font-size:1rem; font-weight:600; margin-bottom:8px; color:var(--paper);}
+  .comp-cell p{font-size:13.5px; color:var(--paper-dim);}
+
+  /* ===== Contact / footer ===== */
+  .contact-inner{
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px;
+  }
+  .contact-inner h2{
+    font-family:var(--font-head); font-weight:800; font-size:clamp(2rem,4vw,3rem); color:var(--paper); max-width:520px;
+  }
+  .contact-links{display:flex; flex-direction:column; gap:10px; font-family:var(--font-mono); font-size:14px;}
+  .contact-links a{color:var(--paper-dim); border-bottom:1px solid var(--line); padding-bottom:2px; transition:color .15s, border-color .15s;}
+  .contact-links a:hover{color:var(--amber); border-color:var(--amber);}
+  .btn{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--blue-deep);
+    background:var(--amber);
+    padding:12px 20px;
+    margin-top:22px;
+  }
+  .btn:hover{background:#f0b458;}
+
+  footer{
+    padding:22px 32px;
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--line-light);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  ::selection{background:var(--amber); color:var(--blue-deep);}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="title-block">
+    <div class="tb-left">
+      <div class="tb-field"><span>NAME</span><strong>Armaan [Last Name]</strong></div>
+      <div class="tb-field"><span>DISCIPLINE</span><strong>Mechanical Engineering</strong></div>
+      <div class="tb-field"><span>SHEET</span><strong>1 OF 1</strong></div>
+    </div>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#competencies">Competencies</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">MECHANICAL ENGINEERING — DESIGN / ANALYSIS / FABRICATION</div>
+      <h1>Suspension geometry, <em>built and validated</em> from sketch to test data.</h1>
+      <p class="lede">I design, analyze, and build vehicle suspension systems and automated manufacturing hardware — leading a 13-person subteam through the full loop from CAD to the track.</p>
+      <div class="roles">
+        <div><div class="role-title">Suspension Lead</div><div class="role-org">UCLA Bruin Baja SAE</div></div>
+        <div><div class="role-title">Mechanical Engineering Intern</div><div class="role-org">Advanced Spade Company</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <h2>Selected Work</h2>
+      <div class="section-num">§ 02 — PROJECTS</div>
+    </div>
+
+    <div class="project">
+      <div class="project-meta">
+        <div class="p-label">ORG</div>
+        <div class="p-value">UCLA Bruin Baja SAE</div>
+        <div class="p-label">ROLE</div>
+        <div class="p-value">Suspension Lead</div>
+        <div class="p-label">TEAM</div>
+        <div class="p-value">13 engineers</div>
+      </div>
+      <div class="project-body">
+        <h3>Baja SAE Suspension System</h3>
+        <p>Directed suspension geometry, shock selection, and validation for the team's off-road vehicle — from parametric hardpoint layout in SolidWorks through physical test rig validation. Ran shock length at ride height as the driving constraint through the kinematic sketch chain, and led budget planning for the M26 cycle using M25 actuals to correct for prior overages in bearings and rod ends.</p>
+        <div class="spec-row">
+          <div class="spec">Geometry: <strong>parametric, driven/driving dims</strong></div>
+          <div class="spec">Shocks evaluated: <strong>Fox, King, Genesis G-series</strong></div>
+          <div class="spec">Team size: <strong>13</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-meta">
+        <div class="p-label">ORG</div>
+        <div class="p-value">Advanced Spade Company</div>
+        <div class="p-label">ROLE</div>
+        <div class="p-value">ME Intern</div>
+      </div>
+      <div class="project-body">
+        <h3>Automated Manufacturing Infrastructure</h3>
+        <p>Set up automated manufacturing infrastructure and designed mechanical systems for a startup manufacturing environment — moving from concept to working hardware in a small, fast-moving team.</p>
+        <div class="spec-row">
+          <div class="spec">Scope: <strong>infrastructure + mechanical systems</strong></div>
+          <div class="spec">Environment: <strong>startup, early-stage</strong></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="competencies">
+    <div class="section-head">
+      <h2>Competencies</h2>
+      <div class="section-num">§ 03 — TOOLS</div>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-cell">
+        <div class="comp-num">01</div>
+        <h4>CAD / Parametric Design</h4>
+        <p>SolidWorks, VBA macro automation for design data extraction and plotting.</p>
+      </div>
+      <div class="comp-cell">
+        <div class="comp-num">02</div>
+        <h4>Vehicle Dynamics</h4>
+        <p>Suspension kinematics, hardpoint geometry, shock sizing and tuning.</p>
+      </div>
+      <div class="comp-cell">
+        <div class="comp-num">03</div>
+        <h4>Fabrication</h4>
+        <p>Test rig design and build, hands-on machining and assembly.</p>
+      </div>
+      <div class="comp-cell">
+        <div class="comp-num">04</div>
+        <h4>Program Management</h4>
+        <p>Subteam leadership, budget planning, test documentation systems.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-inner">
+      <h2>Let's talk about suspension geometry, or anything else.</h2>
+      <div class="contact-links">
+        <a href="mailto:your.email@ucla.edu">your.email@ucla.edu</a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
+        <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+      </div>
+    </div>
+    <a class="btn" href="resume.pdf" target="_blank">DOWNLOAD RESUME (PDF)</a>
+  </section>
+
+  <footer>
+    <span>© 2026 ARMAAN — MECHANICAL ENGINEERING</span>
+    <span>REV. A — LOS ANGELES, CA</span>
+  </footer>
+
+</div>
+</body>
+</html>

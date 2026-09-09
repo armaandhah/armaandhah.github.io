@@ -134,36 +134,85 @@
     color:var(--paper);
   }
 
-  /* ===== Projects ===== */
-  .project{
-    display:grid;
-    grid-template-columns:220px 1fr;
-    gap:36px;
-    padding:32px 0;
-    border-top:1px solid var(--line);
+  /* ===== Project Timeline ===== */
+  .timeline{position:relative; padding-left:46px;}
+  .tl-line{position:absolute; left:9px; top:8px; bottom:8px; width:1px; background:var(--line);}
+
+  .tl-item{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--blue-panel);
+    margin-bottom:14px;
   }
-  .project:last-child{padding-bottom:0;}
-  .project-meta{font-family:var(--font-mono); font-size:12px; color:var(--paper-dim);}
-  .project-meta .p-label{color:var(--line-light); margin-bottom:4px;}
-  .project-meta .p-value{color:var(--paper); margin-bottom:14px;}
-  .project-body h3{
-    font-family:var(--font-head); font-size:1.4rem; font-weight:700; color:var(--paper); margin-bottom:10px;
+  .tl-item:last-child{margin-bottom:0;}
+
+  .tl-dot{
+    position:absolute; left:-37px; top:26px;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--blue-deep);
+    border:2px solid var(--line-light);
+    transition:background .15s, border-color .15s;
   }
-  .project-body p{color:var(--paper-dim); max-width:640px; margin-bottom:14px;}
+  .tl-item[open] .tl-dot, .tl-item:hover .tl-dot{border-color:var(--amber);}
+  .tl-item[open] .tl-dot{background:var(--amber);}
+
+  .tl-item summary{
+    list-style:none;
+    cursor:pointer;
+    padding:22px 56px 22px 24px;
+    position:relative;
+  }
+  .tl-item summary::-webkit-details-marker{display:none;}
+  .tl-item summary::after{
+    content:"+";
+    position:absolute;
+    right:22px; top:22px;
+    font-family:var(--font-mono);
+    font-size:18px;
+    color:var(--line-light);
+    transition:transform .15s, color .15s;
+  }
+  .tl-item[open] summary::after{transform:rotate(45deg); color:var(--amber);}
+
+  .tl-top-row{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;}
+  .tl-top-row h3{font-family:var(--font-head); font-weight:700; font-size:1.2rem; color:var(--paper);}
+  .tl-dates{font-family:var(--font-mono); font-size:12px; color:var(--amber); white-space:nowrap;}
+  .tl-org{font-family:var(--font-mono); font-size:12.5px; color:var(--paper-dim); margin-top:4px;}
+  .tl-blurb{margin-top:12px; color:var(--paper-dim); font-size:14.5px; max-width:640px;}
+
+  .tl-detail{padding:0 24px 26px 24px;}
+  .tl-images{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;}
+  .img-placeholder{
+    width:170px; height:120px;
+    border:1px dashed var(--line-light);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-mono); font-size:10.5px; color:var(--line-light);
+    text-align:center; padding:8px;
+  }
+  .tl-bullets{list-style:none; display:flex; flex-direction:column; gap:9px; max-width:680px; margin-bottom:18px;}
+  .tl-bullets li{position:relative; padding-left:16px; color:var(--paper-dim); font-size:14px; line-height:1.6;}
+  .tl-bullets li::before{content:"—"; position:absolute; left:0; color:var(--amber-dim);}
+  .tl-bullets .sub-role{
+    font-family:var(--font-mono); font-size:11.5px; color:var(--line-light);
+    margin:14px 0 2px; text-transform:none;
+  }
+  .tl-bullets .sub-role:first-child{margin-top:0;}
+
   .spec-row{
-    display:flex; gap:24px; flex-wrap:wrap; margin-top:16px;
-    font-family:var(--font-mono); font-size:12.5px;
+    display:flex; gap:10px; flex-wrap:wrap;
+    font-family:var(--font-mono); font-size:12px;
   }
   .spec{
-    background:var(--blue-panel);
+    background:var(--blue-deep);
     border:1px solid var(--line);
-    padding:8px 12px;
+    padding:6px 11px;
     color:var(--paper-dim);
   }
-  .spec strong{color:var(--amber); font-weight:500;}
 
   @media (max-width:720px){
-    .project{grid-template-columns:1fr;}
+    .timeline{padding-left:30px;}
+    .tl-dot{left:-25px;}
+    .img-placeholder{width:130px; height:100px;}
   }
 
   /* ===== Skills / competencies ===== */
@@ -219,7 +268,7 @@
 
   <header class="title-block">
     <div class="tb-left">
-      <div class="tb-field"><span>NAME</span><strong>Armaan [Last Name]</strong></div>
+      <div class="tb-field"><span>NAME</span><strong>Armaan Dhah</strong></div>
       <div class="tb-field"><span>DISCIPLINE</span><strong>Mechanical Engineering</strong></div>
       <div class="tb-field"><span>SHEET</span><strong>1 OF 1</strong></div>
     </div>
@@ -234,10 +283,10 @@
     <div class="hero-grid"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">MECHANICAL ENGINEERING — DESIGN / ANALYSIS / FABRICATION</div>
-      <h1>Suspension geometry, <em>built and validated</em> from sketch to test data.</h1>
-      <p class="lede">I design, analyze, and build vehicle suspension systems and automated manufacturing hardware — leading a 13-person subteam through the full loop from CAD to the track.</p>
+      <h1>Mechanisms designed, tested, and <em>run to failure</em> before they ever compete.</h1>
+      <p class="lede">B.S. Mechanical Engineering, UCLA — I design, analyze, and build vehicle suspension, combat robotics weapon systems, and underwater hardware, then validate everything against real test data.</p>
       <div class="roles">
-        <div><div class="role-title">Suspension Lead</div><div class="role-org">UCLA Bruin Baja SAE</div></div>
+        <div><div class="role-title">Suspension Lead Engineer</div><div class="role-org">UCLA Bruin Baja SAE</div></div>
         <div><div class="role-title">Mechanical Engineering Intern</div><div class="role-org">Advanced Spade Company</div></div>
       </div>
     </div>
@@ -245,47 +294,174 @@
 
   <section id="projects">
     <div class="section-head">
-      <h2>Selected Work</h2>
+      <h2>Project Timeline</h2>
       <div class="section-num">§ 02 — PROJECTS</div>
     </div>
 
-    <div class="project">
-      <div class="project-meta">
-        <div class="p-label">ORG</div>
-        <div class="p-value">UCLA Bruin Baja SAE</div>
-        <div class="p-label">ROLE</div>
-        <div class="p-value">Suspension Lead</div>
-        <div class="p-label">TEAM</div>
-        <div class="p-value">13 engineers</div>
-      </div>
-      <div class="project-body">
-        <h3>Baja SAE Suspension System</h3>
-        <p>Directed suspension geometry, shock selection, and validation for the team's off-road vehicle — from parametric hardpoint layout in SolidWorks through physical test rig validation. Ran shock length at ride height as the driving constraint through the kinematic sketch chain, and led budget planning for the M26 cycle using M25 actuals to correct for prior overages in bearings and rod ends.</p>
-        <div class="spec-row">
-          <div class="spec">Geometry: <strong>parametric, driven/driving dims</strong></div>
-          <div class="spec">Shocks evaluated: <strong>Fox, King, Genesis G-series</strong></div>
-          <div class="spec">Team size: <strong>13</strong></div>
-        </div>
-      </div>
-    </div>
+    <div class="timeline">
+      <div class="tl-line"></div>
 
-    <div class="project">
-      <div class="project-meta">
-        <div class="p-label">ORG</div>
-        <div class="p-value">Advanced Spade Company</div>
-        <div class="p-label">ROLE</div>
-        <div class="p-value">ME Intern</div>
-      </div>
-      <div class="project-body">
-        <h3>Automated Manufacturing Infrastructure</h3>
-        <p>Set up automated manufacturing infrastructure and designed mechanical systems for a startup manufacturing environment — moving from concept to working hardware in a small, fast-moving team.</p>
-        <div class="spec-row">
-          <div class="spec">Scope: <strong>infrastructure + mechanical systems</strong></div>
-          <div class="spec">Environment: <strong>startup, early-stage</strong></div>
+      <details class="tl-item" open>
+        <span class="tl-dot"></span>
+        <summary>
+          <div class="tl-top-row">
+            <h3>Baja SAE Suspension &amp; Steering System</h3>
+            <span class="tl-dates">MAY 2026 — PRESENT</span>
+          </div>
+          <div class="tl-org">UCLA Bruin Baja SAE — Suspension Lead Engineer</div>
+          <p class="tl-blurb">Direct a 13-person subteam through the full suspension and steering lifecycle — geometry, fabrication, and validation — after building up through fabrication and testbed roles.</p>
+        </summary>
+        <div class="tl-detail">
+          <div class="tl-images">
+            <div class="img-placeholder">add photo — vehicle / suspension assembly</div>
+            <div class="img-placeholder">add photo — CAD or test rig</div>
+          </div>
+          <div class="tl-bullets">
+            <div class="sub-role">SUSPENSION LEAD ENGINEER — MAY 2026–PRESENT</div>
+          </div>
+          <ul class="tl-bullets">
+            <li>Direct a team of 13 project engineers through design, analysis, fabrication, and validation of the entire suspension and steering system, coordinating with other subsystem leads for vehicle integration.</li>
+            <li>Optimize suspension geometry to elevate handling and reliability while supervising component packaging, mass reduction, and rule compliance.</li>
+            <li>Manage the subteam budget and defend design architectures at formal technical reviews and competition design presentations.</li>
+          </ul>
+          <div class="tl-bullets">
+            <div class="sub-role">SUSPENSION ENGINEER — DEC 2025–MAY 2026</div>
+          </div>
+          <ul class="tl-bullets">
+            <li>Fabricated upper and lower A-arm components, generating 1:1 DXF templates for accurate tube notching and machining high-misalignment spacers on manual mill and lathe.</li>
+            <li>Assisted in CNC milling tie rods and final suspension assembly.</li>
+          </ul>
+          <div class="tl-bullets">
+            <div class="sub-role">GENERAL MEMBER — SEPT 2025–DEC 2025</div>
+          </div>
+          <ul class="tl-bullets">
+            <li>Designed and fabricated a scaled mock centerlock assembly in SolidWorks for a software testbench, letting software/electrical teams validate control systems independent of vehicle readiness.</li>
+            <li>Implemented an axially repositionable limit switch assembly to optimize switch placement during testing.</li>
+          </ul>
+          <div class="spec-row">
+            <div class="spec">13-person team</div>
+            <div class="spec">DXF Templates</div>
+            <div class="spec">Manual Mill / Lathe</div>
+            <div class="spec">CNC</div>
+          </div>
         </div>
-      </div>
-    </div>
+      </details>
 
+      <details class="tl-item">
+        <span class="tl-dot"></span>
+        <summary>
+          <div class="tl-top-row">
+            <h3>Sewer-Inspection Robot Gimbal &amp; GNSS Device</h3>
+            <span class="tl-dates">MAY 2026 — PRESENT</span>
+          </div>
+          <div class="tl-org">Advanced Spade Company — Mechanical Engineering Intern</div>
+          <p class="tl-blurb">Redesigned a camera gimbal for a sewer-surveying robot and led mechanical design of an in-house GNSS positioning device, plus supporting test infrastructure and production tooling.</p>
+        </summary>
+        <div class="tl-detail">
+          <div class="tl-images">
+            <div class="img-placeholder">add photo — gimbal assembly</div>
+            <div class="img-placeholder">add photo — GNSS device / housing</div>
+          </div>
+          <ul class="tl-bullets">
+            <li>Redesigned a pitch/roll camera gimbal for a sewer-surveying robot, cutting package volume 53% through re-tuned gear reduction, a ball-bearing-supported roll shaft, and slip-ring integration — programming rotary encoders with a Teensy 4.1 and Arduino IDE.</li>
+            <li>Led mechanical design across three phases of an in-house GNSS positioning cell device to replace third-party units: test fixtures to validate candidate chips, a 4-PCB production device packaged around a parametric housing, and a custom 2s2p battery pack.</li>
+            <li>Designed a single-slot external battery charger enclosure in SolidWorks, converging on slip-fit retention geometry through 13 design-table iterations.</li>
+            <li>Designed and fabricated a T-slot aluminum Testbench Mobility Unit to convert the CRKT CNC testbench into a mobile unit.</li>
+            <li>Deployed an automated 3D-printing farm to streamline prototyping and production across the company's product line.</li>
+          </ul>
+          <div class="spec-row">
+            <div class="spec">Teensy 4.1</div>
+            <div class="spec">Slip-Ring</div>
+            <div class="spec">GD&amp;T</div>
+            <div class="spec">Design Tables</div>
+            <div class="spec">T-Slot Aluminum</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="tl-item">
+        <span class="tl-dot"></span>
+        <summary>
+          <div class="tl-top-row">
+            <h3>SKULL CRUSHER — Spinning Weapon System</h3>
+            <span class="tl-dates">SEPT 2025 — MAY 2026</span>
+          </div>
+          <div class="tl-org">Flagship Combat Robotics, UCLA ASME — Project Engineer</div>
+          <p class="tl-blurb">Designed and manufactured the drisk-style spinning weapon for a 30 lb combat robot, validated across multiple FEA revisions before machining.</p>
+        </summary>
+        <div class="tl-detail">
+          <div class="tl-images">
+            <div class="img-placeholder">add photo — weapon assembly</div>
+            <div class="img-placeholder">add photo — FEA plot or CAD</div>
+          </div>
+          <ul class="tl-bullets">
+            <li>Designed and manufactured a drisk-style spinning weapon system in SolidWorks for the 30 lb combat robot Skull Crusher, iterating geometry and packaging to maintain strength within a 12 lb weapon mass allocation.</li>
+            <li>Performed ANSYS FEA across multiple design revisions to predict stress concentrations and loading responses, validating spline hub survivability under expected combat impact forces.</li>
+            <li>Machined critical components using manual lathe and mill operations, and programmed toolpaths in Fusion CAM to manufacture complex parts on a CNC mill.</li>
+          </ul>
+          <div class="spec-row">
+            <div class="spec">SolidWorks</div>
+            <div class="spec">ANSYS FEA</div>
+            <div class="spec">Fusion CAM</div>
+            <div class="spec">30 lb Weight Class</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="tl-item">
+        <span class="tl-dot"></span>
+        <summary>
+          <div class="tl-top-row">
+            <h3>UCLA Combat Robotics</h3>
+            <span class="tl-dates">DATES TBD</span>
+          </div>
+          <div class="tl-org">UCLA Combat Robotics — Role TBD</div>
+          <p class="tl-blurb">Placeholder — details coming soon.</p>
+        </summary>
+        <div class="tl-detail">
+          <div class="tl-images">
+            <div class="img-placeholder">add photo</div>
+          </div>
+          <ul class="tl-bullets">
+            <li>Add role, timeframe, and project details here.</li>
+          </ul>
+          <div class="spec-row">
+            <div class="spec">TBD</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="tl-item">
+        <span class="tl-dot"></span>
+        <summary>
+          <div class="tl-top-row">
+            <h3>Vertical Profiling Float</h3>
+            <span class="tl-dates">AUG 2024 — JUNE 2025</span>
+          </div>
+          <div class="tl-org">Crush Depth MATE ROV Underwater Robotics — FLOAT Lead Mechanical Engineer</div>
+          <p class="tl-blurb">Led the end-to-end design and fabrication of an underwater vertical profiling float — buoyancy control, waterproofing, and depth testing to a 90% leak-reduction result.</p>
+        </summary>
+        <div class="tl-detail">
+          <div class="tl-images">
+            <div class="img-placeholder">add photo — float assembly</div>
+            <div class="img-placeholder">add photo — depth test setup</div>
+          </div>
+          <ul class="tl-bullets">
+            <li>Led a sub-team in the end-to-end design and fabrication of an underwater vertical profiling float, managing mechanical design, buoyancy control, and waterproofing integration.</li>
+            <li>Modeled eight iterations of buoyancy engine and housing assemblies in SolidWorks CAD; 3D printed components and applied acetone vapor finishing to improve tensile strength, surface quality, and sealing performance.</li>
+            <li>Engineered a precision O-ring waterproofing interface with optimized 25% compression geometry; depth-tested over 150 hours to achieve 3.0 meters with zero leakage — a 90% improvement over previous years.</li>
+            <li>Supervised teammates in CAD modeling, fabrication, and mechanical testing; submitted the system to the 2025 MATE ROV Explorer Class Championship.</li>
+          </ul>
+          <div class="spec-row">
+            <div class="spec">SolidWorks</div>
+            <div class="spec">3D Printing</div>
+            <div class="spec">O-Ring Sealing</div>
+            <div class="spec">150+ hrs Testing</div>
+          </div>
+        </div>
+      </details>
+
+    </div>
   </section>
 
   <section id="competencies">
@@ -296,23 +472,23 @@
     <div class="comp-grid">
       <div class="comp-cell">
         <div class="comp-num">01</div>
-        <h4>CAD / Parametric Design</h4>
-        <p>SolidWorks, VBA macro automation for design data extraction and plotting.</p>
+        <h4>CAD / Analysis</h4>
+        <p>SolidWorks (CSWA certified), ANSYS &amp; SolidWorks FEA, Fusion CAM, Altium Co-Designer, AutoCAD, MATLAB.</p>
       </div>
       <div class="comp-cell">
         <div class="comp-num">02</div>
-        <h4>Vehicle Dynamics</h4>
-        <p>Suspension kinematics, hardpoint geometry, shock sizing and tuning.</p>
+        <h4>Fabrication</h4>
+        <p>Manual lathe &amp; mill, CNC mill, 3D printing, TIG &amp; spot welding, soldering, sheet/tube work.</p>
       </div>
       <div class="comp-cell">
         <div class="comp-num">03</div>
-        <h4>Fabrication</h4>
-        <p>Test rig design and build, hands-on machining and assembly.</p>
+        <h4>Mechatronics</h4>
+        <p>Rotary encoders on Teensy 4.1, embedded electronics packaging, sensor and PCB integration.</p>
       </div>
       <div class="comp-cell">
         <div class="comp-num">04</div>
         <h4>Program Management</h4>
-        <p>Subteam leadership, budget planning, test documentation systems.</p>
+        <p>Subteam leadership (13 engineers), budget planning, design reviews, test documentation systems.</p>
       </div>
     </div>
   </section>
@@ -321,9 +497,8 @@
     <div class="contact-inner">
       <h2>Let's talk about suspension geometry, or anything else.</h2>
       <div class="contact-links">
-        <a href="mailto:your.email@ucla.edu">your.email@ucla.edu</a>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
-        <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+        <a href="mailto:adhah05@outlook.com">adhah05@outlook.com</a>
+        <a href="https://linkedin.com/in/armaandhah" target="_blank">linkedin.com/in/armaandhah</a>
       </div>
     </div>
     <a class="btn" href="resume.pdf" target="_blank">DOWNLOAD RESUME (PDF)</a>

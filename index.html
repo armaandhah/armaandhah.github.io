@@ -179,7 +179,26 @@
   .tl-bullets .sub-role:first-child{margin-top:0;}
   .spec-row{ display:flex; gap:10px; flex-wrap:wrap; font-family:var(--font-mono); font-size:12px; }
   .spec{ background:var(--bg); border:1px solid var(--line); padding:6px 11px; color:var(--ink-dim); }
-  @media (max-width:720px){ .timeline{padding-left:30px;} .tl-dot{left:-25px;} .img-placeholder{width:130px; height:100px;} .hero{grid-template-columns:1fr;} }
+  @media (max-width:720px){
+    .timeline{padding-left:30px;} .tl-dot{left:-25px;} .img-placeholder{width:130px; height:100px;} .hero{grid-template-columns:1fr;}
+    header.title-block{padding:20px 20px;}
+    header.title-block .tb-left{gap:16px 22px;}
+    nav{flex-wrap:wrap; justify-content:flex-start; row-gap:10px;}
+    .icon-btn{width:32px; height:32px; font-size:13px;}
+    section{padding:48px 20px 56px;}
+    .hero{padding:56px 20px 48px;}
+    .sheet-tab{padding:8px 20px;}
+    .contact-inner{align-items:flex-start;}
+    .hero-figure svg{max-width:230px;}
+    table.bom, table.rev{ min-width:480px; }
+    .bom-controls{ gap:6px; }
+    .bom-filter{ padding:6px 10px; font-size:11px; }
+  }
+  @media (max-width:420px){
+    .hero-name{ font-size:2.1rem; }
+    header.title-block .tb-left{ gap:12px 18px; }
+    header.title-block .tb-field{ font-size:12px; }
+  }
 
   /* ===== BOM / Competencies ===== */
   .bom-controls{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
@@ -206,6 +225,7 @@
   table.rev-compact{ max-width:640px; }
   table.rev-compact thead th{ font-size:10px; padding:6px 12px; }
   table.rev-compact tbody td{ padding:6px 12px; font-size:12px; }
+  .table-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
 
   /* ===== General notes ===== */
   .notes-block{ max-width:640px; font-family:var(--font-mono); font-size:12.5px; color:var(--ink-dim); border:1px solid var(--line); padding:22px 24px; background:var(--panel); }
@@ -460,6 +480,7 @@
       <button class="bom-filter" data-filter="mech">MECHATRONICS</button>
       <button class="bom-filter" data-filter="pm">PROGRAM MGMT</button>
     </div>
+    <div class="table-scroll">
     <table class="bom" id="bomTable">
       <thead>
         <tr>
@@ -473,6 +494,7 @@
         <!-- rows injected by JS from BOM_DATA -->
       </tbody>
     </table>
+    </div>
   </section>
 
   <div class="sheet-tab"><span><strong>DWG NO.</strong> ARM-004</span><span><strong>SCALE</strong> NTS</span><span><strong>SHEET</strong> 4 OF 6</span></div>
@@ -481,6 +503,7 @@
       <h2>Revision History</h2>
       <div class="section-num">§ 04 — REVISIONS</div>
     </div>
+    <div class="table-scroll">
     <table class="rev rev-compact">
       <thead><tr><th>REV</th><th>PERIOD</th><th>MILESTONE</th></tr></thead>
       <tbody>
@@ -493,6 +516,7 @@
         <tr><td class="rev-tag">G</td><td>2026</td><td>Mechanical Engineering Intern, Advanced Spade Co.</td></tr>
       </tbody>
     </table>
+    </div>
   </section>
 
   <div class="sheet-tab"><span><strong>DWG NO.</strong> ARM-005</span><span><strong>SCALE</strong> NTS</span><span><strong>SHEET</strong> 5 OF 6</span></div>

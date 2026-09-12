@@ -1,54 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Armaan — Mechanical Engineering</title>
+<title>Armaan Dhah — Mechanical Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0F2438;
-    --blue-deep:#16324A;
-    --blue-panel:#1E3E5C;
-    --blue-panel-2:#254A6E;
-    --paper:#EDF1F4;
-    --paper-dim:#C9D4DD;
+    --bg:#16324A;
+    --panel:#1E3E5C;
+    --panel-2:#254A6E;
+    --ink:#EDF1F4;
+    --ink-dim:#C9D4DD;
     --line:#3E5B78;
     --line-light:#4C6E8E;
-    --amber:#E8A33D;
-    --amber-dim:#B8823A;
-    --font-head:'Archivo',sans-serif;
+    --accent:#E8A33D;
+    --accent-dim:#B8823A;
+    --redline:#E1684F;
+    --font-head:'Allerta Stencil',sans-serif;
     --font-body:'Inter',sans-serif;
     --font-mono:'IBM Plex Mono',monospace;
+    --ruler-w:22px;
+  }
+  html[data-theme="light"]{
+    --bg:#F4F0E3;
+    --panel:#FBF9F1;
+    --panel-2:#EEE8D6;
+    --ink:#20262C;
+    --ink-dim:#565F55;
+    --line:#B7AD8E;
+    --line-light:#8E9A83;
+    --accent:#A6591C;
+    --accent-dim:#8A4A17;
+    --redline:#AE3527;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *{animation-duration:.001s !important; transition-duration:.001s !important;} }
   body{
-    background:var(--blue-deep);
-    color:var(--paper);
+    position:relative;
+    background:var(--bg);
+    color:var(--ink);
     font-family:var(--font-body);
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
+    transition:background .25s ease, color .25s ease;
   }
   a{color:inherit;text-decoration:none;}
+  button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
+
+  /* ===== Ruler edges ===== */
+  #rulerTop, #rulerLeft{
+    position:absolute; z-index:5; pointer-events:none;
+    color:var(--line-light); font-family:var(--font-mono); font-size:8px;
+  }
+  #rulerTop{ top:0; left:var(--ruler-w); right:0; height:var(--ruler-w); border-bottom:1px solid var(--line); overflow:hidden; }
+  #rulerLeft{ top:var(--ruler-w); left:0; bottom:0; width:var(--ruler-w); border-right:1px solid var(--line); overflow:hidden; }
+  .tick{ position:absolute; background:var(--line); }
+  #rulerTop .tick{ top:0; width:1px; }
+  #rulerTop .tick.major{ height:10px; }
+  #rulerTop .tick.minor{ height:5px; top:5px; }
+  #rulerLeft .tick{ left:0; height:1px; }
+  #rulerLeft .tick.major{ width:10px; }
+  #rulerLeft .tick.minor{ width:5px; left:5px; }
+  .tick-label{ position:absolute; white-space:nowrap; }
+  @media (max-width:720px){ #rulerTop,#rulerLeft{display:none;} :root{--ruler-w:0px;} }
 
   /* ===== Drawing-sheet frame ===== */
+  .sheet-wrap{ position:relative; padding-top:var(--ruler-w); padding-left:var(--ruler-w); }
   .sheet{
     max-width:1180px;
     margin:0 auto;
     border-left:1px solid var(--line);
     border-right:1px solid var(--line);
     position:relative;
-  }
-  .sheet::before, .sheet::after{
-    content:"";
-    position:fixed;
-    top:0; bottom:0;
-    width:1px;
-    background:var(--line);
-    z-index:0;
-    display:none;
   }
 
   header.title-block{
@@ -59,23 +85,37 @@
     border-bottom:1px solid var(--line);
     font-family:var(--font-mono);
     font-size:13px;
-    color:var(--paper-dim);
+    color:var(--ink-dim);
     flex-wrap:wrap;
     gap:12px;
   }
   header.title-block .tb-left{display:flex; gap:28px; flex-wrap:wrap;}
   header.title-block .tb-field span{display:block; color:var(--line-light); font-size:11px; letter-spacing:.03em;}
-  header.title-block .tb-field strong{color:var(--paper); font-weight:500;}
-  nav{display:flex; gap:22px;}
-  nav a{font-family:var(--font-mono); font-size:13px; color:var(--paper-dim); border-bottom:1px solid transparent; padding-bottom:2px; transition:border-color .15s, color .15s;}
-  nav a:hover{color:var(--amber); border-color:var(--amber);}
+  header.title-block .tb-field strong{color:var(--ink); font-weight:500;}
+  nav{display:flex; gap:20px; align-items:center;}
+  nav a{font-family:var(--font-mono); font-size:13px; color:var(--ink-dim); border-bottom:1px solid transparent; padding-bottom:2px; transition:border-color .15s, color .15s;}
+  nav a:hover{color:var(--accent); border-color:var(--accent);}
+  .icon-btn{
+    width:28px; height:28px; border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-mono); font-size:12px; color:var(--ink-dim); transition:border-color .15s,color .15s;
+  }
+  .icon-btn:hover{ color:var(--accent); border-color:var(--accent); }
+
+  /* mini sheet tab, repeated per section */
+  .sheet-tab{
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    font-family:var(--font-mono); font-size:10.5px; color:var(--line-light);
+    padding:8px 32px; border-bottom:1px solid var(--line); background:var(--panel);
+  }
+  .sheet-tab span strong{ color:var(--ink-dim); font-weight:500; }
 
   /* ===== Hero ===== */
   .hero{
-    padding:96px 32px 88px;
+    padding:72px 32px 64px;
     border-bottom:1px solid var(--line);
     position:relative;
     overflow:hidden;
+    display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center;
   }
   .hero-grid{
     position:absolute; inset:0;
@@ -83,266 +123,230 @@
       linear-gradient(var(--line) 1px, transparent 1px),
       linear-gradient(90deg, var(--line) 1px, transparent 1px);
     background-size:48px 48px;
-    opacity:.14;
+    opacity:.12;
     pointer-events:none;
   }
-  .hero-content{position:relative; max-width:760px;}
-  .hero-eyebrow{
-    font-family:var(--font-mono);
-    font-size:13px;
-    color:var(--amber);
-    margin-bottom:18px;
-  }
-  .hero h1{
+  .hero-content{position:relative;}
+  .hero-name{
     font-family:var(--font-head);
-    font-weight:800;
-    font-size:clamp(2.6rem, 5.5vw, 4.4rem);
+    font-weight:400;
+    font-size:clamp(2.6rem, 5vw, 4rem);
     line-height:1.05;
-    letter-spacing:-.01em;
-    color:var(--paper);
+    color:var(--ink);
   }
-  .hero h1 em{font-style:normal; color:var(--amber);}
-  .hero p.lede{
-    margin-top:26px;
-    font-size:1.15rem;
-    color:var(--paper-dim);
-    max-width:600px;
-  }
-  .hero .roles{
-    margin-top:34px;
-    display:flex;
-    gap:28px;
-    flex-wrap:wrap;
-    font-family:var(--font-mono);
-    font-size:13px;
-  }
-  .hero .roles div{border-left:2px solid var(--amber); padding-left:12px;}
-  .hero .roles div .role-title{color:var(--paper); font-size:14px; margin-bottom:2px;}
-  .hero .roles div .role-org{color:var(--paper-dim);}
+  .hero-degree{ margin-top:14px; font-family:var(--font-mono); font-size:14px; color:var(--accent); }
+  .hero p.lede{ margin-top:46px; font-size:1.08rem; color:var(--ink-dim); max-width:560px; }
+  .hero-figure{ position:relative; display:flex; justify-content:center; }
+  .hero-figure svg{ width:100%; max-width:340px; height:auto; overflow:visible; }
+  .exploded-line{ stroke:var(--ink-dim); fill:none; stroke-width:1.4; stroke-dasharray:1400; stroke-dashoffset:1400; transition:stroke-dashoffset 1.6s ease; }
+  .exploded-accent{ stroke:var(--accent); }
+  .exploded-fill{ fill:var(--panel); stroke:var(--ink-dim); stroke-width:1.4; }
+  .hero-figure.in-view .exploded-line{ stroke-dashoffset:0; }
+  .leader-label{ font-family:var(--font-mono); font-size:10px; fill:var(--ink-dim); }
 
   /* ===== Section shell ===== */
-  section{padding:76px 32px; border-bottom:1px solid var(--line);}
-  .section-head{
-    display:flex; justify-content:space-between; align-items:baseline;
-    margin-bottom:48px; flex-wrap:wrap; gap:10px;
-  }
-  .section-num{
-    font-family:var(--font-mono); font-size:13px; color:var(--amber);
-  }
-  .section-head h2{
-    font-family:var(--font-head); font-weight:700; font-size:1.9rem;
-    color:var(--paper);
-  }
+  section{padding:64px 32px 76px; border-bottom:1px solid var(--line);}
+  .section-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:44px; flex-wrap:wrap; gap:10px; }
+  .section-num{ font-family:var(--font-mono); font-size:13px; color:var(--accent); }
+  .section-head h2{ font-family:var(--font-head); font-weight:400; font-size:1.6rem; color:var(--ink); }
+  .draw-rule{ height:1px; background:var(--line); margin-top:14px; transform:scaleX(0); transform-origin:left; transition:transform 1.1s ease; }
+  .draw-rule.in-view{ transform:scaleX(1); }
 
   /* ===== Project Timeline ===== */
   .timeline{position:relative; padding-left:46px;}
   .tl-line{position:absolute; left:9px; top:8px; bottom:8px; width:1px; background:var(--line);}
-
-  .tl-item{
-    position:relative;
-    border:1px solid var(--line);
-    background:var(--blue-panel);
-    margin-bottom:14px;
-  }
+  .tl-item{ position:relative; border:1px solid var(--line); background:var(--panel); margin-bottom:14px; }
   .tl-item:last-child{margin-bottom:0;}
-
-  .tl-dot{
-    position:absolute; left:-37px; top:26px;
-    width:11px; height:11px; border-radius:50%;
-    background:var(--blue-deep);
-    border:2px solid var(--line-light);
-    transition:background .15s, border-color .15s;
-  }
-  .tl-item[open] .tl-dot, .tl-item:hover .tl-dot{border-color:var(--amber);}
-  .tl-item[open] .tl-dot{background:var(--amber);}
-
-  .tl-item summary{
-    list-style:none;
-    cursor:pointer;
-    padding:22px 56px 22px 24px;
-    position:relative;
-  }
+  .tl-dot{ position:absolute; left:-37px; top:26px; width:11px; height:11px; border-radius:50%; background:var(--bg); border:2px solid var(--line-light); transition:background .15s, border-color .15s; }
+  .tl-item[open] .tl-dot, .tl-item:hover .tl-dot{border-color:var(--accent);}
+  .tl-item[open] .tl-dot{background:var(--accent);}
+  .tl-item summary{ list-style:none; cursor:pointer; padding:22px 56px 22px 24px; position:relative; }
   .tl-item summary::-webkit-details-marker{display:none;}
-  .tl-item summary::after{
-    content:"+";
-    position:absolute;
-    right:22px; top:22px;
-    font-family:var(--font-mono);
-    font-size:18px;
-    color:var(--line-light);
-    transition:transform .15s, color .15s;
-  }
-  .tl-item[open] summary::after{transform:rotate(45deg); color:var(--amber);}
-
+  .tl-item summary::after{ content:"+"; position:absolute; right:22px; top:22px; font-family:var(--font-mono); font-size:18px; color:var(--line-light); transition:transform .15s, color .15s; }
+  .tl-item[open] summary::after{transform:rotate(45deg); color:var(--accent);}
   .tl-top-row{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;}
-  .tl-top-row h3{font-family:var(--font-head); font-weight:700; font-size:1.2rem; color:var(--paper);}
-  .tl-dates{font-family:var(--font-mono); font-size:12px; color:var(--amber); white-space:nowrap;}
-  .tl-org{font-family:var(--font-mono); font-size:12.5px; color:var(--paper-dim); margin-top:4px;}
-  .tl-blurb{margin-top:12px; color:var(--paper-dim); font-size:14.5px; max-width:640px;}
-
+  .tl-top-row h3{font-family:var(--font-head); font-weight:400; font-size:1.05rem; color:var(--ink); letter-spacing:.02em;}
+  .tl-dates{font-family:var(--font-mono); font-size:12px; color:var(--accent); white-space:nowrap;}
+  .tl-org{font-family:var(--font-mono); font-size:12.5px; color:var(--ink-dim); margin-top:4px;}
+  .tl-blurb{margin-top:12px; color:var(--ink-dim); font-size:14.5px; max-width:640px;}
   .tl-detail{padding:0 24px 26px 24px;}
   .tl-images{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;}
-  .img-placeholder{
-    width:170px; height:120px;
-    border:1px dashed var(--line-light);
-    display:flex; align-items:center; justify-content:center;
-    font-family:var(--font-mono); font-size:10.5px; color:var(--line-light);
-    text-align:center; padding:8px;
-  }
+  .img-placeholder{ width:170px; height:120px; border:1px dashed var(--line-light); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:10.5px; color:var(--line-light); text-align:center; padding:8px; }
   .tl-bullets{list-style:none; display:flex; flex-direction:column; gap:9px; max-width:680px; margin-bottom:18px;}
-  .tl-bullets li{position:relative; padding-left:16px; color:var(--paper-dim); font-size:14px; line-height:1.6;}
-  .tl-bullets li::before{content:"—"; position:absolute; left:0; color:var(--amber-dim);}
-  .tl-bullets .sub-role{
-    font-family:var(--font-mono); font-size:11.5px; color:var(--line-light);
-    margin:14px 0 2px; text-transform:none;
-  }
+  .tl-bullets li{position:relative; padding-left:16px; color:var(--ink-dim); font-size:14px; line-height:1.6;}
+  .tl-bullets li::before{content:"—"; position:absolute; left:0; color:var(--accent-dim);}
+  .tl-bullets .sub-role{ font-family:var(--font-mono); font-size:11.5px; color:var(--line-light); margin:14px 0 2px; }
   .tl-bullets .sub-role:first-child{margin-top:0;}
+  .spec-row{ display:flex; gap:10px; flex-wrap:wrap; font-family:var(--font-mono); font-size:12px; }
+  .spec{ background:var(--bg); border:1px solid var(--line); padding:6px 11px; color:var(--ink-dim); }
+  @media (max-width:720px){ .timeline{padding-left:30px;} .tl-dot{left:-25px;} .img-placeholder{width:130px; height:100px;} .hero{grid-template-columns:1fr;} }
 
-  .spec-row{
-    display:flex; gap:10px; flex-wrap:wrap;
-    font-family:var(--font-mono); font-size:12px;
-  }
-  .spec{
-    background:var(--blue-deep);
-    border:1px solid var(--line);
-    padding:6px 11px;
-    color:var(--paper-dim);
-  }
+  /* ===== BOM / Competencies ===== */
+  .bom-controls{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
+  .bom-filter{ font-family:var(--font-mono); font-size:11.5px; padding:7px 12px; border:1px solid var(--line); color:var(--ink-dim); }
+  .bom-filter.active, .bom-filter:hover{ color:var(--accent); border-color:var(--accent); }
+  table.bom{ width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:13px; }
+  table.bom thead th{ text-align:left; font-size:11px; letter-spacing:.03em; color:var(--line-light); border-bottom:1px solid var(--line); padding:10px 12px; cursor:pointer; user-select:none; white-space:nowrap; }
+  table.bom thead th:hover{ color:var(--accent); }
+  table.bom thead th .arrow{ font-size:9px; margin-left:4px; opacity:.6; }
+  table.bom tbody td{ padding:11px 12px; border-bottom:1px solid var(--line); color:var(--ink-dim); vertical-align:top; }
+  table.bom tbody tr:hover td{ color:var(--ink); background:var(--panel); }
+  table.bom tbody tr.hidden{ display:none; }
+  .item-no{ color:var(--accent-dim); }
+  .level-dots{ display:inline-flex; gap:4px; vertical-align:middle; }
+  .level-dots span{ width:6px; height:6px; border-radius:50%; background:var(--line); display:inline-block; }
+  .level-dots span.filled{ background:var(--accent); }
 
-  @media (max-width:720px){
-    .timeline{padding-left:30px;}
-    .tl-dot{left:-25px;}
-    .img-placeholder{width:130px; height:100px;}
-  }
+  /* ===== Revisions ===== */
+  table.rev{ width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12.5px; max-width:820px; }
+  table.rev thead th{ text-align:left; font-size:11px; color:var(--line-light); border-bottom:1px solid var(--line); padding:9px 12px; }
+  table.rev tbody td{ padding:10px 12px; border-bottom:1px solid var(--line); color:var(--ink-dim); }
+  table.rev tbody td.rev-tag{ color:var(--redline); }
+  section.compact-section{ padding-top:40px; padding-bottom:40px; }
+  table.rev-compact{ max-width:640px; }
+  table.rev-compact thead th{ font-size:10px; padding:6px 12px; }
+  table.rev-compact tbody td{ padding:6px 12px; font-size:12px; }
 
-  /* ===== Skills / competencies ===== */
-  .comp-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .comp-cell{
-    background:var(--blue-deep);
-    padding:22px;
-  }
-  .comp-cell .comp-num{font-family:var(--font-mono); font-size:11px; color:var(--amber-dim); margin-bottom:10px;}
-  .comp-cell h4{font-family:var(--font-head); font-size:1rem; font-weight:600; margin-bottom:8px; color:var(--paper);}
-  .comp-cell p{font-size:13.5px; color:var(--paper-dim);}
+  /* ===== General notes ===== */
+  .notes-block{ max-width:640px; font-family:var(--font-mono); font-size:12.5px; color:var(--ink-dim); border:1px solid var(--line); padding:22px 24px; background:var(--panel); }
+  .notes-block .notes-title{ color:var(--redline); font-size:12px; margin-bottom:14px; }
+  .notes-block ol{ padding-left:18px; display:flex; flex-direction:column; gap:8px; }
 
   /* ===== Contact / footer ===== */
-  .contact-inner{
-    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px;
-  }
-  .contact-inner h2{
-    font-family:var(--font-head); font-weight:800; font-size:clamp(2rem,4vw,3rem); color:var(--paper); max-width:520px;
-  }
+  .contact-inner{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px; }
+  .contact-inner h2{ font-family:var(--font-head); font-weight:400; font-size:clamp(1.6rem,3vw,2.2rem); color:var(--ink); max-width:520px; }
   .contact-links{display:flex; flex-direction:column; gap:10px; font-family:var(--font-mono); font-size:14px;}
-  .contact-links a{color:var(--paper-dim); border-bottom:1px solid var(--line); padding-bottom:2px; transition:color .15s, border-color .15s;}
-  .contact-links a:hover{color:var(--amber); border-color:var(--amber);}
-  .btn{
-    display:inline-block;
-    font-family:var(--font-mono);
-    font-size:13px;
-    color:var(--blue-deep);
-    background:var(--amber);
-    padding:12px 20px;
-    margin-top:22px;
-  }
-  .btn:hover{background:#f0b458;}
+  .contact-links a{color:var(--ink-dim); border-bottom:1px solid var(--line); padding-bottom:2px; transition:color .15s, border-color .15s;}
+  .contact-links a:hover{color:var(--accent); border-color:var(--accent);}
+  .btn{ display:inline-block; font-family:var(--font-mono); font-size:13px; color:var(--bg); background:var(--accent); padding:12px 20px; margin-top:22px; }
+  .btn:hover{ opacity:.88; }
+  footer{ padding:22px 32px; font-family:var(--font-mono); font-size:11.5px; color:var(--line-light); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
 
-  footer{
-    padding:22px 32px;
-    font-family:var(--font-mono);
-    font-size:11.5px;
-    color:var(--line-light);
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
-  }
+  ::selection{background:var(--accent); color:var(--bg);}
 
-  ::selection{background:var(--amber); color:var(--blue-deep);}
+  /* ===== Print ===== */
+  @media print{
+    #rulerTop, #rulerLeft, nav, .btn-print, .icon-btn, .hero-grid{ display:none !important; }
+    body{ background:#fff; color:#000; }
+    :root, html[data-theme]{ --bg:#fff; --panel:#fff; --ink:#000; --ink-dim:#333; --line:#999; --accent:#555; --redline:#900; }
+    .sheet-wrap{ padding:0; }
+    .tl-item summary::after{ display:none; }
+    section{ break-inside:avoid; }
+  }
 </style>
 </head>
 <body>
+
+<div id="rulerTop"></div>
+<div id="rulerLeft"></div>
+
+<div class="sheet-wrap">
 <div class="sheet">
 
   <header class="title-block">
     <div class="tb-left">
       <div class="tb-field"><span>NAME</span><strong>Armaan Dhah</strong></div>
       <div class="tb-field"><span>DISCIPLINE</span><strong>Mechanical Engineering</strong></div>
-      <div class="tb-field"><span>SHEET</span><strong>1 OF 1</strong></div>
+      <div class="tb-field"><span>SHEET</span><strong>1 OF 6</strong></div>
     </div>
     <nav>
       <a href="#projects">Projects</a>
       <a href="#competencies">Competencies</a>
+      <a href="#revisions">Revisions</a>
       <a href="#contact">Contact</a>
+      <button class="icon-btn btn-print" id="printBtn" title="Print / export">P</button>
+      <button class="icon-btn" id="themeToggle" title="Toggle light/dark">☾</button>
     </nav>
   </header>
 
   <section class="hero">
     <div class="hero-grid"></div>
     <div class="hero-content">
-      <div class="hero-eyebrow">MECHANICAL ENGINEERING — DESIGN / ANALYSIS / FABRICATION</div>
-      <h1>Mechanisms designed, tested, and <em>run to failure</em> before they ever compete.</h1>
-      <p class="lede">B.S. Mechanical Engineering, UCLA — I design, analyze, and build vehicle suspension, combat robotics weapon systems, and underwater hardware, then validate everything against real test data.</p>
-      <div class="roles">
-        <div><div class="role-title">Suspension Lead Engineer</div><div class="role-org">UCLA Bruin Baja SAE</div></div>
-        <div><div class="role-title">Mechanical Engineering Intern</div><div class="role-org">Advanced Spade Company</div></div>
-      </div>
+      <h1 class="hero-name">Armaan Dhah</h1>
+      <div class="hero-degree">B.S. Mechanical Engineering, UCLA</div>
+      <p class="lede">I design, analyze, and build mechanical systems end to end, from CAD and FEA through hands-on fabrication. My background spans manual and CNC machining, welding, 3D printing, embedded electronics integration, and leading engineering teams under real budget and schedule constraints.</p>
+    </div>
+    <div class="hero-figure" id="heroFigure">
+      <svg viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg">
+        <line class="exploded-line" x1="160" y1="10" x2="160" y2="420" stroke-dasharray="4 5"/>
+        <rect class="exploded-line exploded-fill" x="128" y="14" width="64" height="26" rx="5"/>
+        <ellipse class="exploded-line" cx="160" cy="70" rx="46" ry="9"/>
+        <ellipse class="exploded-line" cx="160" cy="92" rx="46" ry="9"/>
+        <ellipse class="exploded-line" cx="160" cy="114" rx="46" ry="9"/>
+        <ellipse class="exploded-line" cx="160" cy="136" rx="46" ry="9"/>
+        <ellipse class="exploded-line" cx="160" cy="158" rx="46" ry="9"/>
+        <rect class="exploded-line exploded-fill" x="110" y="188" width="100" height="150" rx="10"/>
+        <rect class="exploded-line exploded-fill" x="150" y="344" width="20" height="52"/>
+        <circle class="exploded-line exploded-fill" cx="160" cy="410" r="18"/>
+        <circle class="exploded-line" cx="160" cy="410" r="6"/>
+
+        <line class="exploded-line exploded-accent" x1="206" y1="27" x2="252" y2="27"/>
+        <circle class="exploded-line exploded-accent" cx="260" cy="27" r="9"/>
+        <text class="leader-label" x="257" y="30.5">1</text>
+
+        <line class="exploded-line exploded-accent" x1="206" y1="114" x2="252" y2="114"/>
+        <circle class="exploded-line exploded-accent" cx="260" cy="114" r="9"/>
+        <text class="leader-label" x="257" y="117.5">2</text>
+
+        <line class="exploded-line exploded-accent" x1="210" y1="250" x2="252" y2="250"/>
+        <circle class="exploded-line exploded-accent" cx="260" cy="250" r="9"/>
+        <text class="leader-label" x="257" y="253.5">3</text>
+
+        <line class="exploded-line exploded-accent" x1="170" y1="370" x2="252" y2="370"/>
+        <circle class="exploded-line exploded-accent" cx="260" cy="370" r="9"/>
+        <text class="leader-label" x="257" y="373.5">4</text>
+
+        <line class="exploded-line exploded-accent" x1="178" y1="410" x2="252" y2="410"/>
+        <circle class="exploded-line exploded-accent" cx="260" cy="410" r="9"/>
+        <text class="leader-label" x="257" y="413.5">5</text>
+      </svg>
     </div>
   </section>
 
+  <div class="sheet-tab"><span><strong>DWG NO.</strong> ARM-002</span><span><strong>SCALE</strong> NTS</span><span><strong>SHEET</strong> 2 OF 6</span></div>
   <section id="projects">
     <div class="section-head">
       <h2>Project Timeline</h2>
       <div class="section-num">§ 02 — PROJECTS</div>
     </div>
-
+    <div class="draw-rule"></div>
+    <br>
     <div class="timeline">
       <div class="tl-line"></div>
 
-      <details class="tl-item" open>
+      <details class="tl-item">
         <span class="tl-dot"></span>
         <summary>
           <div class="tl-top-row">
             <h3>Baja SAE Suspension &amp; Steering System</h3>
-            <span class="tl-dates">MAY 2026 — PRESENT</span>
+            <span class="tl-dates">MAY 2026–PRESENT</span>
           </div>
-          <div class="tl-org">UCLA Bruin Baja SAE — Suspension Lead Engineer</div>
-          <p class="tl-blurb">Direct a 13-person subteam through the full suspension and steering lifecycle — geometry, fabrication, and validation — after building up through fabrication and testbed roles.</p>
+          <div class="tl-org">UCLA Bruin Baja SAE: Suspension Lead Engineer</div>
+          <p class="tl-blurb">Direct a 13-person subteam through the full suspension and steering lifecycle (geometry, fabrication, and validation), after building up through fabrication and testbed roles.</p>
         </summary>
         <div class="tl-detail">
           <div class="tl-images">
-            <div class="img-placeholder">add photo — vehicle / suspension assembly</div>
-            <div class="img-placeholder">add photo — CAD or test rig</div>
+            <div class="img-placeholder">add photo: vehicle / suspension assembly</div>
+            <div class="img-placeholder">add CAD screenshot: suspension geometry</div>
           </div>
-          <div class="tl-bullets">
-            <div class="sub-role">SUSPENSION LEAD ENGINEER — MAY 2026–PRESENT</div>
-          </div>
+          <div class="tl-bullets"><div class="sub-role">SUSPENSION LEAD ENGINEER, MAY 2026–PRESENT</div></div>
           <ul class="tl-bullets">
             <li>Direct a team of 13 project engineers through design, analysis, fabrication, and validation of the entire suspension and steering system, coordinating with other subsystem leads for vehicle integration.</li>
             <li>Optimize suspension geometry to elevate handling and reliability while supervising component packaging, mass reduction, and rule compliance.</li>
-            <li>Manage the subteam budget and defend design architectures at formal technical reviews and competition design presentations.</li>
+            <li>Manage a $10,000 subteam budget, defending design architectures at formal technical reviews and competition design presentations.</li>
           </ul>
-          <div class="tl-bullets">
-            <div class="sub-role">SUSPENSION ENGINEER — DEC 2025–MAY 2026</div>
-          </div>
+          <div class="tl-bullets"><div class="sub-role">SUSPENSION ENGINEER, DEC 2025–MAY 2026</div></div>
           <ul class="tl-bullets">
             <li>Fabricated upper and lower A-arm components, generating 1:1 DXF templates for accurate tube notching and machining high-misalignment spacers on manual mill and lathe.</li>
             <li>Assisted in CNC milling tie rods and final suspension assembly.</li>
           </ul>
-          <div class="tl-bullets">
-            <div class="sub-role">GENERAL MEMBER — SEPT 2025–DEC 2025</div>
-          </div>
+          <div class="tl-bullets"><div class="sub-role">GENERAL MEMBER, SEPT 2025–DEC 2025</div></div>
           <ul class="tl-bullets">
             <li>Designed and fabricated a scaled mock centerlock assembly in SolidWorks for a software testbench, letting software/electrical teams validate control systems independent of vehicle readiness.</li>
             <li>Implemented an axially repositionable limit switch assembly to optimize switch placement during testing.</li>
           </ul>
           <div class="spec-row">
-            <div class="spec">13-person team</div>
-            <div class="spec">DXF Templates</div>
-            <div class="spec">Manual Mill / Lathe</div>
-            <div class="spec">CNC</div>
+            <div class="spec">13-person team</div><div class="spec">DXF Templates</div><div class="spec">Manual Mill / Lathe</div><div class="spec">CNC</div>
           </div>
         </div>
       </details>
@@ -352,30 +356,24 @@
         <summary>
           <div class="tl-top-row">
             <h3>Sewer-Inspection Robot Gimbal &amp; GNSS Device</h3>
-            <span class="tl-dates">MAY 2026 — PRESENT</span>
+            <span class="tl-dates">MAY 2026–SEPT 2026</span>
           </div>
-          <div class="tl-org">Advanced Spade Company — Mechanical Engineering Intern</div>
+          <div class="tl-org">Advanced Spade Company: Mechanical Engineering Intern</div>
           <p class="tl-blurb">Redesigned a camera gimbal for a sewer-surveying robot and led mechanical design of an in-house GNSS positioning device, plus supporting test infrastructure and production tooling.</p>
         </summary>
         <div class="tl-detail">
           <div class="tl-images">
-            <div class="img-placeholder">add photo — gimbal assembly</div>
-            <div class="img-placeholder">add photo — GNSS device / housing</div>
+            <div class="img-placeholder">add photo: gimbal assembly</div>
+            <div class="img-placeholder">add CAD screenshot: GNSS housing</div>
           </div>
           <ul class="tl-bullets">
-            <li>Redesigned a pitch/roll camera gimbal for a sewer-surveying robot, cutting package volume 53% through re-tuned gear reduction, a ball-bearing-supported roll shaft, and slip-ring integration — programming rotary encoders with a Teensy 4.1 and Arduino IDE.</li>
+            <li>Redesigned a pitch/roll camera gimbal for a sewer-surveying robot, cutting package volume 53% through re-tuned gear reduction, a ball-bearing-supported roll shaft, and slip-ring integration, and programmed rotary encoders with a Teensy 4.1 and Arduino IDE.</li>
             <li>Led mechanical design across three phases of an in-house GNSS positioning cell device to replace third-party units: test fixtures to validate candidate chips, a 4-PCB production device packaged around a parametric housing, and a custom 2s2p battery pack.</li>
             <li>Designed a single-slot external battery charger enclosure in SolidWorks, converging on slip-fit retention geometry through 13 design-table iterations.</li>
             <li>Designed and fabricated a T-slot aluminum Testbench Mobility Unit to convert the CRKT CNC testbench into a mobile unit.</li>
             <li>Deployed an automated 3D-printing farm to streamline prototyping and production across the company's product line.</li>
           </ul>
-          <div class="spec-row">
-            <div class="spec">Teensy 4.1</div>
-            <div class="spec">Slip-Ring</div>
-            <div class="spec">GD&amp;T</div>
-            <div class="spec">Design Tables</div>
-            <div class="spec">T-Slot Aluminum</div>
-          </div>
+          <div class="spec-row"><div class="spec">Teensy 4.1</div><div class="spec">Slip-Ring</div><div class="spec">GD&amp;T</div><div class="spec">Design Tables</div><div class="spec">T-Slot Aluminum</div></div>
         </div>
       </details>
 
@@ -384,27 +382,22 @@
         <summary>
           <div class="tl-top-row">
             <h3>SKULL CRUSHER — Spinning Weapon System</h3>
-            <span class="tl-dates">SEPT 2025 — MAY 2026</span>
+            <span class="tl-dates">SEPT 2025–MAY 2026</span>
           </div>
-          <div class="tl-org">Flagship Combat Robotics, UCLA ASME — Project Engineer</div>
+          <div class="tl-org">Flagship Combat Robotics, UCLA ASME: Project Engineer</div>
           <p class="tl-blurb">Designed and manufactured the drisk-style spinning weapon for a 30 lb combat robot, validated across multiple FEA revisions before machining.</p>
         </summary>
         <div class="tl-detail">
           <div class="tl-images">
-            <div class="img-placeholder">add photo — weapon assembly</div>
-            <div class="img-placeholder">add photo — FEA plot or CAD</div>
+            <div class="img-placeholder">add photo: weapon assembly</div>
+            <div class="img-placeholder">add CAD screenshot: FEA plot</div>
           </div>
           <ul class="tl-bullets">
             <li>Designed and manufactured a drisk-style spinning weapon system in SolidWorks for the 30 lb combat robot Skull Crusher, iterating geometry and packaging to maintain strength within a 12 lb weapon mass allocation.</li>
             <li>Performed ANSYS FEA across multiple design revisions to predict stress concentrations and loading responses, validating spline hub survivability under expected combat impact forces.</li>
             <li>Machined critical components using manual lathe and mill operations, and programmed toolpaths in Fusion CAM to manufacture complex parts on a CNC mill.</li>
           </ul>
-          <div class="spec-row">
-            <div class="spec">SolidWorks</div>
-            <div class="spec">ANSYS FEA</div>
-            <div class="spec">Fusion CAM</div>
-            <div class="spec">30 lb Weight Class</div>
-          </div>
+          <div class="spec-row"><div class="spec">SolidWorks</div><div class="spec">ANSYS FEA</div><div class="spec">Fusion CAM</div><div class="spec">30 lb Weight Class</div></div>
         </div>
       </details>
 
@@ -415,19 +408,13 @@
             <h3>UCLA Combat Robotics</h3>
             <span class="tl-dates">DATES TBD</span>
           </div>
-          <div class="tl-org">UCLA Combat Robotics — Role TBD</div>
-          <p class="tl-blurb">Placeholder — details coming soon.</p>
+          <div class="tl-org">UCLA Combat Robotics: Role TBD</div>
+          <p class="tl-blurb">Placeholder. Details coming soon.</p>
         </summary>
         <div class="tl-detail">
-          <div class="tl-images">
-            <div class="img-placeholder">add photo</div>
-          </div>
-          <ul class="tl-bullets">
-            <li>Add role, timeframe, and project details here.</li>
-          </ul>
-          <div class="spec-row">
-            <div class="spec">TBD</div>
-          </div>
+          <div class="tl-images"><div class="img-placeholder">add photo</div></div>
+          <ul class="tl-bullets"><li>Add role, timeframe, and project details here.</li></ul>
+          <div class="spec-row"><div class="spec">TBD</div></div>
         </div>
       </details>
 
@@ -436,66 +423,102 @@
         <summary>
           <div class="tl-top-row">
             <h3>Vertical Profiling Float</h3>
-            <span class="tl-dates">AUG 2024 — JUNE 2025</span>
+            <span class="tl-dates">AUG 2024–JUNE 2025</span>
           </div>
-          <div class="tl-org">Crush Depth MATE ROV Underwater Robotics — FLOAT Lead Mechanical Engineer</div>
-          <p class="tl-blurb">Led the end-to-end design and fabrication of an underwater vertical profiling float — buoyancy control, waterproofing, and depth testing to a 90% leak-reduction result.</p>
+          <div class="tl-org">Crush Depth MATE ROV Underwater Robotics: FLOAT Lead Mechanical Engineer</div>
+          <p class="tl-blurb">Led the end-to-end design and fabrication of an underwater vertical profiling float, covering buoyancy control, waterproofing, and depth testing, and achieving a 90% leak-reduction result.</p>
         </summary>
         <div class="tl-detail">
           <div class="tl-images">
-            <div class="img-placeholder">add photo — float assembly</div>
-            <div class="img-placeholder">add photo — depth test setup</div>
+            <div class="img-placeholder">add photo: float assembly</div>
+            <div class="img-placeholder">add photo: depth test setup</div>
           </div>
           <ul class="tl-bullets">
             <li>Led a sub-team in the end-to-end design and fabrication of an underwater vertical profiling float, managing mechanical design, buoyancy control, and waterproofing integration.</li>
             <li>Modeled eight iterations of buoyancy engine and housing assemblies in SolidWorks CAD; 3D printed components and applied acetone vapor finishing to improve tensile strength, surface quality, and sealing performance.</li>
-            <li>Engineered a precision O-ring waterproofing interface with optimized 25% compression geometry; depth-tested over 150 hours to achieve 3.0 meters with zero leakage — a 90% improvement over previous years.</li>
+            <li>Engineered a precision O-ring waterproofing interface with optimized 25% compression geometry; depth-tested over 150 hours to achieve 3.0 meters with zero leakage, a 90% improvement over previous years.</li>
             <li>Supervised teammates in CAD modeling, fabrication, and mechanical testing; submitted the system to the 2025 MATE ROV Explorer Class Championship.</li>
           </ul>
-          <div class="spec-row">
-            <div class="spec">SolidWorks</div>
-            <div class="spec">3D Printing</div>
-            <div class="spec">O-Ring Sealing</div>
-            <div class="spec">150+ hrs Testing</div>
-          </div>
+          <div class="spec-row"><div class="spec">SolidWorks</div><div class="spec">3D Printing</div><div class="spec">O-Ring Sealing</div><div class="spec">150+ hrs Testing</div></div>
         </div>
       </details>
-
     </div>
   </section>
 
+  <div class="sheet-tab"><span><strong>DWG NO.</strong> ARM-003</span><span><strong>SCALE</strong> NTS</span><span><strong>SHEET</strong> 3 OF 6</span></div>
   <section id="competencies">
     <div class="section-head">
-      <h2>Competencies</h2>
-      <div class="section-num">§ 03 — TOOLS</div>
+      <h2>Bill of Materials</h2>
+      <div class="section-num">§ 03 — SKILLS</div>
     </div>
-    <div class="comp-grid">
-      <div class="comp-cell">
-        <div class="comp-num">01</div>
-        <h4>CAD / Analysis</h4>
-        <p>SolidWorks (CSWA certified), ANSYS &amp; SolidWorks FEA, Fusion CAM, Altium Co-Designer, AutoCAD, MATLAB.</p>
-      </div>
-      <div class="comp-cell">
-        <div class="comp-num">02</div>
-        <h4>Fabrication</h4>
-        <p>Manual lathe &amp; mill, CNC mill, 3D printing, TIG &amp; spot welding, soldering, sheet/tube work.</p>
-      </div>
-      <div class="comp-cell">
-        <div class="comp-num">03</div>
-        <h4>Mechatronics</h4>
-        <p>Rotary encoders on Teensy 4.1, embedded electronics packaging, sensor and PCB integration.</p>
-      </div>
-      <div class="comp-cell">
-        <div class="comp-num">04</div>
-        <h4>Program Management</h4>
-        <p>Subteam leadership (13 engineers), budget planning, design reviews, test documentation systems.</p>
-      </div>
+    <div class="draw-rule"></div>
+    <br>
+    <div class="bom-controls">
+      <button class="bom-filter active" data-filter="all">ALL</button>
+      <button class="bom-filter" data-filter="cad">CAD / ANALYSIS</button>
+      <button class="bom-filter" data-filter="fab">FABRICATION</button>
+      <button class="bom-filter" data-filter="mech">MECHATRONICS</button>
+      <button class="bom-filter" data-filter="pm">PROGRAM MGMT</button>
+    </div>
+    <table class="bom" id="bomTable">
+      <thead>
+        <tr>
+          <th data-key="item">ITEM<span class="arrow"></span></th>
+          <th data-key="desc">DESCRIPTION<span class="arrow"></span></th>
+          <th data-key="category">CATEGORY<span class="arrow"></span></th>
+          <th data-key="level">LEVEL<span class="arrow"></span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- rows injected by JS from BOM_DATA -->
+      </tbody>
+    </table>
+  </section>
+
+  <div class="sheet-tab"><span><strong>DWG NO.</strong> ARM-004</span><span><strong>SCALE</strong> NTS</span><span><strong>SHEET</strong> 4 OF 6</span></div>
+  <section id="revisions" class="compact-section">
+    <div class="section-head">
+      <h2>Revision History</h2>
+      <div class="section-num">§ 04 — REVISIONS</div>
+    </div>
+    <table class="rev rev-compact">
+      <thead><tr><th>REV</th><th>PERIOD</th><th>MILESTONE</th></tr></thead>
+      <tbody>
+        <tr><td class="rev-tag">A</td><td>2015–2017</td><td>FIRST Robotics, 5th–6th grade (qualified to internationals, WV)</td></tr>
+        <tr><td class="rev-tag">B</td><td>2017–2019</td><td>Founded first FTC team, middle school</td></tr>
+        <tr><td class="rev-tag">C</td><td>2017–2023</td><td>Science Olympiad, engineering build events</td></tr>
+        <tr><td class="rev-tag">D</td><td>2024–2025</td><td>Vertical Profiling Float, MATE ROV</td></tr>
+        <tr><td class="rev-tag">E</td><td>2025–2026</td><td>Skull Crusher, Combat Robotics</td></tr>
+        <tr><td class="rev-tag">F</td><td>2025–Present</td><td>Baja SAE Suspension (Member &#8594; Lead)</td></tr>
+        <tr><td class="rev-tag">G</td><td>2026</td><td>Mechanical Engineering Intern, Advanced Spade Co.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="sheet-tab"><span><strong>DWG NO.</strong> ARM-005</span><span><strong>SCALE</strong> NTS</span><span><strong>SHEET</strong> 5 OF 6</span></div>
+  <section id="notes">
+    <div class="section-head">
+      <h2>General Notes</h2>
+      <div class="section-num">§ 05 — NOTES</div>
+    </div>
+    <div class="draw-rule"></div>
+    <br>
+    <div class="notes-block">
+      <div class="notes-title">UNLESS OTHERWISE SPECIFIED:</div>
+      <ol>
+        <li>ALL DIMENSIONS ON THIS PAGE ARE APPROXIMATE. DO NOT SCALE THIS RESUME.</li>
+        <li>SLEEP SCHEDULE TOLERANCE: ±2 HOURS NIGHTLY. VOID DURING BAJA BUILD SEASON.</li>
+        <li>ASSEMBLY: FASTENERS PROVIDED, PATIENCE NOT INCLUDED.</li>
+        <li>TOLERANCES ARE TIGHTER ON HARDWARE THAN ON DEADLINES.</li>
+        <li>CONFIDENTIAL: NOTHING ON THIS SHEET IS CONFIDENTIAL.</li>
+      </ol>
     </div>
   </section>
 
+  <div class="sheet-tab"><span><strong>DWG NO.</strong> ARM-006</span><span><strong>SCALE</strong> NTS</span><span><strong>SHEET</strong> 6 OF 6</span></div>
   <section id="contact">
     <div class="contact-inner">
-      <h2>Let's talk about suspension geometry, or anything else.</h2>
+      <h2>Get in touch.</h2>
       <div class="contact-links">
         <a href="mailto:adhah05@outlook.com">adhah05@outlook.com</a>
         <a href="https://linkedin.com/in/armaandhah" target="_blank">linkedin.com/in/armaandhah</a>
@@ -505,10 +528,172 @@
   </section>
 
   <footer>
-    <span>© 2026 ARMAAN — MECHANICAL ENGINEERING</span>
-    <span>REV. A — LOS ANGELES, CA</span>
+    <span>© 2026 ARMAAN DHAH, MECHANICAL ENGINEERING</span>
+    <span>REV. I, LOS ANGELES, CA</span>
   </footer>
 
 </div>
+</div>
+
+<script>
+(function(){
+  /* ---------- Theme toggle ---------- */
+  var root = document.documentElement;
+  var toggle = document.getElementById('themeToggle');
+  var stored = null;
+  try{ stored = localStorage.getItem('site-theme'); }catch(e){}
+  if(stored){ root.setAttribute('data-theme', stored); }
+  function setToggleIcon(){ toggle.textContent = root.getAttribute('data-theme') === 'light' ? '☀' : '☾'; }
+  setToggleIcon();
+  toggle.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem('site-theme', next); }catch(e){}
+    setToggleIcon();
+  });
+
+  /* ---------- Print ---------- */
+  var openBeforePrint = [];
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+  window.addEventListener('beforeprint', function(){
+    openBeforePrint = [];
+    document.querySelectorAll('details.tl-item').forEach(function(d){ openBeforePrint.push(d.open); d.open = true; });
+  });
+  window.addEventListener('afterprint', function(){
+    document.querySelectorAll('details.tl-item').forEach(function(d,i){ d.open = openBeforePrint[i]; });
+  });
+
+  /* ---------- Rulers ---------- */
+  var rulerTop = document.getElementById('rulerTop');
+  var rulerLeft = document.getElementById('rulerLeft');
+  function buildRulers(){
+    var sheet = document.querySelector('.sheet');
+    var w = sheet.getBoundingClientRect().width;
+    var h = sheet.getBoundingClientRect().height;
+    rulerTop.innerHTML = '';
+    rulerLeft.innerHTML = '';
+    var step = 20, majorEvery = 5;
+    for(var x=0, i=0; x<w; x+=step, i++){
+      var t = document.createElement('div');
+      t.className = 'tick ' + (i % majorEvery === 0 ? 'major' : 'minor');
+      t.style.left = x + 'px';
+      rulerTop.appendChild(t);
+      if(i % majorEvery === 0){
+        var lbl = document.createElement('div');
+        lbl.className = 'tick-label';
+        lbl.style.left = (x+2) + 'px'; lbl.style.top = '11px';
+        lbl.textContent = x;
+        rulerTop.appendChild(lbl);
+      }
+    }
+    for(var y=0, j=0; y<h; y+=step, j++){
+      var t2 = document.createElement('div');
+      t2.className = 'tick ' + (j % majorEvery === 0 ? 'major' : 'minor');
+      t2.style.top = y + 'px';
+      rulerLeft.appendChild(t2);
+      if(j % majorEvery === 0){
+        var lbl2 = document.createElement('div');
+        lbl2.className = 'tick-label';
+        lbl2.style.top = (y+1) + 'px'; lbl2.style.left = '11px';
+        lbl2.style.writingMode = 'vertical-rl';
+        lbl2.textContent = y;
+        rulerLeft.appendChild(lbl2);
+      }
+    }
+  }
+  buildRulers();
+  window.addEventListener('resize', buildRulers);
+  if('ResizeObserver' in window){
+    new ResizeObserver(buildRulers).observe(document.body);
+  } else {
+    document.querySelectorAll('details').forEach(function(d){ d.addEventListener('toggle', buildRulers); });
+  }
+
+  /* ---------- Scroll reveal (draw-in lines + hero figure) ---------- */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.35});
+    document.querySelectorAll('.draw-rule, #heroFigure').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.draw-rule, #heroFigure').forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* ---------- BOM table: data, render, sort, filter ---------- */
+  var BOM_DATA = [
+    {item:'01', desc:'SolidWorks (CSWA Certified)', category:'cad', catLabel:'CAD / Analysis', level:3},
+    {item:'02', desc:'Fusion CAM', category:'cad', catLabel:'CAD / Analysis', level:3},
+    {item:'03', desc:'Manual Lathe &amp; Mill', category:'fab', catLabel:'Fabrication', level:3},
+    {item:'04', desc:'CNC Milling', category:'fab', catLabel:'Fabrication', level:3},
+    {item:'05', desc:'3D Printing (FDM)', category:'fab', catLabel:'Fabrication', level:3},
+    {item:'06', desc:'Sheet / Tube Fabrication', category:'fab', catLabel:'Fabrication', level:3},
+    {item:'07', desc:'Subteam Leadership (13 Engineers)', category:'pm', catLabel:'Program Mgmt', level:3},
+    {item:'08', desc:'Budget Planning', category:'pm', catLabel:'Program Mgmt', level:3},
+    {item:'09', desc:'Design Reviews &amp; Documentation', category:'pm', catLabel:'Program Mgmt', level:3},
+    {item:'10', desc:'ANSYS FEA', category:'cad', catLabel:'CAD / Analysis', level:2},
+    {item:'11', desc:'Altium Co-Designer', category:'cad', catLabel:'CAD / Analysis', level:2},
+    {item:'12', desc:'MATLAB', category:'cad', catLabel:'CAD / Analysis', level:2},
+    {item:'13', desc:'Soldering', category:'fab', catLabel:'Fabrication', level:2},
+    {item:'14', desc:'Embedded Electronics Packaging', category:'mech', catLabel:'Mechatronics', level:2},
+    {item:'15', desc:'Sensor &amp; PCB Integration', category:'mech', catLabel:'Mechatronics', level:2},
+    {item:'16', desc:'AutoCAD', category:'cad', catLabel:'CAD / Analysis', level:1},
+    {item:'17', desc:'TIG &amp; Spot Welding', category:'fab', catLabel:'Fabrication', level:1}
+  ];
+
+  var tbody = document.querySelector('#bomTable tbody');
+  var currentFilter = 'all';
+  var sortKey = 'item';
+  var sortDir = 1;
+
+  function levelDots(level){
+    var s = '<span class="level-dots">';
+    for(var i=1;i<=3;i++){ s += '<span class="'+(i<=level?'filled':'')+'"></span>'; }
+    return s + '</span>';
+  }
+
+  function renderRows(){
+    var rows = BOM_DATA.slice();
+    rows.sort(function(a,b){
+      var av = a[sortKey], bv = b[sortKey];
+      if(typeof av === 'string'){ av = av.toLowerCase(); bv = bv.toLowerCase(); }
+      if(av < bv) return -1*sortDir;
+      if(av > bv) return 1*sortDir;
+      return 0;
+    });
+    tbody.innerHTML = rows.map(function(r){
+      var hidden = (currentFilter !== 'all' && r.category !== currentFilter) ? ' hidden' : '';
+      return '<tr class="'+hidden.trim()+'" data-category="'+r.category+'">'+
+        '<td class="item-no">'+r.item+'</td>'+
+        '<td>'+r.desc+'</td>'+
+        '<td>'+r.catLabel+'</td>'+
+        '<td>'+levelDots(r.level)+'</td>'+
+      '</tr>';
+    }).join('');
+  }
+  renderRows();
+
+  document.querySelectorAll('#bomTable thead th').forEach(function(th){
+    th.addEventListener('click', function(){
+      var key = th.getAttribute('data-key');
+      if(sortKey === key){ sortDir *= -1; } else { sortKey = key; sortDir = 1; }
+      document.querySelectorAll('#bomTable thead .arrow').forEach(function(a){ a.textContent=''; });
+      th.querySelector('.arrow').textContent = sortDir === 1 ? '▲' : '▼';
+      renderRows();
+    });
+  });
+
+  document.querySelectorAll('.bom-filter').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.bom-filter').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentFilter = btn.getAttribute('data-filter');
+      renderRows();
+    });
+  });
+})();
+</script>
 </body>
 </html>

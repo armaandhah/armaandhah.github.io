@@ -423,47 +423,63 @@
           </div>
           <h3 class="tl-title">Sewer-Inspection Robot Gimbal &amp; GNSS Device</h3>
           <p class="tl-blurb">Redesigned a robot camera gimbal and led development of an in-house GNSS device.</p>
-          <div class="spec-row"><div class="spec">Teensy 4.1</div><div class="spec">Slip-Ring</div><div class="spec">GD&amp;T</div><div class="spec">Design Tables</div><div class="spec">T-Slot Aluminum</div></div>
+          <div class="spec-row"><div class="spec">Teensy 4.1</div><div class="spec">Slip-Ring</div><div class="spec">GD&amp;T</div><div class="spec">Design Tables</div><div class="spec">Altium Co-Designer</div><div class="spec">T-Slot Aluminum</div></div>
         </summary>
         <div class="tl-detail">
           <div class="detail-block">
             <div class="detail-label">Objective</div>
-            <p>Advanced Spade builds sewer-inspection robots used by municipal crews to survey underground pipe networks. My objective as the mechanical intern was twofold: shrink the footprint of the existing camera gimbal so it could fit smaller-diameter pipe, and lead mechanical design of a new in-house GNSS positioning device to replace an expensive third-party module across the product line.</p>
+            <p>As the only mechanical engineer supporting several product lines at once, my job was to provide mechanical design and integration for whatever the electrical and firmware teams needed next, across a redesigned battery charger, a mobile testbench cart, three phases of an in-house GNSS positioning device, and a sewer-inspection robot's camera gimbal.</p>
           </div>
           <div class="detail-block">
             <div class="detail-label">Deliverables</div>
             <ul class="tl-bullets">
-              <li>Redesigned a pitch/roll camera gimbal for a sewer-surveying robot, cutting package volume 53% through re-tuned gear reduction, a ball-bearing-supported roll shaft, and slip-ring integration.</li>
-              <li>Programmed rotary encoders on a Teensy 4.1 through the Arduino IDE to close the gimbal's position feedback loop.</li>
-              <li>Led mechanical design across three phases of an in-house GNSS positioning device intended to replace third-party units: test fixtures to validate candidate chips, a 4-PCB production device packaged around a parametric housing, and a custom 2s2p battery pack.</li>
-              <li>Designed a single-slot external battery charger enclosure in SolidWorks, converging on slip-fit retention geometry through 13 design-table iterations.</li>
-              <li>Designed and fabricated a T-slot aluminum Testbench Mobility Unit to convert the CNC testbench into a mobile unit.</li>
-              <li>Deployed an automated 3D-printing farm to streamline prototyping and production across the company's product line.</li>
+              <li>Redesigned the CRABCAKE sewer-inspection robot's pitch and roll camera gimbal, cutting package volume 53%.</li>
+              <li>Built closed-loop joystick control firmware for the gimbal's two axes.</li>
+              <li>Led mechanical design across three phases of an in-house GNSS positioning device, from an early test fixture through a complete four-board V3/V4 unit.</li>
+              <li>Designed a custom 2s2p battery pack and helped bring up the BMS board.</li>
+              <li>Redesigned the external battery charger enclosure around a new single-slot PCB, with a COTS light pipe, a weighted base, and slip-fit battery retention.</li>
+              <li>Designed and built a Testbench Mobility Unit, a caster cart that interfaces directly with the lab's existing testbench for one-operator transfers.</li>
+              <li>Deployed an automated 3D-printing farm to streamline prototyping across the product line.</li>
             </ul>
           </div>
           <div class="detail-block">
             <div class="detail-label">The Process</div>
             <div class="process-grid">
               <div class="process-text">
-                <p>The original gimbal was too bulky for the pipe diameters the company wanted to inspect next. I re-tuned the gear reduction and moved to a ball-bearing-supported roll shaft, then routed power and signal through a slip ring instead of a wire loop so the gimbal could rotate continuously without winding itself up, which is what actually unlocked most of the volume savings.</p>
-                <p>The GNSS device was a longer, three-phase build: first a test fixture to validate candidate GNSS chips against real-world signal conditions, then a 4-PCB production stack packaged around a parametric housing so the enclosure could scale as the board layout changed, and finally a custom 2s2p battery pack sized to the device's duty cycle. [EDIT: add a detail on what made a particular chip win out, or a packaging constraint you had to solve.]</p>
-                <p>The charger enclosure looked simple on paper and wasn't: getting a single-slot slip-fit retention geometry that seated reliably every time took 13 design-table iterations in SolidWorks, adjusting clearance and lead-in chamfer in small steps until it stopped depending on print tolerance to work.</p>
-                <p>[EDIT: add a paragraph on the T-slot mobility unit and the 3D-print farm, i.e. why the testbench needed to be mobile and what problem the print farm actually solved day to day.]</p>
+                <div class="sub-role">CRABCAKE CAMERA GIMBAL</div>
+                <p>CRABCAKE caught my attention because I had worked with combat robotics before and wanted to learn the wiring and programming side of a device, not just the mechanical build. Austin had a pitch and roll gimbal prototype that he and Diego started and never finished, so I picked it up from there. The roll shaft runs in a mounted ball bearing sized for a 5/8 inch shaft, then steps down to 9.5mm where it meets the driven gear, and I had to bore a stock 6mm gear out to that size on a drill press since metal gears for a 3mm motor shaft only come in one bore size. Holding the gear in a standard vise let the free end lift while tightening, leaving the bore slightly off center, something I'd fix next time with v-blocks instead.</p>
+                <p>Gear reduction started as a target around 2 to 1, but part availability and spacing pushed both axes to a final ratio of 1 to 3, 20 teeth driving 60. The slower RPM turned out to be a non-issue, the camera still moved plenty fast while pulling about a watt of power. For the slip ring I reused a 12-channel unit we already had for the motor and encoder rather than buying a smaller one, since fitting the RasPi camera through any slip ring option was either impossible or expensive, so the camera stayed on its own ribbon cable instead.</p>
+                <p>Control runs off a single joystick. The roll axis spins freely and continuously off the joystick's Y deflection, while the pitch axis is mechanically limited to about 180 degrees and I capped it in software using the pitch encoder's count, with a soft limit and a tighter hard limit set inside the true mechanical stops so the axis can only ever be blocked moving outward, never trapped against a stop. A rezero button lets the operator redefine center whenever the arm is manually returned to true zero. Altogether the redesign cut package volume 53 percent.</p>
+
+                <div class="sub-role">POSITIONING CELL INITIATIVE, GNSS DEVICE</div>
+                <p>The Positioning Cell Initiative was the company's own take on an Emlid-type RTK GNSS device, built after a chip deal with a supplier of IMU and GNSS chips. My job across all three phases was to give the firmware and electrical teams a mechanical platform to test against. Phase 1 had to happen fast, tied to how much internship time my teammates had left, so instead of designing a new platform I modified an existing CRKT 3.1 unit, removing unused features to free up mounting holes and adding a survey pole adapter that raised the antenna off the ground for a cleaner GNSS fix. That adapter used a print-pause 5/8-11 coupling nut as its attachment point, the first time I tried that technique, and it worked cleanly enough that I reused it through the next two phases.</p>
+                <p>Phase 2 moved testing off the CRKT entirely onto an isolated rig of IMUs, breakout boards, and a dev kit, nicknamed the sceptre. I split it into four pieces for easy assembly and modularity, since supporting multiple IMUs at once was worth the extra design time it would save later in testing. The whole frame held zero offset between the survey pole tip and the IMU and antenna centers in every direction except vertical, which kept the RTK math simple and cut down on firmware setup time.</p>
+                <p>Phase 3 built the first complete unit, a four-board device (positioning, main, interface, and BMS boards) shaped around the company logo's triangular geometry. I worked board-level design with our PCB designer using Altium Co-Designer to move models back and forth between SolidWorks and Altium, and because the tapered form made a four-board assembly genuinely risky, I wrote out a specific upside-down, bottom-up build sequence so the boards, ribbon cables, and battery pack went in correctly every time. I also drafted the schematic for a custom 2s2p battery pack built from the same cells as the CRKT packs, built the first one with help from the teammate who designs our battery packs, and picked up surface-mount soldering hand-populating chips onto the BMS board myself.</p>
+                <p>Once V3 proved the concept, I designed a V4 housing that takes the company logo's real proportions seriously, every dimension scales off a single reference length so the proportions hold no matter the overall size. It reuses the same four boards in a tighter arrangement with the battery sandwiched between two of them, trading a rougher assembly sequence for a much more product-ready look.</p>
+
+                <div class="sub-role">BATTERY CHARGER ENCLOSURE</div>
+                <p>The existing charger enclosure charged two CRKT battery packs at once and was already FDM printed in low-volume runs, but the electrical team's move to a single-slot charger board meant the whole enclosure had to be reworked around it. The LED diffuser started as a multicolor print, a two-layer white PETG shell printed straight into the black body, which avoided a separate part entirely. After talking it over with the PCB designer we switched to a commercial light pipe instead for tighter tolerances and better light transmission, and I also left room in the housing for a future multi-LED status array.</p>
+                <p>The lightweight housing also slid and tipped during normal one-handed use, so I looked at a print-pause weighing system first and dropped it for being needlessly complex, then landed on filling the upper section solid at 100 percent infill for extra low mass, plus corner-bolted rubber feet that clamp the base plate and PCB retention together in one fastening step. Battery retention had the same reliability problem as any friction fit, inconsistent across print batches with no tactile confirmation the pack was seated, so I ran an Excel-driven design table in SolidWorks sweeping the pocket offset and converged on a proper slip fit after 13 iterations.</p>
+
+                <div class="sub-role">TESTBENCH MOBILITY UNIT</div>
+                <p>One of our lab testbenches was fully stationary, which limited where and how we could run tests without risking a heavy lift that could hurt someone or knock sensitive instrumentation out of alignment. I designed a caster cart that interfaces directly with the existing testbench frame, matching its height with custom-cut T-slot aluminum extrusions and reusing its exact rail profile and spacing so a heavy baseplate rolls smoothly from bench to cart without catching. The cart's own T-slot geometry tracks into the bench's open slots as it rolls up, so alignment is self-guiding, and four total-lock casters immobilize both rotation and swivel once it's seated, keeping the whole transfer stable under a single operator. The whole thing had to come together with basic shop tools before the teammate who built the original testbench left, so speed mattered as much as the engineering.</p>
+                <p>Across all four projects the same few lessons kept repeating. Loop in the electrical and firmware teams early, since most of my mechanical constraints came from them. Design for whoever has to assemble the thing, not just the assembly itself. And write down the reasoning behind a decision, not just the result, since that's what the next person actually needs.</p>
               </div>
               <div class="process-images">
-                <div class="img-placeholder">add photo: gimbal before / after comparison</div>
-                <div class="img-placeholder">add CAD screenshot: GNSS device exploded view</div>
-                <div class="img-placeholder">add photo: 4-PCB stack assembly</div>
+                <div class="img-placeholder">add photo: gimbal before and after comparison</div>
+                <div class="img-placeholder">add CAD screenshot: positioning cell V3 exploded view</div>
+                <div class="img-placeholder">add photo: battery charger before and after</div>
+                <div class="img-placeholder">add photo: TMU cart at the testbench</div>
               </div>
             </div>
           </div>
           <div class="detail-block">
             <div class="detail-label">Appendix</div>
             <div class="appendix-images">
-              <div class="img-placeholder">add CAD screenshot: charger enclosure design-table iterations</div>
-              <div class="img-placeholder">add photo: 3D-print farm</div>
-              <div class="img-placeholder">add photo: 2s2p battery pack assembly</div>
-              <div class="img-placeholder">add photo: T-slot mobility cart</div>
+              <div class="img-placeholder">add photo: gear boring setup on the drill press</div>
+              <div class="img-placeholder">add CAD screenshot: V4 housing, parametric logo-scaled design</div>
+              <div class="img-placeholder">add photo: 2s2p battery pack and BMS board</div>
+              <div class="img-placeholder">add photo: bottom plate with corner-bolted rubber feet</div>
             </div>
           </div>
         </div>

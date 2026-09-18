@@ -70,7 +70,7 @@
   /* ===== Drawing-sheet frame ===== */
   .sheet-wrap{ position:relative; padding-top:var(--ruler-w); padding-left:var(--ruler-w); }
   .sheet{
-    max-width:1180px;
+    max-width:1560px;
     margin:0 auto;
     border-left:1px solid var(--line);
     border-right:1px solid var(--line);
@@ -167,9 +167,21 @@
   .tl-top-row{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;}
   .tl-top-row h3{font-family:var(--font-head); font-weight:400; font-size:1.05rem; color:var(--ink); letter-spacing:.02em;}
   .tl-dates{font-family:var(--font-mono); font-size:12px; color:var(--accent); white-space:nowrap;}
+  .tl-role{ font-family:var(--font-mono); font-size:12.5px; color:var(--accent); letter-spacing:.02em; margin-bottom:6px; }
   .tl-org{font-family:var(--font-mono); font-size:12.5px; color:var(--ink-dim); margin-top:4px;}
   .tl-blurb{margin-top:12px; color:var(--ink-dim); font-size:14.5px; max-width:640px;}
-  .tl-detail{padding:0 24px 26px 24px;}
+  .tl-detail{padding:0 24px 30px 24px;}
+  .detail-block{ margin-top:26px; padding-top:22px; border-top:1px solid var(--line); }
+  .detail-block:first-child{ margin-top:22px; padding-top:0; border-top:none; }
+  .detail-label{ font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; color:var(--accent-dim); text-transform:uppercase; margin-bottom:14px; }
+  .detail-block > p{ color:var(--ink-dim); font-size:14.5px; max-width:720px; }
+  .process-grid{ display:grid; grid-template-columns:1.25fr .9fr; gap:32px; align-items:start; }
+  .process-text p{ color:var(--ink-dim); font-size:14.5px; margin-bottom:16px; }
+  .process-text p:last-child{ margin-bottom:0; }
+  .process-images{ display:flex; flex-direction:column; gap:14px; }
+  .process-images .img-placeholder{ width:100%; height:150px; }
+  .appendix-images{ display:flex; gap:12px; flex-wrap:wrap; }
+  @media (max-width:820px){ .process-grid{ grid-template-columns:1fr; } .process-images .img-placeholder{ height:120px; } }
   .tl-images{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;}
   .img-placeholder{ width:170px; height:120px; border:1px dashed var(--line-light); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:10.5px; color:var(--line-light); text-align:center; padding:8px; }
   .tl-bullets{list-style:none; display:flex; flex-direction:column; gap:9px; max-width:680px; margin-bottom:18px;}
@@ -178,6 +190,7 @@
   .tl-bullets .sub-role{ font-family:var(--font-mono); font-size:11.5px; color:var(--line-light); margin:14px 0 2px; }
   .tl-bullets .sub-role:first-child{margin-top:0;}
   .spec-row{ display:flex; gap:10px; flex-wrap:wrap; font-family:var(--font-mono); font-size:12px; }
+  .tl-item summary .spec-row{ margin-top:16px; }
   .spec{ background:var(--bg); border:1px solid var(--line); padding:6px 11px; color:var(--ink-dim); }
   @media (max-width:720px){
     .timeline{padding-left:30px;} .tl-dot{left:-25px;} .img-placeholder{width:130px; height:100px;} .hero{grid-template-columns:1fr;}
@@ -337,36 +350,63 @@
       <details class="tl-item">
         <span class="tl-dot"></span>
         <summary>
+          <div class="tl-role">UCLA Bruin Baja SAE: Suspension Lead Engineer</div>
           <div class="tl-top-row">
             <h3>Baja SAE Suspension &amp; Steering System</h3>
             <span class="tl-dates">MAY 2026–PRESENT</span>
           </div>
-          <div class="tl-org">UCLA Bruin Baja SAE: Suspension Lead Engineer</div>
           <p class="tl-blurb">Direct a 13-person subteam through the full suspension and steering lifecycle (geometry, fabrication, and validation), after building up through fabrication and testbed roles.</p>
+          <div class="spec-row">
+            <div class="spec">13-person team</div><div class="spec">$10K Budget</div><div class="spec">DXF Templates</div><div class="spec">Manual Mill / Lathe</div><div class="spec">CNC</div>
+          </div>
         </summary>
         <div class="tl-detail">
-          <div class="tl-images">
-            <div class="img-placeholder">add photo: vehicle / suspension assembly</div>
-            <div class="img-placeholder">add CAD screenshot: suspension geometry</div>
+          <div class="detail-block">
+            <div class="detail-label">Objective</div>
+            <p>Baja SAE is an intercollegiate competition where teams design, build, and race a single-seat off-road vehicle against a strict rulebook and a shared parts budget. My objective on the suspension and steering subteam has been to deliver a system that survives repeated high-impact terrain, passes technical inspection on the first attempt, and can be built and repaired in the field by a rotating roster of student engineers on a fixed budget.</p>
           </div>
-          <div class="tl-bullets"><div class="sub-role">SUSPENSION LEAD ENGINEER, MAY 2026–PRESENT</div></div>
-          <ul class="tl-bullets">
-            <li>Direct a team of 13 project engineers through design, analysis, fabrication, and validation of the entire suspension and steering system, coordinating with other subsystem leads for vehicle integration.</li>
-            <li>Optimize suspension geometry to elevate handling and reliability while supervising component packaging, mass reduction, and rule compliance.</li>
-            <li>Manage a $10,000 subteam budget, defending design architectures at formal technical reviews and competition design presentations.</li>
-          </ul>
-          <div class="tl-bullets"><div class="sub-role">SUSPENSION ENGINEER, DEC 2025–MAY 2026</div></div>
-          <ul class="tl-bullets">
-            <li>Fabricated upper and lower A-arm components, generating 1:1 DXF templates for accurate tube notching and machining high-misalignment spacers on manual mill and lathe.</li>
-            <li>Assisted in CNC milling tie rods and final suspension assembly.</li>
-          </ul>
-          <div class="tl-bullets"><div class="sub-role">GENERAL MEMBER, SEPT 2025–DEC 2025</div></div>
-          <ul class="tl-bullets">
-            <li>Designed and fabricated a scaled mock centerlock assembly in SolidWorks for a software testbench, letting software/electrical teams validate control systems independent of vehicle readiness.</li>
-            <li>Implemented an axially repositionable limit switch assembly to optimize switch placement during testing.</li>
-          </ul>
-          <div class="spec-row">
-            <div class="spec">13-person team</div><div class="spec">DXF Templates</div><div class="spec">Manual Mill / Lathe</div><div class="spec">CNC</div>
+          <div class="detail-block">
+            <div class="detail-label">Deliverables</div>
+            <div class="tl-bullets"><div class="sub-role">SUSPENSION LEAD ENGINEER, MAY 2026–PRESENT</div></div>
+            <ul class="tl-bullets">
+              <li>Direct a team of 13 project engineers through design, analysis, fabrication, and validation of the entire suspension and steering system, coordinating with other subsystem leads for vehicle integration.</li>
+              <li>Optimize suspension geometry to elevate handling and reliability while supervising component packaging, mass reduction, and rule compliance.</li>
+              <li>Manage a $10,000 subteam budget, defending design architectures at formal technical reviews and competition design presentations.</li>
+            </ul>
+            <div class="tl-bullets"><div class="sub-role">SUSPENSION ENGINEER, DEC 2025–MAY 2026</div></div>
+            <ul class="tl-bullets">
+              <li>Fabricated upper and lower A-arm components, generating 1:1 DXF templates for accurate tube notching and machining high-misalignment spherical bearing spacers on manual mill and lathe.</li>
+              <li>Assisted in CNC milling tie rods and final suspension assembly.</li>
+            </ul>
+            <div class="tl-bullets"><div class="sub-role">GENERAL MEMBER, SEPT 2025–DEC 2025</div></div>
+            <ul class="tl-bullets">
+              <li>Designed and fabricated a scaled mock centerlock assembly in SolidWorks for a software testbench, letting software/electrical teams validate control systems independent of vehicle readiness.</li>
+              <li>Implemented an axially repositionable limit switch assembly to optimize switch placement during testing.</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">The Process</div>
+            <div class="process-grid">
+              <div class="process-text">
+                <p>I joined the subteam as a general member with no fabrication background. My first real project was a scaled centerlock mock-up built purely so the software and electrical teams could test control logic without waiting on the actual vehicle, which taught me to design for someone else's timeline, not just my own part.</p>
+                <p>Moving into the suspension engineer role, I took on A-arm fabrication end to end: modeling the tube geometry, generating 1:1 DXF templates for notching, and machining the high-misalignment spherical bearing spacers to hold tolerance on a manual lathe. [EDIT: add specific tolerance/spec numbers you want to highlight here.]</p>
+                <p>As Suspension Lead, the job shifted from making parts to making decisions: iterating suspension geometry (camber gain, roll center, anti-squat) against handling targets, then defending those tradeoffs at technical review against a fixed $10,000 budget and a hard mass target set by the frame and drivetrain teams.</p>
+                <p>[EDIT: expand on a specific hard call you had to make this season, e.g. a geometry tradeoff, a part that failed testing, or a rule-compliance issue you solved.]</p>
+              </div>
+              <div class="process-images">
+                <div class="img-placeholder">add photo: A-arm on the mill</div>
+                <div class="img-placeholder">add CAD screenshot: suspension geometry / kinematic sweep</div>
+                <div class="img-placeholder">add photo: assembled corner on the vehicle</div>
+              </div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Appendix</div>
+            <div class="appendix-images">
+              <div class="img-placeholder">add photo: DXF tube-notch template</div>
+              <div class="img-placeholder">add CAD screenshot: camber / roll-center plot</div>
+              <div class="img-placeholder">add photo: spherical bearing spacer setup</div>
+            </div>
           </div>
         </div>
       </details>
@@ -374,92 +414,186 @@
       <details class="tl-item">
         <span class="tl-dot"></span>
         <summary>
+          <div class="tl-role">Advanced Spade Company: Mechanical Engineering Intern</div>
           <div class="tl-top-row">
             <h3>Sewer-Inspection Robot Gimbal &amp; GNSS Device</h3>
             <span class="tl-dates">MAY 2026–SEPT 2026</span>
           </div>
-          <div class="tl-org">Advanced Spade Company: Mechanical Engineering Intern</div>
           <p class="tl-blurb">Redesigned a camera gimbal for a sewer-surveying robot and led mechanical design of an in-house GNSS positioning device, plus supporting test infrastructure and production tooling.</p>
+          <div class="spec-row"><div class="spec">Teensy 4.1</div><div class="spec">Slip-Ring</div><div class="spec">GD&amp;T</div><div class="spec">Design Tables</div><div class="spec">T-Slot Aluminum</div></div>
         </summary>
         <div class="tl-detail">
-          <div class="tl-images">
-            <div class="img-placeholder">add photo: gimbal assembly</div>
-            <div class="img-placeholder">add CAD screenshot: GNSS housing</div>
+          <div class="detail-block">
+            <div class="detail-label">Objective</div>
+            <p>Advanced Spade builds sewer-inspection robots used by municipal crews to survey underground pipe networks. My objective as the mechanical intern was twofold: shrink the footprint of the existing camera gimbal so it could fit smaller-diameter pipe, and lead mechanical design of a new in-house GNSS positioning device to replace an expensive third-party module across the product line.</p>
           </div>
-          <ul class="tl-bullets">
-            <li>Redesigned a pitch/roll camera gimbal for a sewer-surveying robot, cutting package volume 53% through re-tuned gear reduction, a ball-bearing-supported roll shaft, and slip-ring integration, and programmed rotary encoders with a Teensy 4.1 and Arduino IDE.</li>
-            <li>Led mechanical design across three phases of an in-house GNSS positioning cell device to replace third-party units: test fixtures to validate candidate chips, a 4-PCB production device packaged around a parametric housing, and a custom 2s2p battery pack.</li>
-            <li>Designed a single-slot external battery charger enclosure in SolidWorks, converging on slip-fit retention geometry through 13 design-table iterations.</li>
-            <li>Designed and fabricated a T-slot aluminum Testbench Mobility Unit to convert the CRKT CNC testbench into a mobile unit.</li>
-            <li>Deployed an automated 3D-printing farm to streamline prototyping and production across the company's product line.</li>
-          </ul>
-          <div class="spec-row"><div class="spec">Teensy 4.1</div><div class="spec">Slip-Ring</div><div class="spec">GD&amp;T</div><div class="spec">Design Tables</div><div class="spec">T-Slot Aluminum</div></div>
+          <div class="detail-block">
+            <div class="detail-label">Deliverables</div>
+            <ul class="tl-bullets">
+              <li>Redesigned a pitch/roll camera gimbal for a sewer-surveying robot, cutting package volume 53% through re-tuned gear reduction, a ball-bearing-supported roll shaft, and slip-ring integration.</li>
+              <li>Programmed rotary encoders on a Teensy 4.1 through the Arduino IDE to close the gimbal's position feedback loop.</li>
+              <li>Led mechanical design across three phases of an in-house GNSS positioning device intended to replace third-party units: test fixtures to validate candidate chips, a 4-PCB production device packaged around a parametric housing, and a custom 2s2p battery pack.</li>
+              <li>Designed a single-slot external battery charger enclosure in SolidWorks, converging on slip-fit retention geometry through 13 design-table iterations.</li>
+              <li>Designed and fabricated a T-slot aluminum Testbench Mobility Unit to convert the CNC testbench into a mobile unit.</li>
+              <li>Deployed an automated 3D-printing farm to streamline prototyping and production across the company's product line.</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">The Process</div>
+            <div class="process-grid">
+              <div class="process-text">
+                <p>The original gimbal was too bulky for the pipe diameters the company wanted to inspect next. I re-tuned the gear reduction and moved to a ball-bearing-supported roll shaft, then routed power and signal through a slip ring instead of a wire loop so the gimbal could rotate continuously without winding itself up, which is what actually unlocked most of the volume savings.</p>
+                <p>The GNSS device was a longer, three-phase build: first a test fixture to validate candidate GNSS chips against real-world signal conditions, then a 4-PCB production stack packaged around a parametric housing so the enclosure could scale as the board layout changed, and finally a custom 2s2p battery pack sized to the device's duty cycle. [EDIT: add a detail on what made a particular chip win out, or a packaging constraint you had to solve.]</p>
+                <p>The charger enclosure looked simple on paper and wasn't: getting a single-slot slip-fit retention geometry that seated reliably every time took 13 design-table iterations in SolidWorks, adjusting clearance and lead-in chamfer in small steps until it stopped depending on print tolerance to work.</p>
+                <p>[EDIT: add a paragraph on the T-slot mobility unit and the 3D-print farm, i.e. why the testbench needed to be mobile and what problem the print farm actually solved day to day.]</p>
+              </div>
+              <div class="process-images">
+                <div class="img-placeholder">add photo: gimbal before / after comparison</div>
+                <div class="img-placeholder">add CAD screenshot: GNSS device exploded view</div>
+                <div class="img-placeholder">add photo: 4-PCB stack assembly</div>
+              </div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Appendix</div>
+            <div class="appendix-images">
+              <div class="img-placeholder">add CAD screenshot: charger enclosure design-table iterations</div>
+              <div class="img-placeholder">add photo: 3D-print farm</div>
+              <div class="img-placeholder">add photo: 2s2p battery pack assembly</div>
+              <div class="img-placeholder">add photo: T-slot mobility cart</div>
+            </div>
+          </div>
         </div>
       </details>
 
       <details class="tl-item">
         <span class="tl-dot"></span>
         <summary>
+          <div class="tl-role">Flagship Combat Robotics, UCLA ASME: Project Engineer</div>
           <div class="tl-top-row">
             <h3>SKULL CRUSHER — Spinning Weapon System</h3>
             <span class="tl-dates">SEPT 2025–MAY 2026</span>
           </div>
-          <div class="tl-org">Flagship Combat Robotics, UCLA ASME: Project Engineer</div>
           <p class="tl-blurb">Designed and manufactured the drisk-style spinning weapon for a 30 lb combat robot, validated across multiple FEA revisions before machining.</p>
+          <div class="spec-row"><div class="spec">SolidWorks</div><div class="spec">ANSYS FEA</div><div class="spec">Fusion CAM</div><div class="spec">30 lb Weight Class</div></div>
         </summary>
         <div class="tl-detail">
-          <div class="tl-images">
-            <div class="img-placeholder">add photo: weapon assembly</div>
-            <div class="img-placeholder">add CAD screenshot: FEA plot</div>
+          <div class="detail-block">
+            <div class="detail-label">Objective</div>
+            <p>Combat robotics matches are usually decided by the weapon: it has to survive a direct hit from an opposing 30 lb robot without cracking mid-match. My objective was to design and manufacture a drisk-style spinning weapon for Skull Crusher that maximized destructive energy within a strict 12 lb weapon-mass allocation, while surviving worst-case impact loading.</p>
           </div>
-          <ul class="tl-bullets">
-            <li>Designed and manufactured a drisk-style spinning weapon system in SolidWorks for the 30 lb combat robot Skull Crusher, iterating geometry and packaging to maintain strength within a 12 lb weapon mass allocation.</li>
-            <li>Performed ANSYS FEA across multiple design revisions to predict stress concentrations and loading responses, validating spline hub survivability under expected combat impact forces.</li>
-            <li>Machined critical components using manual lathe and mill operations, and programmed toolpaths in Fusion CAM to manufacture complex parts on a CNC mill.</li>
-          </ul>
-          <div class="spec-row"><div class="spec">SolidWorks</div><div class="spec">ANSYS FEA</div><div class="spec">Fusion CAM</div><div class="spec">30 lb Weight Class</div></div>
+          <div class="detail-block">
+            <div class="detail-label">Deliverables</div>
+            <ul class="tl-bullets">
+              <li>Designed and manufactured a drisk-style spinning weapon system in SolidWorks, iterating geometry and packaging to stay within a 12 lb weapon-mass allocation.</li>
+              <li>Performed ANSYS FEA across multiple design revisions to predict stress concentrations and loading responses, validating spline hub survivability under expected combat impact forces.</li>
+              <li>Machined critical components on manual lathe and mill, and programmed toolpaths in Fusion CAM to manufacture complex parts on a CNC mill.</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">The Process</div>
+            <div class="process-grid">
+              <div class="process-text">
+                <p>A drisk trades some of a full disc's destructive radius for lower rotational inertia and better packaging, which matters a lot at a 12 lb weapon-mass limit shared against armor and drivetrain. Early geometry passes were mostly about finding how much material could come off the disc face before it stopped being worth spinning.</p>
+                <p>Once a geometry looked viable, it went through ANSYS FEA to check the failure modes that actually matter in a hit: stress concentration around the hub bore and shear through the spline under a worst-case impact load. [EDIT: add how many FEA revisions it took, or the specific factor of safety you were targeting.]</p>
+                <p>Manufacturing split between manual and CNC work: simpler features went on the manual lathe and mill, while the more complex hub and disc geometry was toolpathed in Fusion CAM and cut on the CNC mill. [EDIT: add a note on balancing the finished weapon or any fixturing challenge from machining an asymmetric spinning mass.]</p>
+              </div>
+              <div class="process-images">
+                <div class="img-placeholder">add CAD screenshot: drisk geometry</div>
+                <div class="img-placeholder">add photo: ANSYS FEA stress plot</div>
+                <div class="img-placeholder">add photo: weapon on the mill</div>
+              </div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Appendix</div>
+            <div class="appendix-images">
+              <div class="img-placeholder">add photo: spline hub detail</div>
+              <div class="img-placeholder">add photo: assembled weapon on the frame</div>
+              <div class="img-placeholder">add photo: robot at competition</div>
+            </div>
+          </div>
         </div>
       </details>
 
       <details class="tl-item">
         <span class="tl-dot"></span>
         <summary>
+          <div class="tl-role">UCLA Combat Robotics: Role TBD</div>
           <div class="tl-top-row">
             <h3>UCLA Combat Robotics</h3>
             <span class="tl-dates">DATES TBD</span>
           </div>
-          <div class="tl-org">UCLA Combat Robotics: Role TBD</div>
           <p class="tl-blurb">Placeholder. Details coming soon.</p>
+          <div class="spec-row"><div class="spec">TBD</div></div>
         </summary>
         <div class="tl-detail">
-          <div class="tl-images"><div class="img-placeholder">add photo</div></div>
-          <ul class="tl-bullets"><li>Add role, timeframe, and project details here.</li></ul>
-          <div class="spec-row"><div class="spec">TBD</div></div>
+          <div class="detail-block">
+            <div class="detail-label">Objective</div>
+            <p>[EDIT: add objective]</p>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Deliverables</div>
+            <ul class="tl-bullets"><li>[EDIT: add deliverables]</li></ul>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">The Process</div>
+            <div class="process-grid">
+              <div class="process-text"><p>[EDIT: add process narrative]</p></div>
+              <div class="process-images"><div class="img-placeholder">add photo</div></div>
+            </div>
+          </div>
         </div>
       </details>
 
       <details class="tl-item">
         <span class="tl-dot"></span>
         <summary>
+          <div class="tl-role">Crush Depth MATE ROV Underwater Robotics: FLOAT Lead Mechanical Engineer</div>
           <div class="tl-top-row">
             <h3>Vertical Profiling Float</h3>
             <span class="tl-dates">AUG 2024–JUNE 2025</span>
           </div>
-          <div class="tl-org">Crush Depth MATE ROV Underwater Robotics: FLOAT Lead Mechanical Engineer</div>
           <p class="tl-blurb">Led the end-to-end design and fabrication of an underwater vertical profiling float, covering buoyancy control, waterproofing, and depth testing, and achieving a 90% leak-reduction result.</p>
+          <div class="spec-row"><div class="spec">SolidWorks</div><div class="spec">3D Printing</div><div class="spec">O-Ring Sealing</div><div class="spec">150+ hrs Testing</div></div>
         </summary>
         <div class="tl-detail">
-          <div class="tl-images">
-            <div class="img-placeholder">add photo: float assembly</div>
-            <div class="img-placeholder">add photo: depth test setup</div>
+          <div class="detail-block">
+            <div class="detail-label">Objective</div>
+            <p>The MATE ROV competition tasks teams with building underwater vehicles that complete mission-specific tasks at depth. As FLOAT Lead, my objective was to design a self-contained vertical profiling float, an instrument that free-dives to a target depth, logs data, and resurfaces, without leaking or drifting in buoyancy over repeated dives.</p>
           </div>
-          <ul class="tl-bullets">
-            <li>Led a sub-team in the end-to-end design and fabrication of an underwater vertical profiling float, managing mechanical design, buoyancy control, and waterproofing integration.</li>
-            <li>Modeled eight iterations of buoyancy engine and housing assemblies in SolidWorks CAD; 3D printed components and applied acetone vapor finishing to improve tensile strength, surface quality, and sealing performance.</li>
-            <li>Engineered a precision O-ring waterproofing interface with optimized 25% compression geometry; depth-tested over 150 hours to achieve 3.0 meters with zero leakage, a 90% improvement over previous years.</li>
-            <li>Supervised teammates in CAD modeling, fabrication, and mechanical testing; submitted the system to the 2025 MATE ROV Explorer Class Championship.</li>
-          </ul>
-          <div class="spec-row"><div class="spec">SolidWorks</div><div class="spec">3D Printing</div><div class="spec">O-Ring Sealing</div><div class="spec">150+ hrs Testing</div></div>
+          <div class="detail-block">
+            <div class="detail-label">Deliverables</div>
+            <ul class="tl-bullets">
+              <li>Led a sub-team in the end-to-end design and fabrication of an underwater vertical profiling float, managing mechanical design, buoyancy control, and waterproofing integration.</li>
+              <li>Modeled eight iterations of buoyancy engine and housing assemblies in SolidWorks; 3D printed components and applied acetone vapor finishing to improve tensile strength, surface quality, and sealing performance.</li>
+              <li>Engineered a precision O-ring waterproofing interface with optimized 25% compression geometry, depth-tested over 150 hours to reach 3.0 meters with zero leakage, a 90% improvement over previous years.</li>
+              <li>Supervised teammates in CAD modeling, fabrication, and mechanical testing; submitted the system to the 2025 MATE ROV Explorer Class Championship.</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">The Process</div>
+            <div class="process-grid">
+              <div class="process-text">
+                <p>The buoyancy engine went through eight full iterations before it held pressure reliably. FDM parts printed straight off the bed leaked at the layer lines under depth, so I added an acetone vapor-smoothing step to seal the surface, which also improved tensile strength enough to survive repeated dives without cracking.</p>
+                <p>Leaking had been a recurring problem in past years' floats, so I treated the O-ring interface as its own sub-project: modeling the groove geometry to land on roughly 25% compression, then depth-testing the sealed housing for over 150 hours at 3.0 meters to confirm zero leakage before trusting it on the full assembly.</p>
+                <p>[EDIT: add a paragraph on how you split responsibilities across the sub-team, and anything specific from testing at the 2025 MATE ROV Explorer Class Championship.]</p>
+              </div>
+              <div class="process-images">
+                <div class="img-placeholder">add photo: float assembly</div>
+                <div class="img-placeholder">add CAD screenshot: buoyancy engine iterations</div>
+                <div class="img-placeholder">add photo: depth test rig</div>
+              </div>
+            </div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Appendix</div>
+            <div class="appendix-images">
+              <div class="img-placeholder">add photo: O-ring compression test setup</div>
+              <div class="img-placeholder">add CAD screenshot: housing cross-section</div>
+              <div class="img-placeholder">add photo: team at MATE ROV competition</div>
+            </div>
+          </div>
         </div>
       </details>
     </div>
@@ -531,7 +665,7 @@
       <div class="notes-title">UNLESS OTHERWISE SPECIFIED:</div>
       <ol>
         <li>ALL DIMENSIONS ON THIS PAGE ARE APPROXIMATE. DO NOT SCALE THIS RESUME.</li>
-        <li>SLEEP SCHEDULE TOLERANCE: 5.00±2.00 HOURS NIGHTLY. VOID DURING BAJA SEASON.</li>
+        <li>SLEEP SCHEDULE TOLERANCE: ±2 HOURS NIGHTLY. VOID DURING BAJA BUILD SEASON.</li>
         <li>ASSEMBLY: FASTENERS PROVIDED, PATIENCE NOT INCLUDED.</li>
         <li>TOLERANCES ARE TIGHTER ON HARDWARE THAN ON DEADLINES.</li>
         <li>CONFIDENTIAL: NOTHING ON THIS SHEET IS CONFIDENTIAL.</li>

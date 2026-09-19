@@ -186,6 +186,8 @@
   .tl-images{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;}
   .img-placeholder{ width:170px; height:120px; border:1px dashed var(--line-light); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:10.5px; color:var(--line-light); text-align:center; padding:8px; }
   img.img-placeholder, video.img-placeholder{ padding:0; border-style:solid; border-color:var(--line); display:block; width:100%; height:auto; }
+  .media-item{ display:flex; flex-direction:column; gap:5px; }
+  .media-caption{ font-family:var(--font-mono); font-size:10.5px; color:var(--line-light); text-align:center; line-height:1.3; }
   .tl-bullets{list-style:none; display:flex; flex-direction:column; gap:9px; max-width:680px; margin-bottom:18px;}
   .tl-bullets li{position:relative; padding-left:16px; color:var(--ink-dim); font-size:14px; line-height:1.6;}
   .tl-bullets li::before{content:"—"; position:absolute; left:0; color:var(--accent-dim);}
@@ -397,18 +399,18 @@
                 <p>[EDIT: expand on a specific hard call you had to make this season, e.g. a geometry tradeoff, a part that failed testing, or a rule-compliance issue you solved.]</p>
               </div>
               <div class="process-images">
-                <div class="img-placeholder">add photo: A-arm on the mill</div>
-                <div class="img-placeholder">add CAD screenshot: suspension geometry / kinematic sweep</div>
-                <div class="img-placeholder">add photo: assembled corner on the vehicle</div>
+                <div class="media-item"><div class="img-placeholder">add photo: A-arm on the mill</div><span class="media-caption">Machining an A-arm on the mill</span></div>
+                <div class="media-item"><div class="img-placeholder">add CAD screenshot: suspension geometry / kinematic sweep</div><span class="media-caption">CAD kinematic sweep of the suspension geometry</span></div>
+                <div class="media-item"><div class="img-placeholder">add photo: assembled corner on the vehicle</div><span class="media-caption">Assembled suspension corner on the vehicle</span></div>
               </div>
             </div>
           </div>
           <div class="detail-block">
             <div class="detail-label">Appendix</div>
             <div class="appendix-images">
-              <div class="img-placeholder">add photo: DXF tube-notch template</div>
-              <div class="img-placeholder">add CAD screenshot: camber / roll-center plot</div>
-              <div class="img-placeholder">add photo: spherical bearing spacer setup</div>
+              <div class="media-item"><div class="img-placeholder">add photo: DXF tube-notch template</div><span class="media-caption">DXF tube-notch template used for fabrication</span></div>
+              <div class="media-item"><div class="img-placeholder">add CAD screenshot: camber / roll-center plot</div><span class="media-caption">Camber and roll-center plot from the kinematic model</span></div>
+              <div class="media-item"><div class="img-placeholder">add photo: spherical bearing spacer setup</div><span class="media-caption">Spherical bearing spacer setup on the lathe</span></div>
             </div>
           </div>
         </div>
@@ -421,25 +423,24 @@
             <div class="tl-role">Advanced Spade Company: Mechanical Engineering Intern</div>
             <span class="tl-dates">MAY 2026–SEPT 2026</span>
           </div>
-          <h3 class="tl-title">Sewer-Inspection Robot Gimbal &amp; GNSS Device</h3>
+          <h3 class="tl-title">Cross-Program Mechanical Design &amp; Integration</h3>
           <p class="tl-blurb">Redesigned a robot camera gimbal and led development of an in-house GNSS device.</p>
           <div class="spec-row"><div class="spec">Teensy 4.1</div><div class="spec">Slip-Ring</div><div class="spec">GD&amp;T</div><div class="spec">Design Tables</div><div class="spec">Altium Co-Designer</div><div class="spec">T-Slot Aluminum</div></div>
         </summary>
         <div class="tl-detail">
           <div class="detail-block">
             <div class="detail-label">Objective</div>
-            <p>As the only mechanical engineer supporting several product lines at once, my job was to provide mechanical design and integration for whatever the electrical and firmware teams needed next, across a redesigned battery charger, a mobile testbench cart, three phases of an in-house GNSS positioning device, and a sewer-inspection robot's camera gimbal.</p>
+            <p>As one of few mechanical engineers supporting several product lines at once, my job was to provide mechanical design and integration for whatever the electrical and firmware teams needed next, across a redesigned battery charger, a mobile testbench cart, three phases of an in-house GNSS positioning device, and a sewer-inspection robot's camera gimbal.</p>
           </div>
           <div class="detail-block">
             <div class="detail-label">Deliverables</div>
             <ul class="tl-bullets">
               <li>Redesigned the CRABCAKE sewer-inspection robot's pitch and roll camera gimbal, cutting package volume 53%.</li>
-              <li>Built closed-loop joystick control firmware for the gimbal's two axes.</li>
-              <li>Led mechanical design across three phases of an in-house GNSS positioning device, from an early test fixture through a complete four-board V3/V4 unit.</li>
+              <li>Led mechanical design across three phases of an in-house GNSS positioning device, from an early test fixture through a complete four-board unit.</li>
               <li>Designed a custom 2s2p battery pack and helped bring up the BMS board.</li>
               <li>Redesigned the external battery charger enclosure around a new single-slot PCB, with a COTS light pipe, a weighted base, and slip-fit battery retention.</li>
               <li>Designed and built a Testbench Mobility Unit, a caster cart that interfaces directly with the lab's existing testbench for one-operator transfers.</li>
-              <li>Deployed an automated 3D-printing farm to streamline prototyping across the product line.</li>
+              <li>Maintained an automated 3D-printing farm to streamline prototyping across the product line.</li>
             </ul>
           </div>
           <div class="detail-block">
@@ -447,39 +448,38 @@
             <div class="process-grid">
               <div class="process-text">
                 <div class="sub-role">CRABCAKE CAMERA GIMBAL</div>
-                <p>CRABCAKE caught my attention because I had worked with combat robotics before and wanted to learn the wiring and programming side of a device, not just the mechanical build. Austin had a pitch and roll gimbal prototype that he and Diego started and never finished, so I picked it up from there. The roll shaft runs in a mounted ball bearing sized for a 5/8 inch shaft, then steps down to 9.5mm where it meets the driven gear, and I had to bore a stock 6mm gear out to that size on a drill press since metal gears for a 3mm motor shaft only come in one bore size. Holding the gear in a standard vise let the free end lift while tightening, leaving the bore slightly off center, something I'd fix next time with v-blocks instead.</p>
-                <p>Gear reduction started as a target around 2 to 1, but part availability and spacing pushed both axes to a final ratio of 1 to 3, 20 teeth driving 60. The slower RPM turned out to be a non-issue, the camera still moved plenty fast while pulling about a watt of power. For the slip ring I reused a 12-channel unit we already had for the motor and encoder rather than buying a smaller one, since fitting the RasPi camera through any slip ring option was either impossible or expensive, so the camera stayed on its own ribbon cable instead.</p>
-                <p>Control runs off a single joystick. The roll axis spins freely and continuously off the joystick's Y deflection, while the pitch axis is mechanically limited to about 180 degrees and I capped it in software using the pitch encoder's count, with a soft limit and a tighter hard limit set inside the true mechanical stops so the axis can only ever be blocked moving outward, never trapped against a stop. A rezero button lets the operator redefine center whenever the arm is manually returned to true zero. Altogether the redesign cut package volume 53 percent.</p>
+                <p>CRABCAKE caught my attention because I had worked with combat robotics before and wanted to learn the wiring and programming side of a device, not just the mechanical build. I picked up an unfinished pitch and roll gimbal prototype and carried it through to a working redesign. The roll shaft runs in a mounted ball bearing sized for a 5/8 inch shaft, then steps down to 9.5mm where it meets the driven gear, which I bored out from stock on a drill press since metal gears for a 3mm motor shaft only come in one bore size.</p>
+                <p>I used the motor that was already on hand and landed on a 1 to 3 ratio, 20 teeth driving 60, which kept the camera moving plenty fast while pulling about a watt of power. For the slip ring I chose a 12-channel unit sized to allow a full 360 degrees of continuous roll.</p>
+                <p>Control runs off a single joystick. The roll axis spins freely and continuously off the joystick's Y deflection, while the pitch axis is mechanically limited to about 180 degrees and capped in software using the pitch encoder's count, with a soft limit and a tighter hard limit set inside the true mechanical stops so the axis can only ever be blocked moving outward, never trapped against a stop. A rezero button lets the operator redefine center whenever the arm is manually returned to true zero. Altogether the redesign cut package volume 53 percent. This was a prototype built to integrate with the sewer crawler platform, and I built the proof of concept for it.</p>
 
                 <div class="sub-role">POSITIONING CELL INITIATIVE, GNSS DEVICE</div>
-                <p>The Positioning Cell Initiative was the company's own take on an Emlid-type RTK GNSS device, built after a chip deal with a supplier of IMU and GNSS chips. My job across all three phases was to give the firmware and electrical teams a mechanical platform to test against. Phase 1 had to happen fast, tied to how much internship time my teammates had left, so instead of designing a new platform I modified an existing CRKT 3.1 unit, removing unused features to free up mounting holes and adding a survey pole adapter that raised the antenna off the ground for a cleaner GNSS fix. That adapter used a print-pause 5/8-11 coupling nut as its attachment point, the first time I tried that technique, and it worked cleanly enough that I reused it through the next two phases.</p>
+                <p>The Positioning Cell Initiative was the company's own RTK GNSS device. My job across all three phases was to give the firmware and electrical teams a mechanical platform to test against. Phase 1 had to happen fast, so instead of designing a new platform I modified an existing unit of the CRKT, a GNSS device from another company that Advanced Spade was separately under contract to engineer, removing unused features to free up mounting holes and adding a survey pole adapter that raised the antenna off the ground for a cleaner GNSS fix. That adapter used a print-pause 5/8-11 coupling nut as its attachment point, a technique I reused through the next two phases.</p>
                 <p>Phase 2 moved testing off the CRKT entirely onto an isolated rig of IMUs, breakout boards, and a dev kit, nicknamed the sceptre. I split it into four pieces for easy assembly and modularity, since supporting multiple IMUs at once was worth the extra design time it would save later in testing. The whole frame held zero offset between the survey pole tip and the IMU and antenna centers in every direction except vertical, which kept the RTK math simple and cut down on firmware setup time.</p>
-                <p>Phase 3 built the first complete unit, a four-board device (positioning, main, interface, and BMS boards) shaped around the company logo's triangular geometry. I worked board-level design with our PCB designer using Altium Co-Designer to move models back and forth between SolidWorks and Altium, and because the tapered form made a four-board assembly genuinely risky, I wrote out a specific upside-down, bottom-up build sequence so the boards, ribbon cables, and battery pack went in correctly every time. I also drafted the schematic for a custom 2s2p battery pack built from the same cells as the CRKT packs, built the first one with help from the teammate who designs our battery packs, and picked up surface-mount soldering hand-populating chips onto the BMS board myself.</p>
-                <p>Once V3 proved the concept, I designed a V4 housing that takes the company logo's real proportions seriously, every dimension scales off a single reference length so the proportions hold no matter the overall size. It reuses the same four boards in a tighter arrangement with the battery sandwiched between two of them, trading a rougher assembly sequence for a much more product-ready look.</p>
+                <p>Phase 3 built the first complete unit, a four-board device (positioning, main, interface, and BMS boards) shaped around the company logo's triangular geometry. I worked board-level design with our PCB designer using Altium Co-Designer to move models back and forth between SolidWorks and Altium, and because the tapered form made assembly order sensitive, I wrote out a specific upside-down, bottom-up build sequence so the boards, ribbon cables, and battery pack went in correctly every time. I also drafted the schematic for a custom 2s2p battery pack built from the same cells as the CRKT packs, built the first one, and picked up surface-mount soldering hand-populating chips onto the BMS board myself.</p>
+                <p>Once that unit proved the concept, I designed a second-generation housing that takes the company logo's real proportions seriously, every dimension scales off a single reference length so the proportions hold no matter the overall size. It reuses the same four boards in a tighter arrangement with the battery sandwiched between two of them, trading a rougher assembly sequence for a much more product-ready look.</p>
 
                 <div class="sub-role">BATTERY CHARGER ENCLOSURE</div>
-                <p>The existing charger enclosure charged two CRKT battery packs at once and was already FDM printed in low-volume runs, but the electrical team's move to a single-slot charger board meant the whole enclosure had to be reworked around it. The LED diffuser started as a multicolor print, a two-layer white PETG shell printed straight into the black body, which avoided a separate part entirely. After talking it over with the PCB designer we switched to a commercial light pipe instead for tighter tolerances and better light transmission, and I also left room in the housing for a future multi-LED status array.</p>
-                <p>The lightweight housing also slid and tipped during normal one-handed use, so I looked at a print-pause weighing system first and dropped it for being needlessly complex, then landed on filling the upper section solid at 100 percent infill for extra low mass, plus corner-bolted rubber feet that clamp the base plate and PCB retention together in one fastening step. Battery retention had the same reliability problem as any friction fit, inconsistent across print batches with no tactile confirmation the pack was seated, so I ran an Excel-driven design table in SolidWorks sweeping the pocket offset and converged on a proper slip fit after 13 iterations.</p>
+                <p>I built the battery charger enclosure around a new single-slot charger board, adding a commercial light pipe for the status LED, a solid-infill upper section to keep the base weighted, and corner-bolted rubber feet that clamp the base plate and battery retention together in one fastening step. Battery retention itself was tuned through an Excel-driven design table in SolidWorks, sweeping the pocket offset until it converged on a reliable slip fit.</p>
 
                 <div class="sub-role">TESTBENCH MOBILITY UNIT</div>
-                <p>One of our lab testbenches was fully stationary, which limited where and how we could run tests without risking a heavy lift that could hurt someone or knock sensitive instrumentation out of alignment. I designed a caster cart that interfaces directly with the existing testbench frame, matching its height with custom-cut T-slot aluminum extrusions and reusing its exact rail profile and spacing so a heavy baseplate rolls smoothly from bench to cart without catching. The cart's own T-slot geometry tracks into the bench's open slots as it rolls up, so alignment is self-guiding, and four total-lock casters immobilize both rotation and swivel once it's seated, keeping the whole transfer stable under a single operator. The whole thing had to come together with basic shop tools before the teammate who built the original testbench left, so speed mattered as much as the engineering.</p>
-                <p>Across all four projects the same few lessons kept repeating. Loop in the electrical and firmware teams early, since most of my mechanical constraints came from them. Design for whoever has to assemble the thing, not just the assembly itself. And write down the reasoning behind a decision, not just the result, since that's what the next person actually needs.</p>
+                <p>One of our lab testbenches was fully stationary, which limited where and how we could run tests without risking a heavy lift that could hurt someone or knock sensitive instrumentation out of alignment. I designed a caster cart that interfaces directly with the existing testbench frame, matching its height with custom-cut T-slot aluminum extrusions and reusing its exact rail profile and spacing so a heavy baseplate rolls smoothly from bench to cart without catching. The cart's own T-slot geometry tracks into the bench's open slots as it rolls up, so alignment is self-guiding, and four total-lock casters immobilize both rotation and swivel once it's seated, keeping the whole transfer stable under a single operator.</p>
+                <p>A few lessons repeated across all four projects. Loop in the electrical and firmware teams early, since most of my mechanical constraints came from them. Design for whoever has to assemble the thing, not just the assembly itself. And write down the reasoning behind a decision, not just the result. (Also on the record from that summer, a decisive rematch win at K1 Speed.)</p>
               </div>
               <div class="process-images">
-                <div class="img-placeholder">add photo: gimbal before and after comparison</div>
-                <div class="img-placeholder">add CAD screenshot: positioning cell V3 exploded view</div>
-                <div class="img-placeholder">add photo: battery charger before and after</div>
-                <div class="img-placeholder">add photo: TMU cart at the testbench</div>
+                <div class="media-item"><div class="img-placeholder">add photo: gimbal before and after comparison</div><span class="media-caption">CRABCAKE gimbal before and after the redesign</span></div>
+                <div class="media-item"><div class="img-placeholder">add CAD screenshot: positioning cell exploded view</div><span class="media-caption">Exploded CAD view of the positioning cell device</span></div>
+                <div class="media-item"><div class="img-placeholder">add photo: battery charger before and after</div><span class="media-caption">Battery charger enclosure before and after</span></div>
+                <div class="media-item"><div class="img-placeholder">add photo: TMU cart at the testbench</div><span class="media-caption">Testbench Mobility Unit cart docked at the bench</span></div>
               </div>
             </div>
           </div>
           <div class="detail-block">
             <div class="detail-label">Appendix</div>
             <div class="appendix-images">
-              <div class="img-placeholder">add photo: gear boring setup on the drill press</div>
-              <div class="img-placeholder">add CAD screenshot: V4 housing, parametric logo-scaled design</div>
-              <div class="img-placeholder">add photo: 2s2p battery pack and BMS board</div>
-              <div class="img-placeholder">add photo: bottom plate with corner-bolted rubber feet</div>
+              <div class="media-item"><div class="img-placeholder">add photo: gear boring setup on the drill press</div><span class="media-caption">Boring the driven gear on the drill press</span></div>
+              <div class="media-item"><div class="img-placeholder">add CAD screenshot: parametric logo-scaled housing design</div><span class="media-caption">Parametric, logo-scaled positioning cell housing</span></div>
+              <div class="media-item"><div class="img-placeholder">add photo: 2s2p battery pack and BMS board</div><span class="media-caption">Custom 2s2p battery pack and BMS board</span></div>
+              <div class="media-item"><div class="img-placeholder">add photo: bottom plate with corner-bolted rubber feet</div><span class="media-caption">Charger baseplate with corner-bolted rubber feet</span></div>
             </div>
           </div>
         </div>
@@ -518,18 +518,18 @@
                 <p>Manufacturing split between manual and CNC work: simpler features went on the manual lathe and mill, while the more complex hub and disc geometry was toolpathed in Fusion CAM and cut on the CNC mill. [EDIT: add a note on balancing the finished weapon or any fixturing challenge from machining an asymmetric spinning mass.]</p>
               </div>
               <div class="process-images">
-                <div class="img-placeholder">add CAD screenshot: drisk geometry</div>
-                <div class="img-placeholder">add photo: ANSYS FEA stress plot</div>
-                <div class="img-placeholder">add photo: weapon on the mill</div>
+                <div class="media-item"><div class="img-placeholder">add CAD screenshot: drisk geometry</div><span class="media-caption">CAD model of the spinning weapon (drisk) geometry</span></div>
+                <div class="media-item"><div class="img-placeholder">add photo: ANSYS FEA stress plot</div><span class="media-caption">ANSYS FEA stress plot of the weapon under load</span></div>
+                <div class="media-item"><div class="img-placeholder">add photo: weapon on the mill</div><span class="media-caption">Machining the weapon on the CNC mill</span></div>
               </div>
             </div>
           </div>
           <div class="detail-block">
             <div class="detail-label">Appendix</div>
             <div class="appendix-images">
-              <div class="img-placeholder">add photo: spline hub detail</div>
-              <div class="img-placeholder">add photo: assembled weapon on the frame</div>
-              <div class="img-placeholder">add photo: robot at competition</div>
+              <div class="media-item"><div class="img-placeholder">add photo: spline hub detail</div><span class="media-caption">Spline hub detail</span></div>
+              <div class="media-item"><div class="img-placeholder">add photo: assembled weapon on the frame</div><span class="media-caption">Assembled weapon mounted to the frame</span></div>
+              <div class="media-item"><div class="img-placeholder">add photo: robot at competition</div><span class="media-caption">Robot at competition</span></div>
             </div>
           </div>
         </div>
@@ -559,7 +559,7 @@
             <div class="detail-label">The Process</div>
             <div class="process-grid">
               <div class="process-text"><p>[EDIT: add process narrative]</p></div>
-              <div class="process-images"><div class="img-placeholder">add photo</div></div>
+              <div class="process-images"><div class="media-item"><div class="img-placeholder">add photo</div><span class="media-caption">Photo to be added</span></div></div>
             </div>
           </div>
         </div>
@@ -604,10 +604,10 @@
                 <p>The float also needed to survive being set down hard on a pool deck, so I sized a set of TPU feet by working backward from an impact-energy budget, estimating the float's drop velocity from a drag balance, converting that to kinetic energy on impact, and comparing the stopping force over a compliant foot's ~10 mm of give against a rigid ~1 mm contact, which cut the estimated impact force by roughly 10&times;.</p>
               </div>
               <div class="process-images">
-                <img class="img-placeholder" src="images/FloatCAD.png" alt="CAD render of the buoyancy engine">
-                <img class="img-placeholder" src="images/evolution.JPEG" alt="Evolution of the housing and buoyancy engine iterations">
-                <video class="img-placeholder" src="images/diveandresurface.mp4" autoplay loop muted playsinline></video>
-                <video class="img-placeholder" src="images/iterations.mp4" autoplay loop muted playsinline></video>
+                <div class="media-item"><img class="img-placeholder" src="images/FloatCAD.png" alt="CAD render of the buoyancy engine"><span class="media-caption">CAD render of the buoyancy engine</span></div>
+                <div class="media-item"><img class="img-placeholder" src="images/evolution.JPEG" alt="Evolution of the housing and buoyancy engine iterations"><span class="media-caption">Evolution of the housing and buoyancy engine across iterations</span></div>
+                <div class="media-item"><video class="img-placeholder" src="images/diveandresurface.mp4" autoplay loop muted playsinline></video><span class="media-caption">Float diving and resurfacing during a test</span></div>
+                <div class="media-item"><video class="img-placeholder" src="images/iterations.mp4" autoplay loop muted playsinline></video><span class="media-caption">Housing and buoyancy engine iteration montage</span></div>
               </div>
             </div>
           </div>

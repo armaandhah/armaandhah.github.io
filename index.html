@@ -184,6 +184,8 @@
   .process-images .media-item{ background:var(--panel-2); border:1px solid var(--line); padding:8px; }
   .process-images .media-item img.img-placeholder, .process-images .media-item video.img-placeholder{ max-height:240px; width:100%; height:auto; object-fit:contain; border:none; }
   .process-images-lg .media-item img.img-placeholder, .process-images-lg .media-item video.img-placeholder{ max-height:340px; }
+  .process-images .media-item-wide{ grid-column:1 / -1; }
+  .process-images .media-item-wide img.img-placeholder, .process-images .media-item-wide video.img-placeholder{ max-height:380px; }
   .appendix-images{ display:flex; gap:12px; flex-wrap:wrap; }
   @media (max-width:820px){ .process-grid{ grid-template-columns:1fr; } }
   .tl-images{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;}
@@ -499,28 +501,28 @@
           <div class="detail-block">
             <div class="detail-label">Deliverables</div>
             <ul class="tl-bullets">
-              <li>Optimized overall weapon geometry for weight while hitting performance targets.</li>
-              <li>Machined, assembled, and performed on-the-fly maintenance on the weapon system between fights, including the drisk blades, spline hub, motor shaft, and belt-drive hardware, across manual lathes, manual mills, and a CNC mill.</li>
+              <li>Took the weapon system from an initial design through iteration to a final, competition-ready version, adapting it for clearances and optimizing for weight while keeping the original performance goals in mind.</li>
+              <li>Machined the spline hub, weapon shaft, motor shaft, and pulleys, learning Fusion CAM to program the spline hub on the CNC mill, then assembled the weapon and performed on-the-fly maintenance between fights.</li>
             </ul>
           </div>
           <div class="detail-block">
             <div class="detail-label">The Process</div>
             <div class="process-grid">
               <div class="process-text">
-                <p>I worked in a four-person subteam to bring the weapon system from CAD to the arena. My main contribution was trimming weight out of the drisk blades and spline hub so the assembly hit its speed target without breaking the 12 lb weapon-mass allocation, then machining the finished S7 blades and 7075 hub myself. The hub's spline carries the actual torque load, with the retaining bolts there to reinforce the joint rather than take the hit directly.</p>
-                <p>On the powertrain side I machined the motor's extended shaft on a lathe and built out the belt-drive hardware, including a tensioner that let us adjust belt tension after final assembly. Every part of the weapon, from the blades to the shaft, was designed to come apart quickly, so a damaged piece could be pulled and swapped for a spare between rounds instead of taking the robot out of the competition.</p>
+                <p>I worked in a four-person subteam to bring the weapon system from an initial design to its final, competition-ready form. My main contribution was taking that initial design through iteration, adapting it for clearances and trimming weight out of the drisk and hub so the assembly hit its speed target without breaking the 12 lb weapon-mass allocation, all while keeping the original performance goals in mind.</p>
+                <p>On the manufacturing side I machined the spline hub on a CNC mill, learning Fusion CAM to program the toolpaths, along with the weapon shaft, the motor shaft, and the pulleys. Every part of the weapon, from the hub to the shaft, was designed to come apart quickly, so a damaged piece could be pulled and swapped for a spare between rounds instead of taking the robot out of the competition.</p>
                 <p>The finished weapon spun up to 10,000 rpm and held up through our comp fights with minimal weapon-side maintenance, mostly swapping in a fresh set of blades between rounds. The robot placed third out of twelve teams.</p>
               </div>
-              <div class="process-images">
+              <div class="process-images process-images-lg">
                 <div class="media-item"><img class="img-placeholder" src="images/CADrenderfullrobot.JPEG" alt="CAD rendering of the full robot"><span class="media-caption">CAD rendering of the full robot</span></div>
                 <div class="media-item"><img class="img-placeholder" src="images/weaponCAD1.png" alt="CAD model of the weapon assembly"><span class="media-caption">CAD model of the weapon assembly</span></div>
                 <div class="media-item"><img class="img-placeholder" src="images/weaponCAD2.png" alt="CAD model of the weapon assembly, alternate view"><span class="media-caption">CAD model of the weapon assembly, alternate view</span></div>
                 <div class="media-item"><img class="img-placeholder" src="images/3dprintedprototype.JPEG" alt="Full-scale printed prototype used for a fit check"><span class="media-caption">Full-scale printed prototype used for a fit check</span></div>
                 <div class="media-item"><img class="img-placeholder" src="images/splinehubcnc.JPEG" alt="Machining the spline hub on the CNC mill"><span class="media-caption">Machining the spline hub on the CNC mill</span></div>
                 <div class="media-item"><img class="img-placeholder" src="images/assembledweapononframe.JPEG" alt="Assembled weapon mounted to the frame"><span class="media-caption">Assembled weapon mounted to the frame</span></div>
-                <div class="media-item"><video class="img-placeholder" src="images/spinuptesting.mp4" autoplay loop muted playsinline></video><span class="media-caption">Weapon spin-up testing</span></div>
                 <div class="media-item"><img class="img-placeholder" src="images/fullyassembledbot.JPEG" alt="Fully assembled robot"><span class="media-caption">Fully assembled robot</span></div>
-                <div class="media-item"><video class="img-placeholder" src="images/compmontage.mp4" autoplay loop muted playsinline></video><span class="media-caption">Competition montage</span></div>
+                <div class="media-item media-item-wide"><video class="img-placeholder" src="images/spinuptesting.mp4" autoplay loop muted playsinline></video><span class="media-caption">Weapon spin-up testing</span></div>
+                <div class="media-item media-item-wide"><video class="img-placeholder" src="images/compmontage.mp4" autoplay loop muted playsinline></video><span class="media-caption">Competition montage</span></div>
               </div>
             </div>
           </div>

@@ -535,27 +535,50 @@
         <span class="tl-dot"></span>
         <summary>
           <div class="tl-top-row">
-            <div class="tl-role">UCLA Combat Robotics: Role TBD</div>
+            <div class="tl-role">UCLA ASME Combat Robotics: Lead Engineer</div>
             <span class="tl-dates">DATES TBD</span>
           </div>
-          <h3 class="tl-title">UCLA Combat Robotics</h3>
-          <p class="tl-blurb">Placeholder. Details coming soon.</p>
-          <div class="spec-row"><div class="spec">TBD</div></div>
+          <h3 class="tl-title">U.A.A.O.D.A.D. — 3 lb Combat Robot</h3>
+          <p class="tl-blurb">Designed, manufactured, and competed with a 3 lb eggbeater combat robot in one week.</p>
+          <div class="spec-row"><div class="spec">SolidWorks</div><div class="spec">Eggbeater Weapon</div><div class="spec">TPU 98A</div><div class="spec">4140 Steel</div><div class="spec">CNC Machining</div><div class="spec">3 lb Weight Class</div></div>
         </summary>
         <div class="tl-detail">
           <div class="detail-block">
             <div class="detail-label">Objective</div>
-            <p>[EDIT: add objective]</p>
+            <p>With just a week until an interschool 3 lb combat robot tournament, my teammate and I decided to sign up anyway. That left almost no time to plan, design, gather parts, manufacture, assemble, and test a full weapon-class robot, so the goal became getting a functioning eggbeater-style bot to the competition floor with whatever the week allowed.</p>
           </div>
           <div class="detail-block">
             <div class="detail-label">Deliverables</div>
-            <ul class="tl-bullets"><li>[EDIT: add deliverables]</li></ul>
+            <ul class="tl-bullets">
+              <li>Designed and iterated a parameterized eggbeater weapon geometry, using a weight-versus-energy sweep to size the disc within a 0.7 lb weapon-mass target.</li>
+              <li>Printed a one-piece TPU 98A chassis and CNC-machined a hardened 4140 steel weapon disc.</li>
+              <li>Sized the weapon's pulley and belt drive within our shaft-size constraints, balancing gear ratio against spin-up time.</li>
+              <li>Bandsawed and CNC-machined UHMW uprights and a top plate from printed DXF templates after the waterjet went down.</li>
+            </ul>
           </div>
           <div class="detail-block">
             <div class="detail-label">The Process</div>
             <div class="process-grid">
-              <div class="process-text"><p>[EDIT: add process narrative]</p></div>
-              <div class="process-images"><div class="media-item"><div class="img-placeholder">add photo</div><span class="media-caption">Photo to be added</span></div></div>
+              <div class="process-text">
+                <div class="sub-role">WEAPON ENERGY SIZING</div>
+                <p>With the tournament a week out, our first priority was locking down a weapon design fast enough to leave time for manufacturing. We ran a batch of geometry iterations on a simple parameterized eggbeater profile, sweeping length and width and logging the resulting moment of inertia and rotational energy for each combination against a set battery voltage and motor RPM. Plotting those points against weapon weight showed a roughly linear relationship between mass and stored energy, which let us pick a geometry that maximized energy while keeping the disc itself under 0.7 lb, leaving the rest of the 3 lb budget for the chassis, drivetrain, and electronics.</p>
+                <div class="media-item"><img class="img-placeholder" src="images/weaponenergyfit.png" alt="Best-fit plot of weapon weight vs rotational energy from the geometry sweep"><span class="media-caption">Weapon weight vs rotational energy, with a linear best fit across the geometry sweep</span></div>
+
+                <div class="sub-role">MATERIALS</div>
+                <p>For the chassis we printed the entire shell as a single piece in TPU 98A, one of the more rigid TPUs available, since we needed real impact toughness without the assembly time a multi-piece design would have cost us that week. For the weapon itself we went with hardened 4140 steel over the annealed version or a lighter aluminum, trading easier machining for the wear resistance and toughness needed to survive repeated hits at full RPM without the edge deforming or cracking, then took on cutting that hardened stock ourselves on a CNC mill with the limited tooling we had access to.</p>
+
+                <div class="sub-role">POWERTRAIN</div>
+                <p>The weapon runs a 20-tooth pulley on a 1/4 inch shaft driven by a 14-tooth pulley on the motor's 1/8 inch shaft, a 1.429 to 1 ratio set largely by which shaft and pulley sizes we could actually get within a week. That ratio put us at a calculated spin-up time of about 1.7 seconds to reach a max weapon speed of roughly 19,600 rpm, and it was the tradeoff we kept running into everywhere we pushed the ratio for more torque, spin-up time crept up, and everywhere we pushed it for a faster spin-up, we gave up weapon energy at the hit.</p>
+
+                <div class="sub-role">UPRIGHTS &amp; TOP PLATE</div>
+                <p>The uprights and top plate were UHMW, chosen for its impact resistance and low weight relative to aluminum, since neither part needed to carry much load beyond holding the weapon shaft in place and keeping the assembly square. Our waterjet was down that week, so we printed DXF templates, cut the upright and top plate profiles by hand on a vertical bandsaw, then finished the shaft bores and mounting holes on the CNC mill.</p>
+              </div>
+              <div class="process-images">
+                <div class="media-item"><div class="img-placeholder">add photo: full robot CAD</div><span class="media-caption">CAD render of the assembled robot</span></div>
+                <div class="media-item"><div class="img-placeholder">add photo: weapon disc on the CNC mill</div><span class="media-caption">Machining the 4140 steel weapon disc</span></div>
+                <div class="media-item"><div class="img-placeholder">add photo: UHMW uprights on the bandsaw</div><span class="media-caption">Cutting UHMW upright profiles on the bandsaw</span></div>
+                <div class="media-item"><div class="img-placeholder">add photo: assembled robot</div><span class="media-caption">Fully assembled robot before competition</span></div>
+              </div>
             </div>
           </div>
         </div>

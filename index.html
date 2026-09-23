@@ -545,7 +545,7 @@
         <div class="tl-detail">
           <div class="detail-block">
             <div class="detail-label">Objective</div>
-            <p>With just a week until an interschool 3 lb combat robot tournament, my teammate and I decided to sign up anyway. That left almost no time to plan, design, gather parts, manufacture, assemble, and test a full weapon-class robot, so the goal became getting a functioning eggbeater-style bot to the competition floor with whatever the week allowed.</p>
+            <p>With just a week until an interschool 3 lb combat robot tournament, my teammate and I decided to sign up anyway. We were both on the Baja SAE suspension subteam, which is where the robot's name came from, Upper A-Arms of Doom and Despair, U.A.A.O.D.A.D. for short, for reasons that should be pretty easy to guess. That left almost no time to plan, design, gather parts, manufacture, assemble, and test a full weapon-class robot, so the goal became getting a functioning eggbeater-style bot to the competition floor with whatever the week allowed.</p>
           </div>
           <div class="detail-block">
             <div class="detail-label">Deliverables</div>
@@ -561,7 +561,7 @@
             <div class="process-grid">
               <div class="process-text">
                 <div class="sub-role">WEAPON ENERGY SIZING</div>
-                <p>With the tournament a week out, our first priority was locking down a weapon design fast enough to leave time for manufacturing. We ran a batch of geometry iterations on a simple parameterized eggbeater profile, sweeping length and width and logging the resulting moment of inertia and rotational energy for each combination against a set battery voltage and motor RPM. Plotting those points against weapon weight showed a roughly linear relationship between mass and stored energy, which let us pick a geometry that maximized energy while keeping the disc itself under 0.7 lb, leaving the rest of the 3 lb budget for the chassis, drivetrain, and electronics.</p>
+                <p>With the tournament a week out, our first priority was locking down a weapon design fast enough to leave time for manufacturing. One of our weapon goals was a minimum of 300 J of stored energy, so we ran a batch of geometry iterations on a simple parameterized eggbeater profile, sweeping length and width and logging the resulting moment of inertia and rotational energy for each combination against a set battery voltage and motor RPM. Plotting those points against weapon weight showed a roughly linear relationship between mass and stored energy, which let us pick a geometry that cleared the 300 J target with room to spare while keeping the disc itself under 0.7 lb, leaving the rest of the 3 lb budget for the chassis, drivetrain, and electronics. We ran the same kind of sweep on battery and motor sizing, checking voltage and KV combinations against the target RPM to get as much power into the system as our weight and cost limits would allow.</p>
                 <div class="media-item"><img class="img-placeholder" src="images/weaponenergyfit.png" alt="Best-fit plot of weapon weight vs rotational energy from the geometry sweep"><span class="media-caption">Weapon weight vs rotational energy, with a linear best fit across the geometry sweep</span></div>
 
                 <div class="sub-role">MATERIALS</div>
@@ -572,6 +572,9 @@
 
                 <div class="sub-role">UPRIGHTS &amp; TOP PLATE</div>
                 <p>The uprights and top plate were UHMW, chosen for its impact resistance and low weight relative to aluminum, since neither part needed to carry much load beyond holding the weapon shaft in place and keeping the assembly square. Our waterjet was down that week, so we printed DXF templates, cut the upright and top plate profiles by hand on a vertical bandsaw, then finished the shaft bores and mounting holes on the CNC mill.</p>
+
+                <div class="sub-role">WIRING &amp; THE FINAL PUSH</div>
+                <p>With about 12 hours left before competition morning, we finally had all our motors, ESCs, and the battery in hand, which left very little time to plan out wiring and soldering, let alone program the ESCs. I harnessed the entire robot from scratch over the next few hours, and the time crunch pushed my soldering well past where it started the week. We were also still making design-for-assembly changes to the robot at that point, since a few interfaces just hadn't been fully worked out yet and there wasn't time left to flesh them out properly.</p>
               </div>
               <div class="process-images">
                 <div class="media-item"><div class="img-placeholder">add photo: full robot CAD</div><span class="media-caption">CAD render of the assembled robot</span></div>
@@ -580,6 +583,11 @@
                 <div class="media-item"><div class="img-placeholder">add photo: assembled robot</div><span class="media-caption">Fully assembled robot before competition</span></div>
               </div>
             </div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Results &amp; Lessons Learned</div>
+            <p>We built a fully functioning 3 lb combat robot from scratch in a single week, which we're proud of on its own. Where we fell short was competition day itself. The ESCs never got fully programmed in the time we had, and that kept the weapon from spinning up the way it was designed to.</p>
+            <p>Working under that kind of pressure meant leaning on a wide mix of skills at once, CAD, CAM, machining, and harnessing, often in the same afternoon, and learning fast which tools we actually had access to versus which ones we didn't, then building the plan around that instead of losing time to it. The housing came out bulkier than it needed to be and wasn't designed with assembly in mind, which is the first thing we'd fix on a second pass. We're hoping to come back next year with a more competitive, more compact version of this robot.</p>
           </div>
         </div>
       </details>

@@ -375,37 +375,54 @@
         <div class="tl-detail">
           <div class="detail-block">
             <div class="detail-label">Objective</div>
-            <p>Baja SAE is an intercollegiate competition where teams design, build, and race a single-seat off-road vehicle against a strict rulebook and a shared parts budget. My objective as suspension and steering lead has been to deliver a system that survives repeated high-impact terrain, passes technical inspection on the first attempt, and can be built and repaired in the field by a rotating roster of student engineers on a fixed budget.</p>
+            <p>Baja SAE is an intercollegiate competition where teams design, build, and race a single-seat off-road vehicle against a strict rulebook and a shared parts budget. My objective as suspension and steering lead has been to deliver a system that survives repeated high-impact terrain, passes technical inspection on the first attempt, and can be built and repaired in the field by a rotating roster of student engineers on a fixed budget. The M26 design is currently a work in progress, so this section will keep updating as the model year develops.</p>
           </div>
           <div class="detail-block">
             <div class="detail-label">Deliverables</div>
-            <div class="tl-bullets"><div class="sub-role">M26 SUSPENSION LEAD ENGINEER, MAY 2026–PRESENT</div></div>
+            <div class="tl-bullets"><div class="sub-role">M26 SUSPENSION LEAD ENGINEER, MAY 2026–PRESENT (IN PROGRESS, DESIGN PHASE)</div></div>
             <ul class="tl-bullets">
-              <li>Direct a team of 13 project engineers through design, analysis, fabrication, and validation of the entire suspension and steering system, coordinating with other subsystem leads for vehicle integration.</li>
-              <li>Optimize suspension geometry to elevate handling and reliability while supervising component packaging, mass reduction, and rule compliance.</li>
-              <li>Manage a $10,000 subteam budget, defending design architectures at formal technical reviews and competition design presentations.</li>
+              <li>Modeled the suspension geometry in SolidWorks and wrote VBA macros to sweep it through shock and rack travel, validating camber gain, bump steer, turn angle, Ackermann percentage, turn radius, and clearances, a validated geometry optimizer M25 never had.</li>
+              <li>Called the decision to revert the upper A-arm to an outboard shock mount after M25's design took three redesigns and still interfered and fractured.</li>
+              <li>Directed the rear suspension and steering redesign to cut weight and steering effort versus M25, and reviewed the FEA behind it.</li>
+              <li>Currently building out a load case calculator to solve component loads across bump, cornering, braking, acceleration, and impact, feeding directly into FEA and hand calcs on the subsystem's parts.</li>
+              <li>Called for and personally ran skidpad, CG, and natural frequency testing, and led a 13-person team on a $10,000 budget through formal design review.</li>
             </ul>
             <div class="tl-bullets"><div class="sub-role">M25 SUSPENSION TEAM ENGINEER, SEPT 2025–MAY 2026</div></div>
             <ul class="tl-bullets">
-              <li>Fabricated the upper and lower A-arms using an angle grinder for tube notching, working off a protractor for simpler cuts and DXF templates for more complex notch geometries, and building dedicated jigging setups to hold tight tolerances given how sensitive suspension geometry and dynamics are to misalignment.</li>
-              <li>Manufactured tightly toleranced spacers and bushings for a range of suspension components on the manual mill and lathe.</li>
-              <li>Assisted in CNC milling tie rod extenders and wafer cups for the A-arms, picking up invaluable machining experience along the way.</li>
-              <li>Took on a side project manufacturing a limit switch plate for the powertrain's centerlock, programming the toolpaths in Fusion CAM and completing it on the strength of that machining experience.</li>
-              <li>Helped redesign a critical A-arm after a late-season failure, building 3D-printed test models to physically validate clearances and vehicle dynamics before locking in the new geometry.</li>
+              <li>Fabricated the upper and lower A-arms, notching tube stock with an angle grinder off a protractor and DXF templates, then jigging each part to hold tight tolerances given how sensitive suspension geometry is to misalignment.</li>
+              <li>Machined tightly toleranced spacers and bushings on the manual mill and lathe, and assisted in CNC milling tie rod extenders and wafer cups for the A-arms.</li>
+              <li>Manufactured a limit switch plate for the powertrain's centerlock as a side project, programming the toolpaths in Fusion CAM.</li>
+              <li>Helped redesign a critical A-arm after a late-season failure, 3D printing test models to validate clearances and vehicle dynamics before finalizing the new geometry.</li>
             </ul>
           </div>
           <div class="detail-block">
             <div class="detail-label">The Process</div>
+
+            <div class="sub-role">M26 SUSPENSION LEAD ENGINEER (IN PROGRESS, DESIGN PHASE)</div>
             <div class="process-grid">
               <div class="process-text">
-                <div class="sub-role">M26 SUSPENSION LEAD ENGINEER</div>
-                <p>As Suspension Lead, the job shifted from making parts to making decisions: iterating suspension geometry (camber gain, roll center, anti-squat) against handling targets, then defending those tradeoffs at technical review against a fixed $10,000 budget and a hard mass target set by the frame and drivetrain teams.</p>
-                <p>[EDIT: expand on a specific hard call you had to make this season, e.g. a geometry tradeoff, a part that failed testing, or a rule-compliance issue you solved.]</p>
+                <p><strong>M26 is still in active development for the current model year.</strong> The geometry, FEA, and load case work below reflects where the design stands right now, not a finished vehicle, and this section will keep changing as the season moves from design into fabrication and testing.</p>
+                <p>Every M26 suspension goal traced back to a specific M25 problem. M25 never had a validated way to check geometry against travel, which let interferences like tie rod versus A-arm, tie rod versus rim, and shock mount versus CV go unnoticed until they showed up on the car, its steering effort was too high, and its A-arm design was complex enough that it took three full redesigns to get right. As lead, those failures set my priorities for the season.</p>
+                <p>I modeled the suspension geometry in SolidWorks and wrote a set of VBA macros to sweep it through shock travel and rack travel, checking camber gain, bump steer, turn angle, Ackermann percentage, and turn radius against our targets, plus a separate macro that checked clearances across the full range of rack travel. That gave us a validated geometry optimizer, something M25 never had, and let us catch interferences during design instead of after manufacturing.</p>
+                <p>The hardest call of the season so far has been the upper A-arm's shock mount. M25 ran an aluminum upper arm with the shock mounted low, which interfered and eventually fractured after three redesigns. For M26 I had the team run FEA on both an upper-mount and a lower-mount configuration side by side, and while the lower mount was lighter, it came back with a tougher tolerance stack, harder welding, and lower margins across every load case. I made the call to revert to an outboard shock mount on the upper A-arm, even though it cost roughly a pound per corner, because the reliability and manufacturability gains were worth more than the weight.</p>
+                <p>On the rear end I pushed the trailing arm to bolt-on shock brackets in place of a CNC'd shock pocket, which let most of the part be made on the waterjet with two mirrored CNC setups instead of one complex one, and directed material tradeoffs on the upright and camber links that got the subsystem close to 10 percent lighter. On steering, I set the target of more rack travel and less backlash than M25 had, since drivers had complained about play in the system, and reviewed the FEA and hand calculations behind the new rack diameter and housing before we committed to it.</p>
+                <p>We're currently building out a load case calculator that solves component loads across bump, cornering, braking, acceleration, and impact scenarios directly from the SolidWorks geometry, so we can design and analyze each subsystem part against real numbers instead of assumed ones. It's an active work in progress, and the plan is to keep refining it as we collect more vehicle data.</p>
+                <p>Once the new geometry was in CAD, I called for a round of vehicle testing to check our assumptions against reality, including a skidpad run to measure roll gradient and lateral acceleration against cornering speed, along with center of gravity and natural frequency measurements. I didn't design the test methodology itself, but I ran the tests myself and used the results to sanity check the spring rates and geometry choices we had made on paper.</p>
+              </div>
+              <div class="process-images">
+                <div class="media-item"><video class="img-placeholder" src="images/susgeometrysweeep.mp4" autoplay loop muted playsinline></video><span class="media-caption">VBA macro sweeping the suspension geometry through travel</span></div>
+                <div class="media-item"><img class="img-placeholder" src="images/bumpsteercambergaingrapphs.png" alt="Bump steer and camber gain graphs from the macro sweep"><span class="media-caption">Bump steer and camber gain curves from the sweep</span></div>
+                <div class="media-item"><img class="img-placeholder" src="images/currentsustopassembly.png" alt="Current M26 suspension assembly in CAD"><span class="media-caption">Current M26 suspension assembly, still in progress</span></div>
+                <div class="media-item"><video class="img-placeholder" src="images/loadcasetesting.mp4" autoplay loop muted playsinline></video><span class="media-caption">Working through load case testing for the subsystem</span></div>
+              </div>
+            </div>
 
-                <div class="sub-role">M25 SUSPENSION TEAM ENGINEER</div>
+            <div class="sub-role">M25 SUSPENSION TEAM ENGINEER</div>
+            <div class="process-grid">
+              <div class="process-text">
                 <p>I came onto the subteam in September 2025 as a suspension team engineer, and my first major project was fabricating the upper and lower A-arms. I cut and notched the tube stock with an angle grinder, laying out simpler notches with a protractor and pulling the more complex ones off DXF templates, then built dedicated jigging setups to hold the parts to tight tolerances, since suspension geometry and dynamics are very sensitive to any misalignment.</p>
-                <p>Alongside the A-arms, I used the manual mill and lathe to manufacture tightly toleranced spacers and bushings for several other suspension components, and helped CNC mill tie rod extenders and wafer cups for the A-arms, which gave me a lot of hands-on machining experience I hadn't had before. That experience paid off on a side project I picked up around the same time, manufacturing a limit switch plate for the powertrain's centerlock, where I programmed the toolpaths in Fusion CAM. [EDIT: add specific tolerance/spec numbers you want to highlight here.]</p>
-                <p>Late in the season one of our A-arms failed, so I helped redesign it from the ground up. Before committing to the new geometry, we 3D printed test models to physically check clearances and vehicle dynamics against the rest of the suspension, which let us validate the redesign without waiting on another full metal build.</p>
+                <p>Alongside the A-arms, I used the manual mill and lathe to manufacture tightly toleranced spacers and bushings for several other suspension components, and helped CNC mill tie rod extenders and wafer cups for the A-arms, which gave me a lot of hands-on machining experience I hadn't had before. That experience paid off on a side project I picked up around the same time, manufacturing a limit switch plate for the powertrain's centerlock, where I programmed the toolpaths in Fusion CAM and held the limit switch bores to 1 to 2 thou for a near perfect fit.</p>
+                <p>Late in the season one of our A-arms failed, so I helped redesign it from the ground up. Before committing to the new geometry, I 3D printed test models to physically check clearances and vehicle dynamics against the rest of the suspension, which let us validate the redesign without waiting on another full metal build.</p>
               </div>
               <div class="process-images">
                 <div class="media-item"><img class="img-placeholder" src="images/angle grinding.jpg" alt="Notching A-arm tube with an angle grinder"><span class="media-caption">Notching A-arm tube stock with an angle grinder</span></div>

@@ -299,7 +299,7 @@
     </div>
     <nav>
       <a href="#projects">Projects</a>
-      <a href="#competencies">Competencies</a>
+      <a href="#competencies">Bill of Materials</a>
       <a href="#revisions">Revisions</a>
       <a href="#contact">Contact</a>
       <button class="icon-btn btn-print" id="printBtn" title="Print / export">P</button>
@@ -312,7 +312,7 @@
     <div class="hero-content">
       <h1 class="hero-name">Armaan Dhah</h1>
       <div class="hero-degree">B.S. Mechanical Engineering, University of California, Los Angeles</div>
-      <p class="lede">I design, analyze, and build mechanical systems end to end, from CAD and FEA through hands-on fabrication. My background spans manual and CNC machining, welding, 3D printing, embedded electronics integration, and leading engineering teams under real budget and schedule constraints.</p>
+      <p class="lede">I design, analyze, and build mechanical systems end to end, from CAD and FEA through hands-on fabrication. My background spans manual and CNC machining, 3D printing, embedded electronics integration, and leading engineering teams under real budget and schedule constraints.</p>
     </div>
     <div class="hero-figure" id="heroFigure">
       <svg viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg">
@@ -384,7 +384,7 @@
             <div class="detail-label">Deliverables</div>
             <div class="tl-bullets"><div class="sub-role">M26 SUSPENSION LEAD ENGINEER, MAY 2026–PRESENT (IN PROGRESS, DESIGN PHASE)</div></div>
             <ul class="tl-bullets">
-              <li>Modeled the suspension geometry in SolidWorks and wrote VBA macros to sweep it through shock and rack travel, validating camber gain, bump steer, turn angle, Ackermann percentage, turn radius, and clearances, a validated geometry optimizer M25 never had.</li>
+              <li>Modeled the suspension geometry in SolidWorks and wrote VBA macros to sweep it through shock and rack travel, validating camber gain, bump steer, turn angle, Ackermann percentage, turn radius, and clearances, a validated geometry optimizer no previous UCLA Baja SAE team had ever had.</li>
               <li>Called the decision to revert the upper A-arm to an outboard shock mount after M25's design took three redesigns and still interfered and fractured.</li>
               <li>Directed the rear suspension and steering redesign to cut weight and steering effort versus M25, and reviewed the FEA behind it.</li>
               <li>Currently building out a load case calculator to solve component loads across bump, cornering, braking, acceleration, and impact, feeding directly into FEA and hand calcs on the subsystem's parts.</li>
@@ -405,8 +405,8 @@
             <div class="process-grid">
               <div class="process-text">
                 <p><strong>M26 is still in active development for the current model year.</strong> The geometry, FEA, and load case work below reflects where the design stands right now, not a finished vehicle, and this section will keep changing as the season moves from design into fabrication and testing.</p>
-                <p>Every M26 suspension goal traced back to a specific M25 problem. M25 never had a validated way to check geometry against travel, which let interferences like tie rod versus A-arm, tie rod versus rim, and shock mount versus CV go unnoticed until they showed up on the car, its steering effort was too high, and its A-arm design was complex enough that it took three full redesigns to get right. As lead, those failures set my priorities for the season.</p>
-                <p>I modeled the suspension geometry in SolidWorks and wrote a set of VBA macros to sweep it through shock travel and rack travel, checking camber gain, bump steer, turn angle, Ackermann percentage, and turn radius against our targets, plus a separate macro that checked clearances across the full range of rack travel. That gave us a validated geometry optimizer, something M25 never had, and let us catch interferences during design instead of after manufacturing.</p>
+                <p>Every M26 suspension goal traced back to a specific M25 problem. No previous UCLA Baja SAE team had ever had a validated way to check geometry against travel, which let interferences like tie rod versus A-arm, tie rod versus rim, and shock mount versus CV go unnoticed until they showed up on the car, M25's steering effort was too high, and its A-arm design was complex enough that it took three full redesigns to get right. As lead, those failures set my priorities for the season.</p>
+                <p>I modeled the suspension geometry in SolidWorks and wrote a set of VBA macros to sweep it through shock travel and rack travel, checking camber gain, bump steer, turn angle, Ackermann percentage, and turn radius against our targets, plus a separate macro that checked clearances across the full range of rack travel. That gave us a validated geometry optimizer, something no previous UCLA Baja SAE team had ever had, and let us catch interferences during design instead of after manufacturing.</p>
                 <p>One of the season's director level goals was an 8ft turn radius with no tire slip, so I ran the calculations to determine that hitting that target required a 37 degree insteer value. After analyzing our final Ackermann geometry, the worst case scenario for turn angle clearances came out to 43 degrees at full bump, a significant jump over what the team had designed around before. I built a SolidWorks macro that checked every clearance through steer and through travel to accommodate that increase in turn angle, and iterated the geometry around passing those clearances. We're currently designing the vehicle with that goal in mind.</p>
                 <p>On the rear end I pushed the trailing arm to bolt-on shock brackets in place of a CNC'd shock pocket, which let most of the part be made on the waterjet with two mirrored CNC setups instead of one complex one, and directed material tradeoffs on the upright and camber links that got the subsystem close to 10 percent lighter. On steering, I set the target of more rack travel and less backlash than M25 had, since drivers had complained about play in the system, and reviewed the FEA and hand calculations behind the new rack diameter and housing before we committed to it.</p>
                 <p>We're currently building out a load case calculator that solves component loads across bump, cornering, braking, acceleration, and impact scenarios directly from the SolidWorks geometry, so we can design and analyze each subsystem part against real numbers instead of assumed ones. It's an active work in progress, and the plan is to keep refining it as we collect more vehicle data.</p>

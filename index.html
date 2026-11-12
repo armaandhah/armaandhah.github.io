@@ -211,6 +211,12 @@
   .data-table td:first-child{ color:var(--ink); }
   .data-table tr.dt-total td{ color:var(--accent); border-top:1px solid var(--line-light); }
   .topic-after{ margin-top:22px; max-width:820px; }
+  .process-overflow{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:14px; margin-top:18px; align-items:start; }
+  .process-overflow:empty{ display:none; }
+  .process-overflow .media-item{ background:var(--panel-2); border:1px solid var(--line); padding:8px; }
+  .process-overflow .media-item img.img-placeholder, .process-overflow .media-item video.img-placeholder{ max-height:260px; width:100%; height:auto; object-fit:contain; border:none; }
+  .process-overflow .media-item-wide, .process-overflow .media-table{ grid-column:span 2; }
+  @media (max-width:820px){ .process-overflow .media-item-wide{ grid-column:auto; } }
   .appendix-images{ display:flex; gap:12px; flex-wrap:wrap; }
   @media (max-width:820px){ .process-grid{ grid-template-columns:1fr; } }
   .tl-images{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;}
@@ -495,7 +501,7 @@
                   <div class="process-images">
                     <div class="media-item media-item-wide"><img class="img-placeholder" src="images/m26-trailing-arm-brackets.jpg" alt="M26 trailing arm with bolt-on shock brackets" loading="lazy"><span class="media-caption">Trailing arm with bolt-on 7075 shock brackets</span></div>
                     <div class="media-item media-table media-item-wide"><table class="data-table"><thead><tr><th>Per side (lb)</th><th>M25</th><th>M26</th></tr></thead><tbody><tr><td>Trailing arm</td><td>2.79</td><td>2.55</td></tr><tr><td>Camber links</td><td>2.14</td><td>1.90</td></tr><tr><td>Upright</td><td>0.67</td><td>0.64</td></tr><tr><td>Fasteners</td><td>0.47</td><td>0.64</td></tr><tr class="dt-total"><td>Total</td><td>6.07</td><td>5.73</td></tr></tbody></table><span class="media-caption">Rear corner weight per side, 5.6 percent lighter</span></div>
-                    <div class="media-item media-item-wide"><img class="img-placeholder" src="images/m26-trailing-arm-fea.jpg" alt="Trailing arm FEA von Mises stress in the 5 g bump case" loading="lazy"><span class="media-caption">Trailing arm FEA, 5 g bump, MoS +0.33 at FOS 1.5</span></div>
+                    <div class="media-item media-item-wide"><img class="img-placeholder" src="images/m26-ta-fea-bump5g.jpg" alt="Trailing arm FEA von Mises stress in the 5 g bump case" loading="lazy"><span class="media-caption">Trailing arm FEA, 5 g bump, MoS +0.33 at FOS 1.5</span></div>
                     <div class="media-item"><img class="img-placeholder" src="images/m26-upright-fea.jpg" alt="Upright FEA von Mises stress in cornering" loading="lazy"><span class="media-caption">Upright FEA in cornering, MoS +0.61 combined at FOS 1.5</span></div>
                     <div class="media-item"><img class="img-placeholder" src="images/m26-shock-bracket-fea.jpg" alt="Shock bracket FEA von Mises stress" loading="lazy"><span class="media-caption">Shock bracket FEA, peak at the loaded hole</span></div>
                     <div class="media-item media-table media-item-wide"><table class="data-table"><thead><tr><th>Check</th><th>Margin</th></tr></thead><tbody><tr><td>Bracket lug, net tension</td><td>+3.17</td></tr><tr><td>Bracket lug, shear tear out</td><td>+0.73</td></tr><tr><td>Bracket lug, bearing</td><td>+1.65</td></tr><tr><td>Camber link buckling</td><td>FOS 3.5</td></tr></tbody></table><span class="media-caption">Hand calc margins, lugs at FOS 3</span></div>
@@ -1057,6 +1063,49 @@
     });
   });
 })();
+
+  /* ---------- Balance process media against text ---------- */
+  function balanceGrid(grid){
+    var text = grid.querySelector(':scope > .process-text');
+    var side = grid.querySelector(':scope > .process-images');
+    if(!text || !side) return;
+    if(!grid._items){ grid._items = Array.prototype.slice.call(side.children); }
+    var over = grid.nextElementSibling;
+    if(!over || !over.classList.contains('process-overflow')){
+      over = document.createElement('div'); over.className = 'process-overflow';
+      grid.parentNode.insertBefore(over, grid.nextSibling);
+    }
+    grid._items.forEach(function(it){
+      side.appendChild(it);
+      var m = it.querySelector('img, video'); if(m) m.style.maxHeight = '';
+    });
+    if(window.innerWidth <= 820 || !grid.offsetParent) return;
+    var T = text.offsetHeight;
+    grid._items.forEach(function(it){ over.appendChild(it); });
+    var stopped = false;
+    grid._items.forEach(function(it){
+      if(stopped) return;
+      var h0 = side.children.length ? side.offsetHeight : 0;
+      side.appendChild(it);
+      var h1 = side.offsetHeight;
+      if(h0 === 0 || h1 <= T + 40) return;
+      if((h1 - T) >= (T - h0)){ over.insertBefore(it, over.firstChild); }
+      stopped = true;
+    });
+    if(side.children.length === 1 && side.offsetHeight > T + 60){
+      var m = side.querySelector('img, video');
+      if(m) m.style.maxHeight = Math.max(200, T - 50) + 'px';
+    }
+  }
+  function balanceAll(){
+    document.querySelectorAll('details[open] .process-grid').forEach(balanceGrid);
+  }
+  var balanceTimer;
+  function queueBalance(){ clearTimeout(balanceTimer); balanceTimer = setTimeout(balanceAll, 60); }
+  document.querySelectorAll('details').forEach(function(d){ d.addEventListener('toggle', queueBalance); });
+  window.addEventListener('resize', queueBalance);
+  document.querySelectorAll('.process-images img').forEach(function(im){ im.addEventListener('load', queueBalance); });
+  document.querySelectorAll('.process-images video').forEach(function(v){ v.addEventListener('loadedmetadata', queueBalance); });
 </script>
 </body>
 </html>

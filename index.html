@@ -211,12 +211,33 @@
   .data-table td:first-child{ color:var(--ink); }
   .data-table tr.dt-total td{ color:var(--accent); border-top:1px solid var(--line-light); }
   .topic-after{ margin-top:22px; max-width:820px; }
-  .process-overflow{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:14px; margin-top:18px; align-items:start; }
-  .process-overflow:empty{ display:none; }
-  .process-overflow .media-item{ background:var(--panel-2); border:1px solid var(--line); padding:8px; }
-  .process-overflow .media-item img.img-placeholder, .process-overflow .media-item video.img-placeholder{ max-height:260px; width:100%; height:auto; object-fit:contain; border:none; }
-  .process-overflow .media-item-wide, .process-overflow .media-table{ grid-column:span 2; }
-  @media (max-width:820px){ .process-overflow .media-item-wide{ grid-column:auto; } }
+  /* ----- Process layout: floated lead figure + uniform card row ----- */
+  .proc-flow{ display:flow-root; }
+  .proc-flow > p{ color:var(--ink-dim); font-size:14.5px; margin-bottom:16px; }
+  .proc-flow > .sub-role{ font-family:var(--font-mono); font-size:11.5px; color:var(--line-light); margin:22px 0 8px; }
+  .proc-flow > .sub-role:first-child, .proc-flow > .lead + .sub-role{ margin-top:0; }
+  .proc-flow .media-item{ background:var(--panel-2); border:1px solid var(--line); padding:8px; }
+  .proc-flow .media-item img.img-placeholder, .proc-flow .media-item video.img-placeholder{ width:100%; border:none; background:var(--bg); object-fit:contain; }
+  .proc-flow > .lead{ float:right; width:44%; margin:2px 0 16px 28px; }
+  .proc-flow > .lead.lead-sm{ width:30%; }
+  .proc-flow > .lead.lead-sm img.img-placeholder, .proc-flow > .lead.lead-sm video.img-placeholder{ aspect-ratio:16/10; }
+  .proc-flow > .lead img.img-placeholder, .proc-flow > .lead video.img-placeholder{ aspect-ratio:4/3; height:auto; }
+  .proc-cards{ clear:both; display:grid; gap:14px; padding-top:6px; align-items:stretch; }
+  .proc-cards.cols-1{ grid-template-columns:minmax(0, 560px); }
+  .proc-cards.cols-2{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .proc-cards.cols-3{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+  .proc-cards.cols-4{ grid-template-columns:repeat(4, minmax(0,1fr)); }
+  .proc-cards .card{ display:flex; flex-direction:column; justify-content:space-between; gap:8px; }
+  .proc-cards .card img.img-placeholder, .proc-cards .card video.img-placeholder{ aspect-ratio:4/3; height:auto; }
+  .proc-cards .card-table{ justify-content:flex-start; }
+  .proc-cards .card-table .data-table{ margin:auto 0; }
+  .proc-cards .card-table .media-caption{ margin-top:0; }
+  .proc-flow .media-caption{ min-height:2.6em; display:flex; align-items:center; justify-content:center; }
+  @media (max-width:1200px){ .proc-cards.cols-3, .proc-cards.cols-4{ grid-template-columns:repeat(2, minmax(0,1fr)); } .proc-cards.cols-3 > .card:last-child:nth-child(odd){ grid-column:1 / -1; } .proc-cards.cols-3 > .card:last-child:nth-child(odd) img.img-placeholder, .proc-cards.cols-3 > .card:last-child:nth-child(odd) video.img-placeholder{ max-height:340px; } }
+  @media (max-width:820px){
+    .proc-flow > .lead, .proc-flow > .lead.lead-sm{ float:none; width:100%; margin:0 0 16px; }
+    .proc-cards.cols-2, .proc-cards.cols-3, .proc-cards.cols-4{ grid-template-columns:1fr; }
+  }
   .appendix-images{ display:flex; gap:12px; flex-wrap:wrap; }
   @media (max-width:820px){ .process-grid{ grid-template-columns:1fr; } }
   .tl-images{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;}
@@ -426,88 +447,79 @@
             <div class="detail-label">The Process</div>
 
             <div class="sub-role">M26 SUSPENSION LEAD ENGINEER (IN PROGRESS, DESIGN PHASE)</div>
-            <div class="process-grid">
-              <div class="process-text">
+            <div class="proc-flow">
+  <div class="media-item lead"><img class="img-placeholder" src="images/m26-assembly-chassis.png" alt="Current M26 suspension assembly on the chassis in CAD"><span class="media-caption">Current M26 suspension assembly, still in progress</span></div>
                 <p><strong>M26 is still in active development for the current model year.</strong> The geometry, FEA, load case, and calculator work below reflects where the design stands right now, not a finished vehicle, and this section will keep changing as the season moves from design into fabrication and testing.</p>
                 <p>Every M26 suspension goal comes back to two things, cutting weight and raising reliability. No previous UCLA Baja SAE team had a validated way to check geometry against travel, so interferences like tie rod versus A-arm, tie rod versus rim, and shock mount versus CV went unnoticed until they showed up on the built car, where a fix costs both weight and reliability at once. M25's steering effort was too high, and its A-arm design took three full redesigns to hold up. Fixing those set the priorities for the season.</p>
                 <p class="topic-hint">Open a topic below to read that part of the work.</p>
-              </div>
-              <div class="process-images process-images-1col">
-                <div class="media-item"><img class="img-placeholder" src="images/m26-assembly-chassis.png" alt="Current M26 suspension assembly on the chassis in CAD"><span class="media-caption">Current M26 suspension assembly, still in progress</span></div>
-              </div>
-            </div>
+              
+</div>
 
             <div class="proc-topics">
               <details class="proc-topic">
                 <summary class="topic-sum"><span class="topic-num">01</span><span class="topic-title">Architecture</span><span class="topic-sub">Why a trailing arm and an outboard shock mount</span></summary>
                 <div class="topic-body">
-                  <div class="process-grid">
-                  <div class="process-text">
+                  <div class="proc-flow">
+  <div class="media-item lead"><img class="img-placeholder" src="images/m26-rear-corner-cad.jpg" alt="M26 rear corner in CAD mounted to the chassis" loading="lazy"><span class="media-caption">M26 rear corner, semi-trailing arm and two camber links</span></div>
                     <p>Most top Baja teams run double wishbones front and rear with the shock on the lower arm, so the first architecture question each season is why M26 doesn't. In the rear, a double wishbone would need major chassis changes early on to fit, and with the current chassis a trailing arm is far lighter. A double wishbone controls camber gain and bump steer better, but some rear bump steer matters less because it doesn't feed directly into the driver's steering, and the trailing arm avoids the tube notching, jigging, and A-arm tabs where tolerance stack-up can erase a geometry advantage on a car this sensitive to it. I kept the trailing arm and put the effort into making it lighter and more reliable instead.</p>
                     <p>Up front, lower mounting the shock is easiest with the shock passing through the upper A-arm, but the current gearbox and halfshaft placement doesn't leave room for it. M25 tried an aluminum tri-arm upper instead, and after two uppers failed in close to a frontal impact, I moved M26 back to an outboard shock mount on a steel upper arm, trading a little weight for parts that are simpler to build accurately and hold up. A rear double wishbone or lower shock mount is still on the table for future cars, but both need chassis, powertrain, and suspension to commit very early in the season, and both depend on knowing real impact loads.</p>
-                  </div>
-                  <div class="process-images process-images-1col">
-                    <div class="media-item"><img class="img-placeholder" src="images/m26-rear-corner-cad.jpg" alt="M26 rear corner in CAD mounted to the chassis" loading="lazy"><span class="media-caption">M26 rear corner, semi-trailing arm and two camber links</span></div>
-                  </div>
-                  </div>
+                  
+</div>
                 </div>
               </details>
               <details class="proc-topic">
                 <summary class="topic-sum"><span class="topic-num">02</span><span class="topic-title">Geometry</span><span class="topic-sub">Parametric CAD, Lotus Shark, and VBA sweeps</span></summary>
                 <div class="topic-body">
-                  <div class="process-grid">
-                  <div class="process-text">
+                  <div class="proc-flow">
+  <div class="media-item lead"><video class="img-placeholder" src="images/susgeometrysweeep.mp4" autoplay loop muted playsinline></video><span class="media-caption">VBA macro sweeping the suspension geometry through travel</span></div>
                     <p>A geometry that has to be rebuilt by hand every time a hardpoint moves never gets iterated enough to find its lightest, most reliable version. The team's suspension layout knowledge lived in notes passed down from former leads, so I turned it into a structured, parametric SolidWorks framework covering A-arm layout, knuckle placement, kingpin axis, tie rod and steering geometry, and camber links. Instead of fixing every dimension, the model takes shock length at ride height as the input and solves ride height and A-arm lengths as outputs, and parallel arms are tied together through the Equations Manager so the model never over-constrains as it moves through travel. A hardpoint change now ripples through the whole assembly in seconds, which is what made it practical to iterate the geometry as hard as this season required.</p>
                     <p>Rear targets came from testing rather than habit. A body roll test measured a roll gradient of 13.02 degrees per g, and at the 0.47 g measured on the skidpad that is about 6 degrees of body roll, so the rear was set to gain about 6 degrees of camber in bump to keep the outside tire upright, with bump steer as close to zero as packaging allows. To get there I pinched the lower chassis tubes together to lengthen both camber links, moved the outboard link points radially off the upright bore for U-joint clearance, and extended the trailing arm. Each move added weight to the parts, which the design work then had to win back.</p>
                     <p>M26 is the first car in 25 years of Bruin Baja whose SolidWorks kinematics match Lotus Shark through full travel, with the toe and camber curves from both overlaying. That let hundreds of hardpoint sets be optimized in Lotus, then checked in CAD with VBA macros that sweep shock and rack travel for camber gain, bump steer, turn angle, Ackermann, and clearances, looping back to Lotus whenever a check failed. A second macro plots hardpoints straight from the vehicle dynamics team's CSV so numbers are never retyped by hand. M25's hardpoints were moved by hand and checked one position at a time, and it missed its targets with 10.93 degrees of rear camber gain and 4.29 degrees of bump steer. M26 lands at 6.23 and 0.70 degrees against targets of 6 and 0, with zero interferences through full travel.</p>
-                  </div>
-                  <div class="process-images process-images-1col">
-                    <div class="media-item"><video class="img-placeholder" src="images/susgeometrysweeep.mp4" autoplay loop muted playsinline></video><span class="media-caption">VBA macro sweeping the suspension geometry through travel</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/bumpsteercambergaingrapphs.png" alt="Bump steer and camber gain graphs from the macro sweep" loading="lazy"><span class="media-caption">Bump steer and camber gain curves from the sweep</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/m26-lotus-vs-cad-curves.jpg" alt="Rear toe and camber curves from Lotus Shark overlaid on the SolidWorks sweep" loading="lazy"><span class="media-caption">Rear toe (top) and camber (bottom) vs. wheel travel, Lotus Shark in cyan over the SolidWorks sweep in magenta. The spike at 8 in is Lotus losing the link solution.</span></div>
-                    <div class="media-item media-table"><table class="data-table"><thead><tr><th>Rear, ride to full bump</th><th>M25</th><th>M26</th><th>Target</th></tr></thead><tbody><tr><td>Camber gain</td><td>10.93°</td><td>6.23°</td><td>6°</td></tr><tr><td>Bump steer</td><td>4.29°</td><td>0.70°</td><td>0°</td></tr><tr><td>Hardpoint sets evaluated</td><td>A few</td><td>Hundreds</td><td>&nbsp;</td></tr></tbody></table><span class="media-caption">Rear geometry results, M25 vs M26</span></div>
-                  </div>
-                  </div>
+                  
+  <div class="proc-cards cols-3">
+    <div class="media-item card"><img class="img-placeholder" src="images/bumpsteercambergaingrapphs.png" alt="Bump steer and camber gain graphs from the macro sweep" loading="lazy"><span class="media-caption">Bump steer and camber gain curves from the sweep</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/m26-lotus-vs-cad-curves.jpg" alt="Rear toe and camber curves from Lotus Shark overlaid on the SolidWorks sweep" loading="lazy"><span class="media-caption">Rear toe (top) and camber (bottom) vs. wheel travel, Lotus Shark in cyan over the SolidWorks sweep in magenta. The spike at 8 in is Lotus losing the link solution.</span></div>
+    <div class="media-item card card-table"><table class="data-table"><thead><tr><th>Rear, ride to full bump</th><th>M25</th><th>M26</th><th>Target</th></tr></thead><tbody><tr><td>Camber gain</td><td>10.93°</td><td>6.23°</td><td>6°</td></tr><tr><td>Bump steer</td><td>4.29°</td><td>0.70°</td><td>0°</td></tr><tr><td>Hardpoint sets evaluated</td><td>A few</td><td>Hundreds</td><td>&nbsp;</td></tr></tbody></table><span class="media-caption">Rear geometry results, M25 vs M26</span></div>
+  </div>
+</div>
                 </div>
               </details>
               <details class="proc-topic">
                 <summary class="topic-sum"><span class="topic-num">03</span><span class="topic-title">Loads and Testing</span><span class="topic-sub">Measured inputs, the load calculator, and statics</span></summary>
                 <div class="topic-body">
-                  <div class="process-grid">
-                  <div class="process-text">
+                  <div class="proc-flow">
+  <div class="media-item lead"><video class="img-placeholder" src="images/loadcasetesting.mp4" autoplay loop muted playsinline></video><span class="media-caption">Working through load case testing for the subsystem</span></div>
                     <p>M25 was designed against conservative legacy loads that nobody could trace to a source, so every M26 load starts from a measurement. Ledge drops on M25 peaked at 4.9 g at the rear chassis, consistent across five drops, so the rear is designed to 5 g, about 729 lbf straight up at each rear contact patch. Skidpad and roll testing supplied the lateral g, and a CG test and corner scales set the weight transfer.</p>
                     <p>I built a web load calculator that turns those inputs into tire forces for bump, cornering, braking, acceleration, and obstacle impact, then solves a 6 by 6 statics system with hardpoints pulled straight from CAD to get the load in every link, the shock, and the trailing arm pivot. Bump and cornering governed every member, so those two cases size every rear part, and nothing gets built heavier to survive a load the car never sees.</p>
                     <p>Testing continues this season, with IMUs on the car during skidpad and drop tests feeding measured g's back into the calculators, and strain gauge impact testing on M25 covering the case that broke last year's uppers, giving real impact loads so the next design can be trusted instead of overbuilt.</p>
-                  </div>
-                  <div class="process-images process-images-1col">
-                    <div class="media-item"><video class="img-placeholder" src="images/loadcasetesting.mp4" autoplay loop muted playsinline></video><span class="media-caption">Working through load case testing for the subsystem</span></div>
-                    <div class="media-item media-table"><table class="data-table"><thead><tr><th>Test</th><th>Result</th></tr></thead><tbody><tr><td>Projected weight</td><td>560 lb, 52% rear</td></tr><tr><td>Static rear corner load</td><td>145.9 lbf</td></tr><tr><td>CG height</td><td>25.2 in</td></tr><tr><td>Rear drop test (M25)</td><td>4.9 g peak, 5 drops</td></tr><tr><td>Skidpad and roll</td><td>0.47 g, 13.02°/g</td></tr></tbody></table><span class="media-caption">Measured inputs to the load calculator</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/m26-statics-fbd-sketch.jpg" alt="Hand sketch of the trailing arm and upright free body diagram" loading="lazy"><span class="media-caption">Free body diagram behind the 6 by 6 statics solve</span></div>
-                    <div class="media-item media-table"><table class="data-table"><thead><tr><th>Case</th><th>UCL</th><th>LCL</th><th>Shock</th><th>Pivot</th></tr></thead><tbody><tr><td>Bump 5 g</td><td>654 C</td><td>520 T</td><td>1722 C</td><td>1318</td></tr><tr><td>Cornering 1 g</td><td>595 T</td><td>881 C</td><td>397</td><td>231</td></tr></tbody></table><span class="media-caption">Governing member loads in lbf, C compression, T tension</span></div>
-                  </div>
-                  </div>
+                  
+  <div class="proc-cards cols-3">
+    <div class="media-item card card-table"><table class="data-table"><thead><tr><th>Test</th><th>Result</th></tr></thead><tbody><tr><td>Projected weight</td><td>560 lb, 52% rear</td></tr><tr><td>Static rear corner load</td><td>145.9 lbf</td></tr><tr><td>CG height</td><td>25.2 in</td></tr><tr><td>Rear drop test (M25)</td><td>4.9 g peak, 5 drops</td></tr><tr><td>Skidpad and roll</td><td>0.47 g, 13.02°/g</td></tr></tbody></table><span class="media-caption">Measured inputs to the load calculator</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/m26-statics-fbd-sketch.jpg" alt="Hand sketch of the trailing arm and upright free body diagram" loading="lazy"><span class="media-caption">Free body diagram behind the 6 by 6 statics solve</span></div>
+    <div class="media-item card card-table"><table class="data-table"><thead><tr><th>Case</th><th>UCL</th><th>LCL</th><th>Shock</th><th>Pivot</th></tr></thead><tbody><tr><td>Bump 5 g</td><td>654 C</td><td>520 T</td><td>1722 C</td><td>1318</td></tr><tr><td>Cornering 1 g</td><td>595 T</td><td>881 C</td><td>397</td><td>231</td></tr></tbody></table><span class="media-caption">Governing member loads in lbf, C compression, T tension</span></div>
+  </div>
+</div>
                 </div>
               </details>
               <details class="proc-topic">
                 <summary class="topic-sum"><span class="topic-num">04</span><span class="topic-title">Rear Corner Design</span><span class="topic-sub">Trailing arm, upright, camber links, and validation</span></summary>
                 <div class="topic-body">
-                  <div class="process-grid">
-                  <div class="process-text">
+                  <div class="proc-flow">
+  <div class="media-item lead"><img class="img-placeholder" src="images/m26-trailing-arm-brackets.jpg" alt="M26 trailing arm with bolt-on shock brackets" loading="lazy"><span class="media-caption">Trailing arm with bolt-on 7075 shock brackets</span></div>
                     <p>Hitting the weight target meant the trailing arm couldn't keep its CNC'd shock pocket, since the pocket set how thick the whole arm had to be. I moved the shock to two bolt-on waterjet 7075 brackets, which let the arm get thinner, cut a CNC setup, and turn a damaged mount into a bolt-on swap instead of a scrapped billet part.</p>
                     <p>Manufacturability was decided in geometry, not after. Keeping the outboard link points in the upright's plane made the upright a 2D waterjet profile that serves both sides, its thickness was set to 0.95 inches so it cuts from 1 inch stock, and every rear part is built in our own shop, waterjet first with as few CNC setups as possible.</p>
                     <p>For the camber links, a heat affected zone model showed welded 6061 losing about 60 percent of its yield strength at the weld, which ruled out welded aluminum. Straight 7075 billet bar with no welds came out about 11 percent lighter than M25's welded 4130 tube while roughly doubling bending yield, with a buckling factor of safety of 3.5 at the 881 lbf cornering load.</p>
                     <p>Every part was checked against those peak loads. FEA stress at a bolt hole is a singularity, so the shock bracket lugs were sized with hand calculations for net section tension, shear tear out, and bearing, all passing at a factor of safety of 3 with a lowest margin of 0.73. FEA on the brackets, trailing arm, and upright covered the rest, with the trailing arm at a margin of 0.33 in the 5 g bump case and the upright at 0.61 under combined bump and cornering, both at a factor of safety of 1.5. Despite longer links and a longer arm, the rear corner dropped from 6.07 to 5.73 pounds per side, about 5.6 percent lighter.</p>
-                  </div>
-                  <div class="process-images">
-                    <div class="media-item media-item-wide"><img class="img-placeholder" src="images/m26-trailing-arm-brackets.jpg" alt="M26 trailing arm with bolt-on shock brackets" loading="lazy"><span class="media-caption">Trailing arm with bolt-on 7075 shock brackets</span></div>
-                    <div class="media-item media-table media-item-wide"><table class="data-table"><thead><tr><th>Per side (lb)</th><th>M25</th><th>M26</th></tr></thead><tbody><tr><td>Trailing arm</td><td>2.79</td><td>2.55</td></tr><tr><td>Camber links</td><td>2.14</td><td>1.90</td></tr><tr><td>Upright</td><td>0.67</td><td>0.64</td></tr><tr><td>Fasteners</td><td>0.47</td><td>0.64</td></tr><tr class="dt-total"><td>Total</td><td>6.07</td><td>5.73</td></tr></tbody></table><span class="media-caption">Rear corner weight per side, 5.6 percent lighter</span></div>
-                    <div class="media-item media-item-wide"><img class="img-placeholder" src="images/m26-ta-fea-bump5g.jpg" alt="Trailing arm FEA von Mises stress in the 5 g bump case" loading="lazy"><span class="media-caption">Trailing arm FEA, 5 g bump, MoS +0.33 at FOS 1.5</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/m26-upright-fea.jpg" alt="Upright FEA von Mises stress in cornering" loading="lazy"><span class="media-caption">Upright FEA in cornering, MoS +0.61 combined at FOS 1.5</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/m26-shock-bracket-fea.jpg" alt="Shock bracket FEA von Mises stress" loading="lazy"><span class="media-caption">Shock bracket FEA, peak at the loaded hole</span></div>
-                    <div class="media-item media-table media-item-wide"><table class="data-table"><thead><tr><th>Check</th><th>Margin</th></tr></thead><tbody><tr><td>Bracket lug, net tension</td><td>+3.17</td></tr><tr><td>Bracket lug, shear tear out</td><td>+0.73</td></tr><tr><td>Bracket lug, bearing</td><td>+1.65</td></tr><tr><td>Camber link buckling</td><td>FOS 3.5</td></tr></tbody></table><span class="media-caption">Hand calc margins, lugs at FOS 3</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/m26-machined-rear-parts.jpg" alt="Machined M26 rear suspension parts" loading="lazy"><span class="media-caption">Rear parts machined in house</span></div>
-                  </div>
-                  </div>
+                  
+  <div class="proc-cards cols-3">
+    <div class="media-item card card-table"><table class="data-table"><thead><tr><th>Per side (lb)</th><th>M25</th><th>M26</th></tr></thead><tbody><tr><td>Trailing arm</td><td>2.79</td><td>2.55</td></tr><tr><td>Camber links</td><td>2.14</td><td>1.90</td></tr><tr><td>Upright</td><td>0.67</td><td>0.64</td></tr><tr><td>Fasteners</td><td>0.47</td><td>0.64</td></tr><tr class="dt-total"><td>Total</td><td>6.07</td><td>5.73</td></tr></tbody></table><span class="media-caption">Rear corner weight per side, 5.6 percent lighter</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/m26-ta-fea-bump5g.jpg" alt="Trailing arm FEA von Mises stress in the 5 g bump case" loading="lazy"><span class="media-caption">Trailing arm FEA, 5 g bump, MoS +0.33 at FOS 1.5</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/m26-upright-fea.jpg" alt="Upright FEA von Mises stress in cornering" loading="lazy"><span class="media-caption">Upright FEA in cornering, MoS +0.61 combined at FOS 1.5</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/m26-shock-bracket-fea.jpg" alt="Shock bracket FEA von Mises stress" loading="lazy"><span class="media-caption">Shock bracket FEA, peak at the loaded hole</span></div>
+    <div class="media-item card card-table"><table class="data-table"><thead><tr><th>Check</th><th>Margin</th></tr></thead><tbody><tr><td>Bracket lug, net tension</td><td>+3.17</td></tr><tr><td>Bracket lug, shear tear out</td><td>+0.73</td></tr><tr><td>Bracket lug, bearing</td><td>+1.65</td></tr><tr><td>Camber link buckling</td><td>FOS 3.5</td></tr></tbody></table><span class="media-caption">Hand calc margins, lugs at FOS 3</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/m26-machined-rear-parts.jpg" alt="Machined M26 rear suspension parts" loading="lazy"><span class="media-caption">Rear parts machined in house</span></div>
+  </div>
+</div>
                 </div>
               </details>
               <details class="proc-topic">
@@ -534,21 +546,21 @@
             </div>
 
             <div class="sub-role" style="margin-top:32px; padding-top:26px; border-top:1px solid var(--line);">M25 SUSPENSION TEAM ENGINEER</div>
-            <div class="process-grid">
-              <div class="process-text">
+            <div class="proc-flow">
+  <div class="media-item lead"><img class="img-placeholder" src="images/m25 car.jpg" alt="Completed M25 car"><span class="media-caption">The completed M25 car</span></div>
                 <p>Suspension geometry only holds up if the parts underneath it are built accurately, so reliability there starts on the shop floor. My first major project after joining the subteam in September 2025 was fabricating the upper and lower A-arms. I cut and notched the tube stock with an angle grinder, laying out simpler notches with a protractor and pulling the more complex ones off DXF templates, then built dedicated jigging setups to hold the parts to tight tolerances, since suspension geometry and dynamics are very sensitive to any misalignment.</p>
                 <p>Alongside the A-arms, I used the manual mill and lathe to manufacture tightly toleranced spacers and bushings for several other suspension components, and helped CNC mill tie rod extenders and wafer cups for the A-arms, which gave me a lot of hands-on machining experience I hadn't had before. That experience paid off on a side project I picked up around the same time, manufacturing a limit switch plate for the powertrain's centerlock, where I programmed the toolpaths in Fusion CAM and held the limit switch bores to 1 to 2 thou for a near perfect fit, since a sloppy fit there is exactly the kind of reliability problem that shows up at the worst possible time.</p>
                 <p>Late in the season an A-arm failed, a direct hit against the reliability the subsystem was supposed to deliver, so I helped redesign it from the ground up. Before committing to the new geometry, I 3D printed test models to physically check clearances and vehicle dynamics against the rest of the suspension, validating the redesign without waiting on another full metal build.</p>
                 <p>By our second competition I'd been named M26 suspension lead, so I was the one who gave the design presentation in New York, where we placed 14th in design out of over 100 teams. Everything I'd learned across M25 carried straight into how I approached M26.</p>
-                <div class="media-item"><img class="img-placeholder" src="images/m25 car.jpg" alt="Completed M25 car"><span class="media-caption">The completed M25 car</span></div>
-              </div>
-              <div class="process-images process-images-lg">
-                <div class="media-item"><img class="img-placeholder" src="images/angle grinding.jpg" alt="Notching A-arm tube with an angle grinder"><span class="media-caption">Notching A-arm tube stock with an angle grinder</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/aarmjigsetup.JPEG" alt="A-arm jigging setup"><span class="media-caption">Jigging setup for holding A-arm tolerances</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/milling spacers.JPEG" alt="Milling suspension spacers"><span class="media-caption">Milling tightly toleranced suspension spacers</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/cnclimitswitchplate.JPEG" alt="CNC milling the centerlock limit switch plate"><span class="media-caption">CNC milling the centerlock limit switch plate</span></div>
-              </div>
-            </div>
+                
+              
+  <div class="proc-cards cols-2">
+    <div class="media-item card"><img class="img-placeholder" src="images/angle grinding.jpg" alt="Notching A-arm tube with an angle grinder"><span class="media-caption">Notching A-arm tube stock with an angle grinder</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/aarmjigsetup.JPEG" alt="A-arm jigging setup"><span class="media-caption">Jigging setup for holding A-arm tolerances</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/milling spacers.JPEG" alt="Milling suspension spacers"><span class="media-caption">Milling tightly toleranced suspension spacers</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/cnclimitswitchplate.JPEG" alt="CNC milling the centerlock limit switch plate"><span class="media-caption">CNC milling the centerlock limit switch plate</span></div>
+  </div>
+</div>
           </div>
         </div>
       </details>
@@ -588,63 +600,55 @@
               <details class="proc-topic">
                 <summary class="topic-sum"><span class="topic-num">01</span><span class="topic-title">CRABCAKE Camera Gimbal</span><span class="topic-sub">Pitch and roll gimbal redesign</span></summary>
                 <div class="topic-body">
-                  <div class="process-grid">
-                  <div class="process-text">
+                  <div class="proc-flow">
+  <div class="media-item lead"><img class="img-placeholder" src="images/gimbalcomparison.png" alt="CRABCAKE gimbal before and after the redesign"><span class="media-caption">CRABCAKE gimbal before and after the redesign</span></div>
                     <p>CRABCAKE caught my attention because I had worked with combat robotics before and wanted to learn the wiring and programming side of a device, not just the mechanical build. I picked up an unfinished pitch and roll gimbal prototype and carried it through to a working redesign. The roll shaft runs in a mounted ball bearing sized for a 5/8 inch shaft, then steps down to 9.5mm where it meets the driven gear, which I bored out from stock on a drill press since metal gears for a 3mm motor shaft only come in one bore size.</p>
                     <p>I used the motor that was already on hand and landed on a 1 to 3 ratio, 20 teeth driving 60, which kept the camera moving plenty fast while pulling about a watt of power. For the slip ring I chose a 12-channel unit sized to allow a full 360 degrees of continuous roll.</p>
                     <p>Control runs on a Teensy 4.1 reading a single joystick. The roll axis spins freely and continuously off the joystick's Y deflection, while the pitch axis is mechanically limited to about 180 degrees and capped in software using the pitch encoder's count, with a soft limit and a tighter hard limit set inside the true mechanical stops so the axis can only ever be blocked moving outward, never trapped against a stop. A rezero button lets the operator redefine center whenever the arm is manually returned to true zero. Altogether the redesign cut package volume 53 percent. This was a prototype built to integrate with the sewer crawler platform, and I built the proof of concept for it.</p>
-                  </div>
-                  <div class="process-images process-images-1col">
-                    <div class="media-item"><img class="img-placeholder" src="images/gimbalcomparison.png" alt="CRABCAKE gimbal before and after the redesign"><span class="media-caption">CRABCAKE gimbal before and after the redesign</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/gimbalassembled.JPEG" alt="Fully assembled camera gimbal"><span class="media-caption">Fully assembled camera gimbal</span></div>
-                    <div class="media-item"><video class="img-placeholder" src="images/gimbalvideo.mp4" autoplay loop muted playsinline></video><span class="media-caption">Gimbal roll and pitch range of motion</span></div>
-                  </div>
-                  </div>
+                  
+  <div class="proc-cards cols-2">
+    <div class="media-item card"><img class="img-placeholder" src="images/gimbalassembled.JPEG" alt="Fully assembled camera gimbal"><span class="media-caption">Fully assembled camera gimbal</span></div>
+    <div class="media-item card"><video class="img-placeholder" src="images/gimbalvideo.mp4" autoplay loop muted playsinline></video><span class="media-caption">Gimbal roll and pitch range of motion</span></div>
+  </div>
+</div>
                 </div>
               </details>
               <details class="proc-topic">
                 <summary class="topic-sum"><span class="topic-num">02</span><span class="topic-title">Positioning Cell Initiative</span><span class="topic-sub">Three phases of an RTK GNSS device</span></summary>
                 <div class="topic-body">
-                  <div class="process-grid">
-                  <div class="process-text">
+                  <div class="proc-flow">
+  <div class="media-item lead"><img class="img-placeholder" src="images/phase1.png" alt="Phase 1 CRKT retrofit"><span class="media-caption">Phase 1 CRKT retrofit for GNSS testing</span></div>
                     <p>The Positioning Cell Initiative was the company's own RTK GNSS device. My job across all three phases was to give the firmware and electrical teams a mechanical platform to test against. Phase 1 had to happen fast, so instead of designing a new platform I retrofitted an existing CRKT unit for my own testing purposes, a GNSS device currently in production by another company that Advanced Spade was also in the process of engineering. I removed unused features to free up mounting holes and added a survey pole adapter that raised the antenna off the ground for a cleaner GNSS fix. That adapter used a print-pause 5/8-11 coupling nut as its attachment point, a technique I reused through the next two phases.</p>
                     <p>Phase 2 moved testing off the CRKT entirely onto an isolated rig of IMUs, breakout boards, and a dev kit, nicknamed the sceptre. I split it into four pieces for easy assembly and modularity, since supporting multiple IMUs at once was worth the extra design time it would save later in testing. The whole frame held zero offset between the survey pole tip and the IMU and antenna centers in every direction except vertical, which kept the RTK math simple and cut down on firmware setup time.</p>
                     <p>Phase 3 built the first complete unit, a four-board device (positioning, main, interface, and BMS boards) shaped around the company logo's triangular geometry. I worked board-level design with our PCB designer using Altium Co-Designer to move models back and forth between SolidWorks and Altium. Because the tapered form made assembly order sensitive, I wrote out a specific upside-down, bottom-up build sequence so the boards, ribbon cables, and battery pack went in correctly every time. I also drafted the schematic for a custom 2s2p battery pack built from the same cells as the CRKT packs, built the first one, and picked up surface-mount soldering hand-populating chips onto the BMS board myself.</p>
-                  </div>
-                  <div class="process-images">
-                    <div class="media-item"><img class="img-placeholder" src="images/phase1.png" alt="Phase 1 CRKT retrofit"><span class="media-caption">Phase 1 CRKT retrofit for GNSS testing</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/phase2.png" alt="Phase 2 sceptre test rig"><span class="media-caption">Phase 2 sceptre test rig</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/explodedview.png" alt="Exploded CAD view of the positioning cell device"><span class="media-caption">Exploded CAD view of the positioning cell device</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/v3assembledunit.png" alt="Assembled positioning cell device"><span class="media-caption">Assembled positioning cell device</span></div>
-                    <div class="media-item"><img class="img-placeholder" src="images/batterypack.png" alt="Custom 2s2p battery pack"><span class="media-caption">Custom 2s2p battery pack</span></div>
-                  </div>
-                  </div>
+                  
+  <div class="proc-cards cols-2">
+    <div class="media-item card"><img class="img-placeholder" src="images/phase2.png" alt="Phase 2 sceptre test rig"><span class="media-caption">Phase 2 sceptre test rig</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/explodedview.png" alt="Exploded CAD view of the positioning cell device"><span class="media-caption">Exploded CAD view of the positioning cell device</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/v3assembledunit.png" alt="Assembled positioning cell device"><span class="media-caption">Assembled positioning cell device</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/batterypack.png" alt="Custom 2s2p battery pack"><span class="media-caption">Custom 2s2p battery pack</span></div>
+  </div>
+</div>
                 </div>
               </details>
               <details class="proc-topic">
                 <summary class="topic-sum"><span class="topic-num">03</span><span class="topic-title">Battery Charger Enclosure</span><span class="topic-sub">A charger the field team could rely on</span></summary>
                 <div class="topic-body">
-                  <div class="process-grid">
-                  <div class="process-text">
+                  <div class="proc-flow">
+  <div class="media-item lead lead-sm"><img class="img-placeholder" src="images/batterycharger.png" alt="Battery charger enclosure"><span class="media-caption">Battery charger enclosure</span></div>
                     <p>The company needed a battery charger for the CRKT device that the field team could rely on, so I built the enclosure around a new single-slot charger board, adding a commercial light pipe for the status LED, a solid-infill upper section to keep the base weighted, and corner-bolted rubber feet that clamp the base plate and battery retention together in one fastening step. Battery retention itself was tuned through an Excel-driven design table in SolidWorks, sweeping the pocket offset until it converged on a reliable slip fit.</p>
-                  </div>
-                  <div class="process-images process-images-1col">
-                    <div class="media-item"><img class="img-placeholder" src="images/batterycharger.png" alt="Battery charger enclosure"><span class="media-caption">Battery charger enclosure</span></div>
-                  </div>
-                  </div>
+                  
+</div>
                 </div>
               </details>
               <details class="proc-topic">
                 <summary class="topic-sum"><span class="topic-num">04</span><span class="topic-title">Testbench Mobility Unit</span><span class="topic-sub">Making a stationary testbench mobile</span></summary>
                 <div class="topic-body">
-                  <div class="process-grid">
-                  <div class="process-text">
+                  <div class="proc-flow">
+  <div class="media-item lead"><img class="img-placeholder" src="images/TMU.png" alt="Testbench Mobility Unit cart docked at the bench"><span class="media-caption">Testbench Mobility Unit cart docked at the bench</span></div>
                     <p>One of our lab testbenches was fully stationary, which limited where and how we could run tests without risking a heavy lift that could hurt someone or knock sensitive instrumentation out of alignment. I designed a caster cart that interfaces directly with the existing testbench frame, matching its height with custom-cut T-slot aluminum extrusions and reusing its exact rail profile and spacing so a heavy baseplate rolls smoothly from bench to cart without catching. The cart's own T-slot geometry tracks into the bench's open slots as it rolls up, so alignment is self-guiding, and four total-lock casters immobilize both rotation and swivel once it's seated, keeping the whole transfer stable under a single operator.</p>
-                  </div>
-                  <div class="process-images process-images-1col">
-                    <div class="media-item"><img class="img-placeholder" src="images/TMU.png" alt="Testbench Mobility Unit cart docked at the bench"><span class="media-caption">Testbench Mobility Unit cart docked at the bench</span></div>
-                  </div>
-                  </div>
+                  
+</div>
                 </div>
               </details>
             </div>
@@ -680,8 +684,8 @@
           </div>
           <div class="detail-block">
             <div class="detail-label">The Process</div>
-            <div class="process-grid">
-              <div class="process-text">
+            <div class="proc-flow">
+  <div class="media-item lead"><img class="img-placeholder" src="images/weaponenergyfit.png" alt="Best-fit plot of weapon weight vs rotational energy from the geometry sweep"><span class="media-caption">Weapon weight vs rotational energy, with a linear best fit across the geometry sweep</span></div>
                 <div class="sub-role">WEAPON ENERGY SIZING</div>
                 <p>With the tournament a week out, our first priority was locking down a weapon design fast enough to leave time for manufacturing. One of our weapon goals was a minimum of 300 J of stored energy, so we ran a batch of geometry iterations on a simple parameterized eggbeater profile, sweeping length and width and logging the resulting moment of inertia and rotational energy for each combination against a set battery voltage and motor RPM. Plotting those points against weapon weight showed a roughly linear relationship between mass and stored energy, which let us pick a geometry that cleared the 300 J target with room to spare while keeping the disc itself under 0.7 lb, leaving the rest of the 3 lb budget for the chassis, drivetrain, and electronics. We ran the same kind of sweep on battery and motor sizing, checking voltage and KV combinations against the target RPM to get as much power into the system as our weight and cost limits would allow.</p>
 
@@ -700,15 +704,14 @@
                 <div class="sub-role">RESULTS &amp; LESSONS LEARNED</div>
                 <p>We built a fully functioning 3 lb combat robot from scratch in a single week, which we're proud of on its own. Where we fell short was competition day itself. The ESCs never got fully programmed in the time we had, so we achieved a successful weapon spinup but had no meaningful control over it once it was running.</p>
                 <p>Working under that kind of pressure meant leaning on a wide mix of skills at once, CAD, CAM, machining, and harnessing, often in the same afternoon, and learning fast which tools we actually had access to versus which ones we didn't, then building the plan around that instead of losing time to it. The housing came out bulkier than it needed to be and wasn't designed with assembly in mind, which is the first thing we'd fix on a second pass. We're hoping to come back next year with a more competitive, more compact version of this robot.</p>
-              </div>
-              <div class="process-images process-images-lg">
-                <div class="media-item"><img class="img-placeholder" src="images/weaponenergyfit.png" alt="Best-fit plot of weapon weight vs rotational energy from the geometry sweep"><span class="media-caption">Weapon weight vs rotational energy, with a linear best fit across the geometry sweep</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/cad.png" alt="CAD render of the assembled robot"><span class="media-caption">CAD render of the assembled robot</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/weaponincnc.JPEG" alt="Machining the weapon disc on the CNC mill"><span class="media-caption">Machining the weapon disc on the CNC mill</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/almostfullbot.JPEG" alt="Robot nearly fully assembled"><span class="media-caption">Robot nearly fully assembled</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/teampic.JPEG" alt="Team photo"><span class="media-caption">team pic!</span></div>
-              </div>
-            </div>
+              
+  <div class="proc-cards cols-2">
+    <div class="media-item card"><img class="img-placeholder" src="images/cad.png" alt="CAD render of the assembled robot"><span class="media-caption">CAD render of the assembled robot</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/weaponincnc.JPEG" alt="Machining the weapon disc on the CNC mill"><span class="media-caption">Machining the weapon disc on the CNC mill</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/almostfullbot.JPEG" alt="Robot nearly fully assembled"><span class="media-caption">Robot nearly fully assembled</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/teampic.JPEG" alt="Team photo"><span class="media-caption">team pic!</span></div>
+  </div>
+</div>
           </div>
         </div>
       </details>
@@ -738,24 +741,25 @@
           </div>
           <div class="detail-block">
             <div class="detail-label">The Process</div>
-            <div class="process-grid">
-              <div class="process-text">
+            <div class="proc-flow">
+  <div class="media-item lead"><video class="img-placeholder" src="images/spinuptesting.mp4" autoplay loop muted playsinline></video><span class="media-caption">Weapon spin-up testing</span></div>
                 <p>I worked in a four-person subteam to bring the weapon system from an initial design to its final, competition-ready form. My main contribution was taking that initial design through iteration, adapting it for clearances and trimming weight out of the drisk and hub so the assembly hit its speed target without breaking the 12 lb weapon-mass allocation, all while keeping the original performance goals in mind.</p>
                 <p>On the manufacturing side I machined the spline hub on a CNC mill, learning Fusion CAM to program the toolpaths, along with the weapon shaft, the motor shaft, and the pulleys. Every part of the weapon, from the hub to the shaft, was designed to come apart quickly, so a damaged piece could be pulled and swapped for a spare between rounds instead of taking the robot out of the competition.</p>
                 <p>The finished weapon spun up to 10,000 rpm and held up through our comp fights with minimal weapon-side maintenance, mostly swapping in a fresh set of blades between rounds. The robot placed third out of twelve teams.</p>
-                <div class="media-item"><video class="img-placeholder" src="images/spinuptesting.mp4" autoplay loop muted playsinline></video><span class="media-caption">Weapon spin-up testing</span></div>
-                <div class="media-item"><video class="img-placeholder" src="images/compmontage.mp4" autoplay loop muted playsinline></video><span class="media-caption">Competition montage</span></div>
-              </div>
-              <div class="process-images">
-                <div class="media-item"><img class="img-placeholder" src="images/CADrenderfullrobot.JPEG" alt="CAD rendering of the full robot"><span class="media-caption">CAD rendering of the full robot</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/weaponCAD1.png" alt="CAD model of the weapon assembly"><span class="media-caption">CAD model of the weapon assembly</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/weaponCAD2.png" alt="CAD model of the weapon assembly, alternate view"><span class="media-caption">CAD model of the weapon assembly, alternate view</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/3dprintedprototype.JPEG" alt="Full-scale printed prototype used for a fit check"><span class="media-caption">Full-scale printed prototype used for a fit check</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/splinehubcnc.JPEG" alt="Machining the spline hub on the CNC mill"><span class="media-caption">Machining the spline hub on the CNC mill</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/assembledweapononframe.JPEG" alt="Assembled weapon mounted to the frame"><span class="media-caption">Assembled weapon mounted to the frame</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/fullyassembledbot.JPEG" alt="Fully assembled robot"><span class="media-caption">Fully assembled robot</span></div>
-              </div>
-            </div>
+                
+                
+              
+  <div class="proc-cards cols-4">
+    <div class="media-item card"><video class="img-placeholder" src="images/compmontage.mp4" autoplay loop muted playsinline></video><span class="media-caption">Competition montage</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/CADrenderfullrobot.JPEG" alt="CAD rendering of the full robot"><span class="media-caption">CAD rendering of the full robot</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/weaponCAD1.png" alt="CAD model of the weapon assembly"><span class="media-caption">CAD model of the weapon assembly</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/weaponCAD2.png" alt="CAD model of the weapon assembly, alternate view"><span class="media-caption">CAD model of the weapon assembly, alternate view</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/3dprintedprototype.JPEG" alt="Full-scale printed prototype used for a fit check"><span class="media-caption">Full-scale printed prototype used for a fit check</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/splinehubcnc.JPEG" alt="Machining the spline hub on the CNC mill"><span class="media-caption">Machining the spline hub on the CNC mill</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/assembledweapononframe.JPEG" alt="Assembled weapon mounted to the frame"><span class="media-caption">Assembled weapon mounted to the frame</span></div>
+    <div class="media-item card"><img class="img-placeholder" src="images/fullyassembledbot.JPEG" alt="Fully assembled robot"><span class="media-caption">Fully assembled robot</span></div>
+  </div>
+</div>
           </div>
         </div>
       </details>
@@ -790,21 +794,20 @@
           </div>
           <div class="detail-block">
             <div class="detail-label">The Process</div>
-            <div class="process-grid">
-              <div class="process-text">
+            <div class="proc-flow">
+  <div class="media-item lead"><img class="img-placeholder" src="images/FloatCAD.png" alt="CAD render of the buoyancy engine"><span class="media-caption">CAD render of the buoyancy engine</span></div>
                 <p>Our program has no machine shop, so every housing component had to come off an FDM printer, a constraint no other team at the MATE World Championship worked within. FDM parts leak at the layer lines under pressure, so getting a print to actually hold water became its own project. Hand-brushing acetone onto the ABS parts blended the layers but was slow and inconsistent, and a small vapor chamber worked well on small parts but smoothed larger housings unevenly. What stuck was a flash vapor chamber sized for the housing itself, which smoothed a part in minutes with consistent results and let us reprint, smooth, and pressure-test a new housing revision in a single day. The housing went through 9 iterations before we landed on one that sealed reliably every time.</p>
                 <p>For the buoyancy engine we weighed two concepts, a bank of three or four smaller syringes sharing a lead screw, or a single large syringe with the lead screw running inside it. The multi-syringe layout was the most common approach in past competitions, but it meant several seals' worth of friction and a much bigger package, so we went with the single-syringe design for lower friction and a smaller footprint. With next to no budget, the drive motor ended up being a stepper scavenged from an old 3D printer rather than something bought to spec, so the first real question was whether it could do the job at all. I measured plunger friction directly with a force gauge, separating the static breakaway force from the steady kinetic force, combined that with the water-pressure load at depth and a factor of safety of 2, then converted that to a torque requirement through the lead screw's lead and an assumed screw efficiency. The number landed close enough to the motor's rated holding torque to know it would work.</p>
                 <p>The housing splits into two pieces so the batteries, wiring, and code stay reachable between test runs, which meant two separate waterproof interfaces to design rather than one, the main lid and the pass-through where the syringe tip exits the housing. I built a test puck matching the housing diameter to validate sealing independent of the rest of the assembly. Seals in years past had failed here, so I went back and ran the numbers myself.</p>
                 <p>Using the standard O-ring compression-ratio formula, I sized the gland depth for a 25% compression on our ring's cross-section, with a groove width at 1.5&times; that cross-section so the compressed ring had room to spread instead of extruding out the sides, and fillets in every corner to protect the ring. That geometry passed a slow, controlled one-minute depth test and then a fast, choppy depth-change test with zero leakage on both interfaces. I also checked the bolt pattern clamping it down, a 10-bolt M4 pattern, against the required clamping force, landing around a factor of safety of 3, and checked the housing wall itself in hoop stress against a simulated 20 m depth, well past our actual 2.5 to 3 m operating range, which came out around a factor of safety of 12.</p>
                 <p>The float also needed to survive being set down hard on a pool deck, so I sized a set of TPU feet by working backward from an impact-energy budget, estimating the float's drop velocity from a drag balance, converting that to kinetic energy on impact, and comparing the stopping force over a compliant foot's ~10 mm of give against a rigid ~1 mm contact, which cut the estimated impact force by roughly 10&times;.</p>
-              </div>
-              <div class="process-images process-images-lg">
-                <div class="media-item"><img class="img-placeholder" src="images/FloatCAD.png" alt="CAD render of the buoyancy engine"><span class="media-caption">CAD render of the buoyancy engine</span></div>
-                <div class="media-item"><img class="img-placeholder" src="images/evolution.JPEG" alt="Evolution of the housing and buoyancy engine iterations"><span class="media-caption">Evolution of the housing and buoyancy engine across iterations</span></div>
-                <div class="media-item"><video class="img-placeholder" src="images/diveandresurface.mp4" autoplay loop muted playsinline></video><span class="media-caption">Float diving and resurfacing during a test</span></div>
-                <div class="media-item"><video class="img-placeholder" src="images/iterations.mp4" autoplay loop muted playsinline></video><span class="media-caption">Housing and buoyancy engine iteration montage</span></div>
-              </div>
-            </div>
+              
+  <div class="proc-cards cols-3">
+    <div class="media-item card"><img class="img-placeholder" src="images/evolution.JPEG" alt="Evolution of the housing and buoyancy engine iterations"><span class="media-caption">Evolution of the housing and buoyancy engine across iterations</span></div>
+    <div class="media-item card"><video class="img-placeholder" src="images/diveandresurface.mp4" autoplay loop muted playsinline></video><span class="media-caption">Float diving and resurfacing during a test</span></div>
+    <div class="media-item card"><video class="img-placeholder" src="images/iterations.mp4" autoplay loop muted playsinline></video><span class="media-caption">Housing and buoyancy engine iteration montage</span></div>
+  </div>
+</div>
           </div>
         </div>
       </details>
@@ -1064,48 +1067,6 @@
   });
 })();
 
-  /* ---------- Balance process media against text ---------- */
-  function balanceGrid(grid){
-    var text = grid.querySelector(':scope > .process-text');
-    var side = grid.querySelector(':scope > .process-images');
-    if(!text || !side) return;
-    if(!grid._items){ grid._items = Array.prototype.slice.call(side.children); }
-    var over = grid.nextElementSibling;
-    if(!over || !over.classList.contains('process-overflow')){
-      over = document.createElement('div'); over.className = 'process-overflow';
-      grid.parentNode.insertBefore(over, grid.nextSibling);
-    }
-    grid._items.forEach(function(it){
-      side.appendChild(it);
-      var m = it.querySelector('img, video'); if(m) m.style.maxHeight = '';
-    });
-    if(window.innerWidth <= 820 || !grid.offsetParent) return;
-    var T = text.offsetHeight;
-    grid._items.forEach(function(it){ over.appendChild(it); });
-    var stopped = false;
-    grid._items.forEach(function(it){
-      if(stopped) return;
-      var h0 = side.children.length ? side.offsetHeight : 0;
-      side.appendChild(it);
-      var h1 = side.offsetHeight;
-      if(h0 === 0 || h1 <= T + 40) return;
-      if((h1 - T) >= (T - h0)){ over.insertBefore(it, over.firstChild); }
-      stopped = true;
-    });
-    if(side.children.length === 1 && side.offsetHeight > T + 60){
-      var m = side.querySelector('img, video');
-      if(m) m.style.maxHeight = Math.max(200, T - 50) + 'px';
-    }
-  }
-  function balanceAll(){
-    document.querySelectorAll('details[open] .process-grid').forEach(balanceGrid);
-  }
-  var balanceTimer;
-  function queueBalance(){ clearTimeout(balanceTimer); balanceTimer = setTimeout(balanceAll, 60); }
-  document.querySelectorAll('details').forEach(function(d){ d.addEventListener('toggle', queueBalance); });
-  window.addEventListener('resize', queueBalance);
-  document.querySelectorAll('.process-images img').forEach(function(im){ im.addEventListener('load', queueBalance); });
-  document.querySelectorAll('.process-images video').forEach(function(v){ v.addEventListener('loadedmetadata', queueBalance); });
 </script>
 </body>
 </html>
